@@ -1,23 +1,26 @@
 import axios from "axios";
 import React, {useState} from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import './Compte.css'
 
 
 const CompteEtudiant = () => {
-    const navigate = useNavigate()
     const [showVerification, setShowVerification] = useState(false);
     const [showInfogen, setShowInfogen] = useState(true)
     const [parcoursOptions, setParcoursOptions] = useState([]);
 
-    const GoToLogin = () =>{
-        navigate('/')
-    };
-
-    const GoToEnseignant = () => {
-        navigate('/CompteEnseignant')
-    }
     const [formData, setFormData] = useState({
+        Nom:'',
+        Prenom:'',
+        Matricul:'',
+        Mention:'',
+        Parcours:'',
+        Niveau:'',
+        Telephone:'',
+        Email:'',
+        Mot_de_passe:'',
+        Roles:'Etudiant',
+        
     });
 
     const handleChange = (e) => {
@@ -48,7 +51,6 @@ const CompteEtudiant = () => {
         console.log(formData);
         const response = await axios.post('http://localhost:4000/Authentification/Signup', formData);
         console.log(response.data);
-        // Stockez le token JWT dans le stockage local ou les cookies ici
         } catch (error) {
           console.error('Erreur lors de la connexion', error);
         }
@@ -139,8 +141,8 @@ const CompteEtudiant = () => {
                 <button onClick={retouner} type="button">Retour</button>
                 <button type="submit" >Créer</button><br></br>
                 </div>
-                    <button type="button" onClick={GoToLogin}>j'ai un compte</button><br></br>
-                    <button type="button" onClick={GoToEnseignant}>je suis un professeur</button><br></br>
+                <Link to='/'>J'ai un  compte</Link>
+                <Link to='/CompteEnseignant'>Je suis un Professeur</Link>
             </form>
         </div>
     )

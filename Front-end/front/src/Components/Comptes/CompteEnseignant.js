@@ -1,18 +1,9 @@
 import axios from "axios";
 import React, {useState} from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 const CompteEnseignant = () => {
-    const navigate = useNavigate()
-    const [file, setFile] = useState(null);
-    const GoToEtudiant = () =>{
-        navigate('/CompteEtudiant')
-    };
-
-    const GoToLogin = () => {
-        navigate('/')
-    };
     const [formData, setFormData] = useState({
         nom: '',
         prenom: '',
@@ -40,18 +31,10 @@ const CompteEnseignant = () => {
         }
       };
 
-      const handleFileChange = (e) => {
-        const selectedFile = e.target.files[0];
-        setFile(selectedFile);
-      };
     return(
         <div>
                 <h1>je suis un Enseignant</h1>
-
                 <form onSubmit={handleSubmit} autoComplete="off">
-                <div>
-                    <input type="file" accept="image/*" onChange={handleFileChange} />
-                </div>
                 <div>
                     <label>Nom :</label><br></br>
                     <input type="text" name="nom" onChange={handleChange} />
@@ -81,8 +64,8 @@ const CompteEnseignant = () => {
                     <input type="password" name="confirmation" onChange={handleChange} />
                 </div>
                     <button type="submit">Créer</button><br></br>
-                    <button type="button" onClick={GoToLogin}>j'ai un compte</button><br></br>
-                    <button type="button" onClick={GoToEtudiant}>je suis un Etudiant</button>
+                    <Link to='/'>J'ai un  compte</Link>
+                    <Link to='/CompteEnseignant'>Je suis un Professeur</Link>
                 </form>
         </div>
     )
