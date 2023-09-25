@@ -3,7 +3,7 @@ const cors = require('cors');
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt'); // Ajout de la bibliothèque bcrypt
+const bcrypt = require('bcrypt');
 
 router.use(cors());
 router.use(express.json());
@@ -41,5 +41,19 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ error: 'Une erreur est survenue lors de la connexion' });
   }
 });
+
+router.post('/Signup', async (req, res) => {
+    const { Matricul ,Nom, Prenom, Mention, Parcours, Niveau, Telephone, Email, Mot_de_passe,  Image} = req.body;
+  
+    const query = 'INSERT INTO Compte (Matricul, Nom, Prenom, Mention, Parcours, Niveau, Telephone, Email, Mot_de_passe, Image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)';
+    connection.query(query, [Matricul ,Nom, Prenom, Mention, Parcours, Niveau, Telephone, Email, Mot_de_passe,  Image], (err, result) => {
+      if (err) {
+        console.error('Erreur lors de la création :', err);
+        res.status(500).json({ error: 'Erreur lors de la création.' });
+        return;
+      }
+      res.json({ message: 'créé avec succès !' });
+    });
+  });
 
 module.exports = router;

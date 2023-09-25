@@ -6,7 +6,6 @@ import './Compte.css'
 
 const CompteEtudiant = () => {
     const navigate = useNavigate()
-    const [image, setFile] = useState(null);
     const [showVerification, setShowVerification] = useState(false);
     const [showInfogen, setShowInfogen] = useState(true)
     const [parcoursOptions, setParcoursOptions] = useState([]);
@@ -19,22 +18,13 @@ const CompteEtudiant = () => {
         navigate('/CompteEnseignant')
     }
     const [formData, setFormData] = useState({
-        // nom: '',
-        // prenom: '',
-        // matricul: '',
-        // mention: '',
-        // parcours: '',
-        // niveau: '',
-        // telephone: '',
-        // email: '',
-        // mot_de_passe: '',
     });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
 
-        if (name === "mention") {
+        if (name === "Mention") {
             switch (value) {
               case "Mathematique et Informatique":
                 setParcoursOptions(["Mathematique Fondamentale", "Mathematique Elementaire", "MISS"]);
@@ -52,33 +42,21 @@ const CompteEtudiant = () => {
           }
       };
 
-
       const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            
-            console.log(formData);
-          const response = await axios.post('http://localhost:4000/auth/login', formData);
-          console.log(response.data);
-          // Stockez le token JWT dans le stockage local ou les cookies ici
+        console.log(formData);
+        const response = await axios.post('http://localhost:4000/Authentification/Signup', formData);
+        console.log(response.data);
+        // Stockez le token JWT dans le stockage local ou les cookies ici
         } catch (error) {
           console.error('Erreur lors de la connexion', error);
         }
       };
 
-      const handleFileChange = (e) => {
-        const selectedFile = e.target.files[0];
-        setFile(selectedFile);
-      };
-
-      
-      const cacher =  () => {
-          setShowInfogen(false);
-        };
-        
-        const afficherVerification = () => {
+     const afficherVerification = () => {
           setShowVerification(true);
-          cacher();
+          setShowInfogen(false);
       };
 
       const retouner = () => {
@@ -92,23 +70,20 @@ const CompteEtudiant = () => {
             <form onSubmit={handleSubmit} autoComplete="off">
                 <div className="infogen" style={{ display: showInfogen ? "block" : "none" }}>
                     <div>
-                        <input type="file" accept="image" onChange={handleFileChange} />
-                    </div>
-                    <div>
                         <label>Nom :</label><br></br>
-                        <input type="text" name="nom" onChange={handleChange} />
+                        <input type="text" name="Nom" onChange={handleChange} />
                     </div>
                     <div>
                         <label>Prénom :</label><br></br>
-                        <input type="text" name="prenom" onChange={handleChange} />
+                        <input type="text" name="Prenom" onChange={handleChange} />
                     </div>
                     <div>
                         <label>Nº Matricul :</label><br></br>
-                        <input type="text" name="matricul" onChange={handleChange}/>
+                        <input type="text" name="Matricul" onChange={handleChange}/>
                     </div>
                     <div>
                         <label>Mention :</label><br></br>
-                        <select name="mention" onChange={handleChange}>
+                        <select name="Mention" onChange={handleChange}>
                             <option value="">Sélectionnez votre mention</option>
                             <option value="Mathematique et Informatique">Mathematique et Informatique</option>
                             <option value="Physique Chimie">Physique Chimie</option>
@@ -117,7 +92,7 @@ const CompteEtudiant = () => {
                     </div>
                     <div>
                         <label>Parcours :</label><br></br>
-                        <select name="parcours" onChange={handleChange}>
+                        <select name="Parcours" onChange={handleChange}>
                             <option value="">Sélectionnez votre parcours</option>
                             {parcoursOptions.map((parcours, index) => (
                             <option key={index} value={parcours}>
@@ -128,7 +103,7 @@ const CompteEtudiant = () => {
                     </div>
                     <div>
                         <label>Niveau :</label><br></br>
-                        <select name="niveau" onChange={handleChange}>
+                        <select name="Niveau" onChange={handleChange}>
                             <option>Vous etes de quel niveau</option>
                             <option>S1</option>
                             <option>S2</option>
@@ -142,27 +117,27 @@ const CompteEtudiant = () => {
                             <option>S10</option>
                         </select>
                     </div>
-                    <button onClick={afficherVerification}>Suivant</button>
+                    <button onClick={afficherVerification} type="button">Suivant</button>
                 </div>
                 <div className="verification" style={{ display: showVerification ? "block" : "none" }}>
                 <div>
                     <label>Nº Téléphone :</label><br></br>
-                    <input type="text" name="telephone" onChange={handleChange} />
+                    <input type="text" name="Telephone" onChange={handleChange} />
                 </div>
                 <div>
                     <label>Email :</label><br></br>
-                    <input type="mail" name="mail" onChange={handleChange} />
+                    <input type="mail" name="Email" onChange={handleChange} />
                 </div>
                 <div>
                     <label>Mot de passe :</label><br></br>
-                    <input type="password" name="mot_de_passe" onChange={handleChange} />
+                    <input type="password" name="Mot_de_passe" onChange={handleChange} />
                 </div>
                 <div>
                     <label>Confirmation de mot de passe :</label><br></br>
                     <input type="password" name="confirmation" onChange={handleChange} />
                 </div>
-                <button onClick={retouner}>Retour</button>
-                <button type="submit">Créer</button><br></br>
+                <button onClick={retouner} type="button">Retour</button>
+                <button type="submit" >Créer</button><br></br>
                 </div>
                     <button type="button" onClick={GoToLogin}>j'ai un compte</button><br></br>
                     <button type="button" onClick={GoToEnseignant}>je suis un professeur</button><br></br>

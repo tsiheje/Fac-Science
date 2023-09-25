@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2'; 
+import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import './Login.css';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -10,8 +11,6 @@ const Login = () => {
     email: '',
     password: '',
   });
-
-   
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,21 +34,30 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Connexion</h2>
-      <form onSubmit={handleSubmit} autoComplete='off'>
+    <div className='login'>
+      <div className='left'>
+      </div>
+      <div className='right'>
         <div>
-          <label>Email :</label><br></br>
-          <input type="text" name="email" onChange={handleChange} />
+          <h2>Connexion</h2>
+          <form onSubmit={handleSubmit} autoComplete='off'>
+            <div>
+              <label>Email :</label><br></br>
+              <input type="text" name="email" onChange={handleChange} />
+            </div>
+            <div>
+              <label>Mot de passe :</label><br></br>
+              <input type="password" name="password" onChange={handleChange} />
+            </div>
+            <div>
+              <button type="submit" className='connecte'>Se connecter</button><br></br>
+              <Link>Mot de passe oublié?</Link><br></br>
+              <hr></hr>
+              <button type="button" onClick={goToSignup} className='inscription'>S'inscrire</button>
+            </div>
+          </form>
         </div>
-        <div>
-          <label>Mot de passe :</label><br></br>
-          <input type="password" name="password" onChange={handleChange} />
-        </div>
-        
-        <button type="submit">Se connecter</button><br></br>
-        <button type="button" onClick={goToSignup}>S'inscrire</button>
-      </form>
+      </div>
     </div>
   );
 };
