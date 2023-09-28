@@ -10,9 +10,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
-import { Autocomplete } from '@mui/material';
+import { useNavigate, NavLink } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 
@@ -50,7 +48,7 @@ export default function SignInSide() {
         Email: !formData.Email ? 'Veuillez remplir ce champ.' : '',
         Mot_de_passe: !formData.Mot_de_passe ? 'Veuillez remplir ce champ.' : '',
       });
-      return; // Arrête la soumission du formulaire
+      return; 
     }
     try {
     console.log(formData);
@@ -179,9 +177,9 @@ export default function SignInSide() {
               </Button>
               <Grid item>
                 Vous n' avez pas de compte?
-                <Link href="/CompteEtudiant" variant="body2">
-                    {" S'inscrire"}
-                </Link>
+                <NavLink to="/CompteEtudiant" variant="body2"  underline='none'>
+                     S'inscrire
+                </NavLink>
               </Grid>
             </Box>
           </Box>

@@ -1,10 +1,9 @@
 import React from "react";
+import NavBar from "./Navbar";
 
 const Administrateur = () => {
     return(
-        <div>
-            <h1> Vous etes sur Administrateur</h1>
-        </div>
+        <NavBar></NavBar>
     )
 }
 

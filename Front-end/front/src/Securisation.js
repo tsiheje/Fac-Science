@@ -10,12 +10,10 @@ export function ProtectedRoute({ element, allowedRoles, user }) {
   }
 
   if (!hasPermission) {
-    // Si l'utilisateur n'a pas la permission, vous pouvez rediriger vers une page d'erreur ou une autre page par défaut
-    return <Navigate to="/CompteEtudiant" />; // Par exemple, redirigez vers une page d'erreur
+    return <Navigate to="/CompteEtudiant" />;
   }
 
   if (user.Roles === 'Etudiant') {
-    // Si l'utilisateur est un étudiant, redirigez-le vers la page "Etudiant"
     return <Navigate to="/Etudiant" />;
   }
   return element;

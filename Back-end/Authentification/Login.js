@@ -38,6 +38,44 @@ router.post('/Login', async (req, res) => {
   }
 });
 
+router.get('/CheckEmail/:email', (req, res) => {
+  const email = req.params.email;
+
+  const query = 'SELECT COUNT(*) AS count FROM Compte WHERE Email = ?';
+  connection.query(query, [email], (err, result) => {
+    if (err) {
+      console.error('Erreur lors de la vérification de l\'e-mail :', err);
+      res.status(500).json({ error: 'Erreur lors de la vérification de l\'e-mail.' });
+      return;
+    }
+
+    const emailExists = result[0].count > 0;
+
+    res.json({ exists: emailExists });
+  });
+});
+
+
+router.post('/SignupProfesseur', async (req, res) => {
+  const {Nom,Prenom, Email, Telephone, Mot_de_passe, Roles} = req.body;
+
+  try{
+    const hashedPassword = await bcrypt.hash(Mot_de_passe, 10);
+    const query = 'INSERT INTO Compte (Nom, Prenom, Email, Telephone, Mot_de_passe, Roles)values (?, ?, ?, ?, ?, ?)';
+    connection.query(query, [Nom, Prenom, Email, Telephone, hashedPassword, Roles], (err, result) => {
+      if(err){
+        console.error('Erreur lors de la creation :', err);
+        res.status(401).json({error: 'Erreur lors de la creation'});
+        return;
+      }
+      res.json({ message: 'Cree avec succes !'});
+    });
+  }catch(error) {
+    console.error('Erreur lors de la création', error);
+    res.status(500).json({ error: 'Erreur lors de la création.' });
+  }
+})
+
 router.post('/Signup', async (req, res) => {
   const { Matricul ,Nom, Prenom, Mention, Parcours, Niveau, Telephone, Email, Mot_de_passe, Roles } = req.body;
 
