@@ -12,8 +12,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import { useNavigate, NavLink } from 'react-router-dom';
 import Swal from 'sweetalert2';
-
-
+import backgroundImage from '../../Asset/Images/images (1).png'; // Utilisez un chemin absolu depuis la racine
 
 
 const defaultTheme = createTheme();
@@ -109,7 +108,7 @@ export default function SignInSide() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(../Asset/Images/images(1).png)',
+            backgroundImage: `url(${backgroundImage})`,
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
