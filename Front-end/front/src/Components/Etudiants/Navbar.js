@@ -1,4 +1,5 @@
 import { AppBar, Stack, Toolbar, Typography, Link } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
     return(
@@ -8,12 +9,12 @@ const NavBar = () => {
                     One Note
                 </Typography>
                 <Stack  direction='row' spacing={3}>
-                    <Link href="/Annonces_et_Informations" variant="body2"  underline='none' color='inherit'>
-                    {" Annonces et Informations"}
-                    </Link>
-                    <Link href="/Cours_et_Devoirs" variant="body2"  underline='none' color='inherit'>
-                    {" Cours et devoirs"}
-                    </Link>
+                    <NavLink to="/Etudiant/Annonces_et_Informations" variant="body2"  underline='none' color='inherit'>
+                     Annonces et Informations
+                    </NavLink>
+                    <NavLink to="/Etudiant/Cours_et_Devoirs" variant="body2"  underline='none' color='inherit'>
+                    Cours et devoirs
+                    </NavLink>
                 </Stack>
             </Toolbar>
         </AppBar>

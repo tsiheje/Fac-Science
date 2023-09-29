@@ -12,7 +12,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import { useNavigate, NavLink } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import backgroundImage from '../../Asset/Images/images (1).png'; // Utilisez un chemin absolu depuis la racine
+import backgroundImage from '../../Asset/Images/images (1).png';
 
 
 const defaultTheme = createTheme();
