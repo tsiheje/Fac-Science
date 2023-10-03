@@ -2,10 +2,10 @@ import React from "react";
 import Navbar from '../NavBar/Navbar';
 import Card from '../Card/Card';
 
-const Professeur = () => {
+const Admin_Etudiant = () => {
     return(
         <div className="content">
-        <Navbar></Navbar>
+            <Navbar></Navbar>
             <div className="scroll">
                 <Card/>
                 <Card/>
@@ -14,4 +14,4 @@ const Professeur = () => {
     )
 }
 
-export default Professeur;
+export default Admin_Etudiant;

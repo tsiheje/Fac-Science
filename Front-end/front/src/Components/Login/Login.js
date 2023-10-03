@@ -12,7 +12,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import { useNavigate, NavLink } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import backgroundImage from '../../Asset/Images/images (1).png';
+import backgroundImage from '../../Asset/Images/online-registration-or-sign-up-login-for-account-on-smartphone-app-user-interface-with-secure-password-mobile-application-for-ui-web-banner-access-cartoon-people-illustration-vector.jpg';
+
 
 
 const defaultTheme = createTheme();

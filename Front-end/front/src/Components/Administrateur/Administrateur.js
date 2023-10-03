@@ -1,9 +1,17 @@
 import React from "react";
-import NavBar from "./Navbar";
+import Navbar from '../NavBar/Navbar';
+import Card from '../Card/Card';
+
 
 const Administrateur = () => {
     return(
-        <NavBar></NavBar>
+        <div className="content">
+            <Navbar></Navbar>
+            <div className="scroll">
+                <Card/>
+                <Card/>
+            </div>
+        </div>
     )
 }
 
