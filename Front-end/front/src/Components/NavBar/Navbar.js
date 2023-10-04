@@ -10,24 +10,6 @@ const NavBar = () => {
     return(
         <div className="navbar">
             <h2> One Note</h2>
-            {role === "Administrateur" && (
-                console.log(role),
-                    <div className="link">
-                        <NavLink to="/Administrateur">
-                            <p>Annonce et information</p>
-                        </NavLink>
-                        <NavLink to="/Administrateur/Professeur">
-                            <p>Professeur</p>
-                        </NavLink>
-                        <NavLink to="/Administrateur/Etudiant">
-                            <p>Etudiant</p>
-                        </NavLink>
-                        <div className="profil">
-                            <img src={profil} width="100%" border-radius="50%"></img>
-                        </div>
-                    </div>
-                )
-            }
             
             {role === "Etudiant" && (
                     <div className="link">

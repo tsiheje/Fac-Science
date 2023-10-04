@@ -7,8 +7,7 @@ const Admin_Professeur= () => {
         <div className="content">
             <Navbar></Navbar>
             <div className="scroll">
-                <Card/>
-                <Card/>
+               <h1>PROFESSEUR DANS ADMINISTRATEUR</h1>
             </div>
         </div>
     )

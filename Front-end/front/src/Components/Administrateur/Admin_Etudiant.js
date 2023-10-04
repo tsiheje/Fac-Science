@@ -7,8 +7,7 @@ const Admin_Etudiant = () => {
         <div className="content">
             <Navbar></Navbar>
             <div className="scroll">
-                <Card/>
-                <Card/>
+                <h1>ETUDIANT DANS ADMINISTRATEUR</h1>
             </div>
         </div>
     )

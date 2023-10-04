@@ -68,7 +68,7 @@ export default function SignInSide() {
       navigate('/Professeur', { state: { user: user } });
     } else if(roles === 'Administrateur'){
       setUserInfo(user)
-      navigate('/Administrateur');
+      navigate('/Administrateur', {state: {user: user}});
     }else{
       navigate('/');
     }

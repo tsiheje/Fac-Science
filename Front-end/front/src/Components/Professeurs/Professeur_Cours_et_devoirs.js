@@ -8,7 +8,6 @@ const Professeur_Cours_et_Devoirs = () =>{
         <Navbar></Navbar>
             <div className="scroll">
                 <h1>Professeur Devoir et Cours</h1>
-                <Card></Card>
             </div>
         </div>
     )
