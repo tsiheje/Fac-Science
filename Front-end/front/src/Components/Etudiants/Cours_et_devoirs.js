@@ -7,6 +7,8 @@ import Card from '../Card/Card';
 const Cours_et_Devoirs = () => {
     const location = useLocation();
     const user = location.state?.user;
+
+    console.log(user);
     return(
         <div className="content">
             <Navbar></Navbar>

@@ -11,8 +11,8 @@ const Etudiant = () => {
         <div className="content">
             <Navbar></Navbar>
             <div className="scroll">
-            <Card/>
-            <Card/>
+                <Card/>
+                <Card/>
             </div>
         </div>
     );

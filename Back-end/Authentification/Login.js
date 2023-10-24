@@ -98,4 +98,28 @@ router.post('/Signup', async (req, res) => {
   }
 });
 
+function requireAuth(req, res, next) {
+  const token = req.headers.authorization;
+
+  if (!token) {
+    return res.status(401).json({ error: 'Authentification requise.' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, secretKey);
+    req.user = decoded;
+    next();
+  } catch (error) {
+    return res.status(401).json({ error: 'Token invalide.' });
+  }
+}
+
+// Exemple d'utilisation du middleware
+router.get('/route_protegee', requireAuth, (req, res) => {
+  // Cette route est protégée et nécessite une authentification
+  res.json({ message: 'Accès autorisé.' });
+});
+
+
+
 module.exports = router;

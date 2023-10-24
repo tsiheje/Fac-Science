@@ -14,10 +14,17 @@ import Admin_Etudiant from './Components/Administrateur/Admin_Etudiant';
 
 function App() {
   const [user, setUser] = useState(null);
+  const [userRole, setUserRole] = useState(null);
+
+  // Lorsque l'utilisateur se connecte avec succès
+  const handleUserLogin = (userData) => {
+    setUser(userData);
+    setUserRole(userData.Roles);
+  }
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+      <Route path="/" element={<Login onLogin={handleUserLogin} />} />
         <Route path='/CompteEtudiant' element={<SignInSide/>}/>
         <Route path="/CompteEnseignant" element={<CompteEnseignant />} />
         <Route path="/Etudiant"element={<Etudiant />}></Route>
