@@ -1,0 +1,83 @@
+.cont {
+  background-image: url('../../Assets/Images/pexels-buro-millennial-1438072.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    height: 100vh; 
+}
+
+.compte {
+    background-color: #ffffff;
+    width: 50%;
+    border-radius: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center; 
+}
+
+.compte h2 {
+    margin: 0;
+}
+
+.btn {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.compte .inscri a {
+    color: blue; 
+    text-decoration: none;
+    
+}
+
+
+.compte .inscri {
+    text-align: left;
+}
+
+.steps-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .step-item {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    color: #333;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .step-number {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border: 2px solid #333;
+    border-radius: 50%;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  }
+  
+  .step-name {
+    margin-left: 10px;
+  }
+  
+  .step-item.active {
+    color: blue;
+  }
+  
+  .step-number.active {
+    color: blue;
+  }
+
+  .step-separator {
+    width: 10px;
+    border: 1px solid #333;
+    margin: 20px 0;
+  }
+  

@@ -11,10 +11,19 @@
     box-sizing: border-box;
     align-items: center;
     position: fixed;
+    top: 0;
+}
+.navbar h2{
+    font-size: 40px;
 }
 .navbar .profil{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
     width: 45px;
     height: 45px;
+    gap: 5px;
+    cursor: pointer;
 }
 .link{
     display: flex;
@@ -23,8 +32,44 @@
 .link p{
     cursor: pointer;
     color: white;
+    font-size: 20px;
 }
 .link a{
     text-decoration: none!important;
 
 }
+
+.searchbar {
+    position: relative;
+    width: 300px; /* Ajustez la largeur selon vos besoins */
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 8px 30px 8px 10px; /* Ajustez les marges et le rembourrage selon vos besoins */
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    outline: none;
+  }
+  
+  .search-input::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background-image: url('../../Assets/Images/icons8-chercher.svg'); /* Remplacez par le chemin de votre icône de recherche */
+    background-size: cover;
+  }
+  
+  .search-icon {
+    position: absolute;
+    right:-40px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888; /* Couleur de l'icône */
+    pointer-events: none;
+  }
+  

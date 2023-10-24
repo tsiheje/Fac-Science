@@ -1,0 +1,160 @@
+
+.Modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Modal > div {
+    width: 40%;
+    margin-top: -50px;
+    background-color: rgb(253, 243, 243);
+    border-radius: 5px;
+}
+
+.Modal .fermer{
+    float: right;
+    font-size: 25px;
+    cursor: pointer;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.Modal .titre h2{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 0;
+    /* padding: 20px;
+    box-sizing: border-box; */
+}
+
+.Modal .formulaire, .formulaire-prof {
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
+}
+.content .dashbord{
+    margin-top: 5%;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+    gap: 10px;
+}
+
+.content .dashbord .dash-left{
+    background-color: rgb(240, 240, 240);
+    width: 60%;
+    height: 86vh;
+    border-radius: 10px;
+}
+
+.content .dashbord .dash-right{
+    background-color: rgb(240, 240, 240);
+    width: 40%;
+    height: 86vh;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    box-sizing: border-box;
+    gap: 5px;
+}
+
+.dashbord .dash-right .ambony{
+    width: 100%;
+    height: 40%;
+    border-radius: 5px;
+    display: flex;
+    gap: 5px;
+}
+
+.dash-right .ambony .gauche{
+    background-color: white;
+    width: 50%;
+    border-radius: 5px;
+}
+
+.dash-right .ambony .droite{
+    background-color: white;
+    width: 50%;
+    border-radius: 5px;
+}
+
+.dashbord .dash-right .ambany{
+    background-color: white;
+    width: 100%;
+    height: 60%;
+    border-radius: 5px;
+}
+
+.content .scroll{
+    margin-top: 9%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.content .scroll .card{
+    width: 27.5em;
+    height: 25em;
+    border-radius: 10px;
+    background-color: rgb(219, 219, 219);
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.scroll .card .anatiny p{
+    /* float: right; */
+    margin-top: -5px;
+    margin-left: 310px;
+    font-size: 20px;
+}
+
+.card .anatiny .soratra p{
+    /* float: left; */
+    margin-left: 0;
+}
+
+ .anatiny .sary{
+    width: 100%;
+    height: 250px;
+    background-color: red;
+    /* margin-top: 25%; */
+}
+
+.anatiny .action{
+    display: flex;
+    gap: 20px;
+    float: right;
+    margin-top: 15px;
+    margin-right: 20px;
+}
+
+.formulaire .form-anaty{
+    display: flex;
+}
+
+.input-file {
+    background-image: url('../../Assets/Images/image.svg');
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.input-file input[type="file"] {
+    display: none;
+}
+
+.input-file.has-file {
+    background-color: #e0e0e0;
+}

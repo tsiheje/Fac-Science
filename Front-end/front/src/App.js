@@ -1,39 +1,42 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Login from './Components/Login/Login'
-import CompteEnseignant from './Components/Comptes/CompteEnseignant';
+import CompteEtudiant from './Components/Compte/CompteEtudiant';
 import Etudiant from './Components/Etudiants/Etudiant';
+import Cours from './Components/Etudiants/Cours';
+import Devoirs from './Components/Etudiants/Devoirs';
+import Professeurs from './Components/Etudiants/Professeurs';
+import Annonce_et_Information from './Components/Etudiants/Annonce_et_Information';
 import Professeur from './Components/Professeurs/Professeur';
-import Administrateur from './Components/Administrateur/Administrateur';
-import React, {useState} from 'react';
-import SignInSide from './Components/Comptes/CompteEtudiant';
-import Cours_et_Devoirs from './Components/Etudiants/Cours_et_devoirs';
-import Professeur_Cours_et_Devoirs from './Components/Professeurs/Professeur_Cours_et_devoirs';
-import Admin_Professeur from './Components/Administrateur/Admin_Professeur';
-import Admin_Etudiant from './Components/Administrateur/Admin_Etudiant';
+import Professeur_Annonce_et_Information from './Components/Professeurs/Professeur_Annonce_et_Information';
+import Professeur_Cours from './Components/Professeurs/Professeur_Cours';
+import Professeur_Devoirs from './Components/Professeurs/Professeur_devoirs';
+import Administrateur from './Components/Administrateurs/Administrateur';
+import Admin_Annonce_et_Information from './Components/Administrateurs/Admin_Annonce_et_Information';
+import Admin_Professeur from './Components/Administrateurs/Admin_Professeur';
+import Admin_Etudiant from './Components/Administrateurs/Admin_Etudiant';
+import ProtectedRoute from './RouteProteger';
+
 
 function App() {
-  const [user, setUser] = useState(null);
-  const [userRole, setUserRole] = useState(null);
-
-  // Lorsque l'utilisateur se connecte avec succès
-  const handleUserLogin = (userData) => {
-    setUser(userData);
-    setUserRole(userData.Roles);
-  }
   return (
     <BrowserRouter>
       <Routes>
-      <Route path="/" element={<Login onLogin={handleUserLogin} />} />
-        <Route path='/CompteEtudiant' element={<SignInSide/>}/>
-        <Route path="/CompteEnseignant" element={<CompteEnseignant />} />
-        <Route path="/Etudiant"element={<Etudiant />}></Route>
-        <Route path="/Etudiant/Cours_et_devoirs" element={<Cours_et_Devoirs />} />
-        <Route path="/Professeur" element={<Professeur/>}/>
-        <Route path="/Professeur/Cours_et_devoirs" element={<Professeur_Cours_et_Devoirs/>}/>
-        <Route path="/Administrateur" element={<Administrateur/>}/>
-        <Route path="/Administrateur/Professeur" element={<Admin_Professeur/>}/>
-        <Route path="/Administrateur/Etudiant" element={<Admin_Etudiant/>}/>
+        <Route path="/" element={<Login/>} />
+        <Route path='/CompteEtudiant' element={<CompteEtudiant/>}/>
+        <Route path="/Etudiant" element={<ProtectedRoute element={<Etudiant />} />} />
+        <Route path="/Etudiant/Annonce_et_Information" element={<ProtectedRoute element={ <Annonce_et_Information />} />} />
+        <Route path="/Etudiant/Cours" element={<ProtectedRoute element={ <Cours />}/>} />
+        <Route path="/Etudiant/Devoirs" element={<ProtectedRoute element={ <Devoirs />}/>} />
+        <Route path="/Etudiant/Professeurs" element={<ProtectedRoute element={ <Professeurs />} /> } />
+        <Route path="/Professeur" element={<ProtectedRoute element={ <Professeur/>}/>}/>
+        <Route path="/Professeur/Annonce_et_Information" element={<ProtectedRoute element={ <Professeur_Annonce_et_Information />} />}/>
+        <Route path="/Professeur/Cours" element={<ProtectedRoute element={ <Professeur_Cours/>}/>}/>
+        <Route path="/Professeur/Devoirs" element={<ProtectedRoute element={ <Professeur_Devoirs/>}/>}/>
+        <Route path="/Administrateur" element={<ProtectedRoute element={ <Administrateur/>}/>}/>
+        <Route path="/Administrateur/Annonce_et_Information" element={<ProtectedRoute element={ <Admin_Annonce_et_Information />} />}/>
+        <Route path="/Administrateur/Professeur" element={<ProtectedRoute element={ <Admin_Professeur/>}/>}/>
+        <Route path="/Administrateur/Etudiant" element={<ProtectedRoute element={ <Admin_Etudiant/>}/>}/>
       </Routes>
     </BrowserRouter>
   );
