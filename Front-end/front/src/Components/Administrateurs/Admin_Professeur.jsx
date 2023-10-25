@@ -7,11 +7,7 @@ import sary from '../../Assets/Images/3135715.png';
 import axios from "axios";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import Visibility from '@mui/icons-material/Visibility';
-import GetAppIcon from '@mui/icons-material/GetApp';
-import Swal from 'sweetalert2';
-import message from '../../Assets/Images/message.svg';
-
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 
 
 const Admin_Professeur = () => {
@@ -75,7 +71,7 @@ const Admin_Professeur = () => {
                     <div className="action">
                         <div className="modifier"><EditIcon/></div>
                         <div className="supprimer"><DeleteIcon/></div>
-                        {/* <div className="message"><img src={message} width="10%" alt="Profil" /></div> */}
+                        <div className="message"><ChatBubbleIcon/></div>
                     </div>
                 </div>
                 ))}
