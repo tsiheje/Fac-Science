@@ -2,8 +2,10 @@ import React from "react";
 import Cookies from 'js-cookie';
 import jwt_decode from 'jwt-decode';
 import NavBar from "../Navbar/Navbar";
-import {Line, Chart, CategoryScale, LinearScale, LogarithmicScale, Title } from 'chart.js';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement,} from "chart.js";
+import { Doughnut, Bar} from "react-chartjs-2";
 
+ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale,  BarElement,);
 
 const Administrateur = () => {
     const token = Cookies.get('token');
@@ -40,15 +42,16 @@ const Administrateur = () => {
             <NavBar/>
             <div className="dashbord">
                 <div className="dash-left">
-                    {/* <Line data={data} options={options} /> */}
+                    <h3>statistique des etudiants</h3>
+                    <div className="chart-anatiny">
+                        <Bar options={options} data={data} />
+                    </div> 
                 </div>
                 <div className="dash-right">
-                    <div className="ambony">
-                        <div className="gauche"></div>
-                        <div className="droite"></div>
-                        <div className="droite"></div>
-                    </div>
-                    <div className="ambany"></div>
+                        <div className="anatiny"></div>
+                        <div className="anatiny"></div>
+                        <div className="anatiny"></div>
+                        <div className="anatiny"></div>
                 </div>
             </div>
         </div>
