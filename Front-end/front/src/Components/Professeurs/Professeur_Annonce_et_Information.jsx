@@ -17,17 +17,18 @@ const Professeur_Annonce_et_Information = () => {
     const handleshowModal = () => {
         setshowModal(true);
     }
+    const handleCloseModal = () => {
+        setshowModal(false);
+    };
 
-    
-    const Modal = showModal && <ModaleAnnonce/>;
     return(
         <div className="content">
             <NavBar/>
-            <div className="scroll">
+            <div className="professeur">
                 <div className="buttonajouter" onClick={handleshowModal}>
                     Faire une Annonce
                 </div>
-                {Modal}
+                {showModal && <ModaleAnnonce onClose={handleCloseModal}/>}
             </div>
         </div>
     )

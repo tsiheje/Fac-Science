@@ -18,15 +18,18 @@ const Professeur_Devoirs = () => {
         setshowModal(true);
     }
 
-    const Modal = showModal && <ModaleDevoirs/>
+    const handlehideModal = () => {
+        setshowModal(false);
+    }
+
     return(
         <div className="content">
             <NavBar/>
-            <div className="scroll">
+            <div className="professeur">
                 <div className="buttonajouter" onClick={handleshowModal}>
                     Donner un Devoirs
                 </div>
-                {Modal}
+                {showModal && <ModaleDevoirs onClose={handlehideModal}/>}
             </div>
         </div>
     )

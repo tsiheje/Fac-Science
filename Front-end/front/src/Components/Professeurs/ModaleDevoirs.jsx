@@ -1,10 +1,10 @@
 import React from "react";
 
-const ModaleDevoirs = () => {
+const ModaleDevoirs = ({onClose}) => {
     return(
         <div className="Modal">
             <div>
-                <div className="fermer">X</div>
+                <div className="fermer" onClick={onClose}>X</div>
                 <div className="Titre">
                     <h2>DONNER UN DEVOIR</h2>
                 </div>

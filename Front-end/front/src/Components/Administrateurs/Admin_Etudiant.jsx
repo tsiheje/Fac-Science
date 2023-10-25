@@ -4,6 +4,13 @@ import jwt_decode from 'jwt-decode';
 import NavBar from "../Navbar/Navbar";
 import sary from '../../Assets/Images/3135715.png';
 import axios from "axios";
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import Visibility from '@mui/icons-material/Visibility';
+import GetAppIcon from '@mui/icons-material/GetApp';
+import Swal from 'sweetalert2';
+import message from '../../Assets/Images/message.svg';
+
 
 const Admin_Etudiant = () => {
     const token = Cookies.get('token');
@@ -28,9 +35,9 @@ const Admin_Etudiant = () => {
         <div className="content">
             <NavBar />
             <div className="scroll">
-                    <div className="card" >
                         {etudiants.map(etudiant => (
-                            <div className="anatiny" key={etudiant.id}>
+                    <div className="card-professeur"key={etudiant.id} >
+                            <div className="anatiny-professeur" >
                             <div className="left">
                                 <img src={sary} width="100%" height="80%" alt="Image de l'étudiant" />
                             </div>
@@ -45,8 +52,13 @@ const Admin_Etudiant = () => {
                                 <p>Email : {etudiant.Email}</p>
                             </div>
                         </div>
-                    ))}
+                        <div className="action">
+                            <div className="modifier"><EditIcon/></div>
+                            <div className="supprimer"><DeleteIcon/></div>
+                            {/* <div className="mes"><img src={message} width="10%" alt="Profil" /></div> */}
+                        </div>
                 </div>
+            ))}
             </div>
         </div>
     )

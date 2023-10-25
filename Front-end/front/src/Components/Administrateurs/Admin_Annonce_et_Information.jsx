@@ -126,14 +126,14 @@ const Admin_Annonce_et_Information = () => {
                             </div>
                             <div className="action">
                                 <div className="voir"><Visibility/></div>
-                                <div className="supprimer" onClick={() => showDeleteConfirmation(announcement.Id_Annonce)}>
-                                    <DeleteIcon/>
-                                </div>
                                 <div className="modifier"  onClick={() => handleEdit(announcement.id)} >
                                     <EditIcon/>
                                 </div>
+                                <div className="supprimer" onClick={() => showDeleteConfirmation(announcement.Id_Annonce)}>
+                                    <DeleteIcon/>
+                                </div>
                             </div>
-                        </div>
+                        </div>  
                     </div>
                 ))}
             </div>

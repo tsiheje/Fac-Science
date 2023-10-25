@@ -5,6 +5,13 @@ import NavBar from "../Navbar/Navbar";
 import ModalProfesseur from "./ModalProfesseur";
 import sary from '../../Assets/Images/3135715.png';
 import axios from "axios";
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import Visibility from '@mui/icons-material/Visibility';
+import GetAppIcon from '@mui/icons-material/GetApp';
+import Swal from 'sweetalert2';
+import message from '../../Assets/Images/message.svg';
+
 
 
 const Admin_Professeur = () => {
@@ -32,8 +39,9 @@ const Admin_Professeur = () => {
         
         const getAllProfesseurs = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/Administrateur/professeur');
+                const response = await axios.get('http://localhost:4000/Administrateur/professeurs');
                 setprofesseur(response.data);
+                console.log(response.data);
             } catch (error) {
                 console.error(error);
             }
@@ -42,7 +50,6 @@ const Admin_Professeur = () => {
         getAllProfesseurs(); 
     }, []);
 
-    const Modal = showModal && <ModalProfesseur onClose={handleCloseModal}/>;
     return(
         <div className="content">
             <NavBar/>
@@ -50,25 +57,28 @@ const Admin_Professeur = () => {
                 <div className="buttonajouter" onClick={handleshowModal}>
                     Ajouter Un(e) Professeur
                 </div>
-                {Modal}
-                <div className="card-professeur">
-                    <div className="anatiny">
+                {showModal && <ModalProfesseur onClose={handleCloseModal}/>}
+                {Professeur.map(Professeurs => (
+                <div className="card-prof"key={Professeurs.id}>
+                    <div className="anatiny-prof">
                         <div className="left">
                         <img src={sary} width="100%" height="80%">
                             </img>
                         </div>
                         <div className="right">
-                            <p>Nom : </p>
-                            <p>Prenom : </p>
-                            <p>Telephone : </p>
-                            <p>Email : </p>
+                            <p>Nom : {Professeurs.Nom}</p>
+                            <p>Prenom : {Professeurs.Prenom}</p>
+                            <p>Telephone : {Professeurs.Telephone}</p>
+                            <p>Email : {Professeurs.Email}</p>
                         </div>
                     </div>
                     <div className="action">
-                        <div className="modifier">Modifier</div>
-                        <div className="supprimer">Supprimer</div>
+                        <div className="modifier"><EditIcon/></div>
+                        <div className="supprimer"><DeleteIcon/></div>
+                        {/* <div className="message"><img src={message} width="10%" alt="Profil" /></div> */}
                     </div>
                 </div>
+                ))}
             </div>
         </div>
     )

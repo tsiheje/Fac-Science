@@ -143,18 +143,64 @@
     display: flex;
 }
 
-.input-file {
-    background-image: url('../../Assets/Images/image.svg');
+.scroll .card-professeur {
+    width: 27.5em;
+    height: 22em;
+    border-radius: 10px;
+    background-color: rgb(219, 219, 219);
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
+    box-sizing: border-box;
 }
 
-.input-file input[type="file"] {
-    display: none;
+.scroll .card-professeur .anatiny-professeur{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.input-file.has-file {
-    background-color: #e0e0e0;
+.card-professeur .anatiny-professeur .left{
+    width: 45%;
+}
+
+.card-professeur .anatiny-professeur .right{
+    width: 55%;
+}
+
+.card-professeur  .action{
+    display: flex;
+    gap: 20px;
+    float: right;
+    margin-top: 5px;
+    margin-right: 20px;
+}
+
+.scroll .card-prof {
+    width: 27.5em;
+    height: 15em;
+    border-radius: 10px;
+    background-color: rgb(219, 219, 219);
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.scroll .card-prof .anatiny-prof{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-prof .anatiny-prof .left{
+    width: 40%;
+}
+
+.card-prof .anatiny-prof .right{
+    width: 60%;
+}
+
+.card-prof  .action{
+    display: flex;
+    gap: 20px;
+    float: right;
+    margin-top: 5px;
+    margin-right: 20px;
 }
