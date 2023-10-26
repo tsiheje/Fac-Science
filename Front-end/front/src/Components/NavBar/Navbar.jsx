@@ -14,7 +14,13 @@ import SearchIcon from '@mui/icons-material/Search';
 import Swal from 'sweetalert2';
 import './NavBar.css';
 
-const NavBar = () => {
+const NavBar = ({ onSearch }) => {
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const handleSearchInputChange = (event) => {
+        setSearchTerm(event.target.value);
+        onSearch(event.target.value);
+    };
     const token = Cookies.get('token');
     console.log(token);
 

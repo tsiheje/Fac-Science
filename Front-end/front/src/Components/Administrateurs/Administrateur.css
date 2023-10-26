@@ -100,15 +100,14 @@
 }
 
 .card .anatiny .soratra p{
-    /* float: left; */
+    word-wrap: break-word;
     margin-left: 0;
 }
 
  .anatiny .sary{
     width: 100%;
     height: 250px;
-    background-color: red;
-    /* margin-top: 25%; */
+    text-align: center;
 }
 
 .anatiny .action{
@@ -184,3 +183,4 @@
     margin-top: 5px;
     margin-right: 20px;
 }
+

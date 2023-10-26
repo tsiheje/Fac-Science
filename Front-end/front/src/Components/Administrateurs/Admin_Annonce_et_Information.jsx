@@ -40,22 +40,22 @@ const Admin_Annonce_et_Information = () => {
         getAllAnnonces(); 
         
     }, []);
-    const baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:4000' : 'https://votreserveur.com';
+    // const baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:4000' : 'https://votreserveur.com';
 
     const renderContent = (announcement) => {
         console.log(announcement.Annonce);
         console.log(announcement.Description);
         if (announcement.Annonce) {
-            const fileURL = `${baseURL}/uploads/${announcement.Annonce}`;
+            const fileURL = `http://localhost:4000/Administrateur/uploads/${announcement.Annonce}`;
             const fileExtension = announcement.Annonce.split('.').pop().toLowerCase();
             console.log(fileURL);
 
             if (fileExtension === "jpg" || fileExtension === "jpeg" || fileExtension === "png" || fileExtension === "gif") {
-                return <img src={fileURL} alt="Image d'annonce" width="100%" height="100px" />;
+                return <img src={fileURL} alt="Image d'annonce" width="100%" height="100%" />;
             } else if (fileExtension === "pdf") {
-                return <embed src={fileURL} type="application/pdf" width="100%" height="200px" />;
+                return <embed src={fileURL} type="application/pdf" width="100%" height="100%" />;
             } else if (fileExtension === "mp4" || fileExtension === "avi" || fileExtension === "mkv") {
-                return <video width="100%" height="100px" controls>
+                return <video width="100%" height="100%" controls>
                     <source src={fileURL} type={`video/${fileExtension}`} />
                 </video>;
             } else {
@@ -66,7 +66,16 @@ const Admin_Annonce_et_Information = () => {
         }
     }
 
-    const showDeleteConfirmation = (announcementId) => {
+    const handleDelete = (announcementID) => {
+        console.log(announcementID);
+        axios.delete(`http://localhost:4000/Administrateur/delete${announcementID}`)
+        .then((response) => {
+            console.log('Annonce supprimée avec succès');
+            
+        })
+    }
+
+    const showDeleteConfirmation = (announcementID) => {
         Swal.fire({
             title: 'Confirmation',
             text: 'Voulez-vous vraiment supprimer cette annonce ?',
@@ -76,7 +85,8 @@ const Admin_Annonce_et_Information = () => {
             cancelButtonText: 'Annuler',
         }).then((result) => {
             if (result.isConfirmed) {
-                handleDelete(announcementId);
+                handleDelete(announcementID);
+                displaySweetAlert();
             }
         });
     };
@@ -86,24 +96,21 @@ const Admin_Annonce_et_Information = () => {
             Swal.fire({
                 icon: 'success',
                 title: 'Succès',
-                text: 'Les données ont été ajoutées avec succès!',
+                text: 'Suppression avec succès!',
             });
         } else {
             Swal.fire({
                 icon: 'error',
                 title: 'Erreur',
-                text: 'Une erreur est survenue lors de l\'ajout des données.',
+                text: 'Une erreur lors de la suppression des données.',
             });
         }
     };
     
-    const handleDelete = (announcementID) => {
-        console.log(announcementID);
-        axios.delete('http://localhost:4000/Administrateur/delete/${announcementId}')
-        .then((response) => {
-            console.log('Annonce supprimée avec succès');
-            
-        })
+    
+
+    const handleEdit = () => {
+
     }
 
     return (

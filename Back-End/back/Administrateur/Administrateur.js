@@ -39,7 +39,7 @@ router.post('/annonce',upload.single('Annonce'), (req, res) => {
   console.log(Description);
   console.log(Annonce);
 
-  const filePath = Annonce.originalname;
+  const filePath = Annonce.filename;
   
   try {
     const sql = 'INSERT INTO annonce (Description,Annonce, date_de_publication, Id_source) VALUES ( ?, ?, ?, ?)';
@@ -55,7 +55,11 @@ router.post('/annonce',upload.single('Annonce'), (req, res) => {
   }
 });
 
-router.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+router.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+
+// router.get('/test-upload', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../uploads', 'logoENI.png')); // Remplacez 'test.txt' par le nom d'un fichier réel
+// });
 
 router.get('/annonce', (req, res) => {
   const sql = "select * from annonce";
