@@ -5,19 +5,24 @@ import axios from 'axios';
 import { useNavigate, NavLink } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import MenuItem from '@mui/material/MenuItem';
+import Cookies from 'js-cookie';
+import jwt_decode from 'jwt-decode';
 
 
 const ModaleCours = ({onClose}) => {
+  const token = Cookies.get('token');
+  const decodedToken = jwt_decode(token);
+  const Id = decodedToken.Id_compte;
     const [Niveau, setNiveau] = useState('');
     const [Mention, setMention] = useState('');
     const [Parcours, setParcours] = useState('');
-
-    const [formData, setFormData] = useState({
+    const [cours, setcours] = useState({
         Libelle:'',
-        Cours: '',
+        Cours: null,
         Niveau:'',
         Mention:'',
         Parcours:'',
+        Id_Professeur:Id,
       });
 
     const handleNiveauChange = (event) => {
@@ -27,6 +32,13 @@ const ModaleCours = ({onClose}) => {
         setMention('');
         setParcours('');
       };
+      const handleImageChange = (event) => {
+        const selectedFile = event.target.files[0];
+        setcours((prev) => ({
+            ...prevAnnonce,
+            Cours: selectedFile,
+        }));
+    };
 
     const handleMentionChange = (event) => {
         const { name, value } = event.target;
@@ -67,6 +79,37 @@ const ModaleCours = ({onClose}) => {
             ? ['MATHEMATIQUE ET APPLICATION', 'PHYSIQUE ET APPLICATION', 'CHIMIE', 'SCIENCE DE LA VIE', 'GSEEM']
             : []
         : [];
+
+        const handleSubmit = async (e) => {
+          e.preventDefault();
+          console.log(annonce);
+
+          // Utilisez FormData pour envoyer le fichier
+          const formData = new FormData();
+          formData.append("Annonce", cours.Cours);
+          formData.append("Libelle", cours.Libelle);
+          formData.append("Niveau", cours.Niveau);
+          formData.append("Mention", cours.Mention);
+          formData.append("Parcours", cours.Parcours);
+          formData.append("Id_source", cours.Id_source);
+          console.log(formData);
+
+          try {
+              const response = await axios.post('http://localhost:4000/Professeur/annonce', formData, {
+                  headers: {
+                      'Content-Type': 'multipart/form-data'
+                  }
+              });
+              console.log('Réponse du serveur:', response.data);
+              displaySweetAlert(true);
+          } catch (error) {
+              console.error('Erreur:', error);
+              displaySweetAlert(false);
+          }
+          
+          onClose();
+      };
+
     return(
         <div className="Modal">
             <div>
@@ -84,6 +127,13 @@ const ModaleCours = ({onClose}) => {
                             name="Libelle"
                             onChange={handleChange}
                         />
+                        <label className={`input-file ${annonce.Annonce ? 'has-file' : ''}`}>
+                                <input
+                                    type="file"
+                                    name="Cours"
+                                    onChange={handleImageChange}
+                                />
+                            </label>
                         <TextField required fullWidth id="Niveau" label="Niveau" name='Niveau' select value={Niveau} margin="normal"
                                 onChange={handleNiveauChange}
                                 >

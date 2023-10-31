@@ -22,10 +22,8 @@ const NavBar = ({ onSearch }) => {
         onSearch(event.target.value);
     };
     const token = Cookies.get('token');
-    console.log(token);
 
     const decodedToken = jwt_decode(token);
-    console.log(decodedToken.Roles);
 
     const role = decodedToken.Roles
 
@@ -105,7 +103,6 @@ const NavBar = ({ onSearch }) => {
             }
 
             {role === "Professeur" && (
-                console.log(role),
                     <div className="link">
                         <NavLink to="/Professeur">
                             <p>Acceuil</p>
@@ -138,7 +135,6 @@ const NavBar = ({ onSearch }) => {
             }
 
             {role === "Administrateur" && (
-                console.log(role),
                     <div className="link">
                         <NavLink to="/Administrateur">
                             <p>Dashbord</p>

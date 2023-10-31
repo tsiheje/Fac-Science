@@ -60,7 +60,7 @@ const ModaleAnnonce = ({ onClose }) => {
             formData.append("Id_source", annonce.Id_source);
 
             try {
-                const response = await axios.post('http://localhost:4000/Administrateur/annonce', formData, {
+                const response = await axios.post('http://localhost:4000/Professeur/annonce', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }

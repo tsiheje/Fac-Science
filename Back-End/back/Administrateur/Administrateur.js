@@ -2,8 +2,6 @@ const connection = require('../Connexion/Connexion');
 const cors = require('cors');
 const express = require('express');
 const router = express.Router();
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
 const multer = require('multer');
 const path = require('path');
 
@@ -75,7 +73,6 @@ router.get('/annonce', (req, res) => {
 
 router.delete('/delete:Id_Annonce', (req, res) => {
   const Id_Annonce = req.params.Id_Annonce;
-  console.log('ato izao');
   try{
       const sql = 'DELETE FROM annonce WHERE Id_Annonce = ?';
       connection.query(sql, [Id_Annonce], (err, results) => {
@@ -113,5 +110,22 @@ router.get('/professeurs', (req, res) => {
 
     res.json(results);
   })
+})
+
+router.delete('/supprimer:Id_compte', (req, res) => {
+  const Id = req.params.Id_compte;
+  try{
+    const sql = 'delete from compte where Id_compte = ?';
+    connection.query(sql, [Id], (err, results) => {
+      if (err) throw err;
+        console.log('Suppression des fichier avec succes');
+        res.send('Fichier Supprimer avec succès');
+    })
+
+  }catch(error){
+    console.error(error);
+    res.status(500).send('Erreur interne du serveur.');
+  }
+
 })
 module.exports = router;

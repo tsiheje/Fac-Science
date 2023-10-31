@@ -9,7 +9,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import Visibility from '@mui/icons-material/Visibility';
 import GetAppIcon from '@mui/icons-material/GetApp';
 import Swal from 'sweetalert2';
-// import sary from '../../Assets/Images/3135715.png';
 
 
 const Admin_Annonce_et_Information = () => {
@@ -40,7 +39,6 @@ const Admin_Annonce_et_Information = () => {
         getAllAnnonces(); 
         
     }, []);
-    // const baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:4000' : 'https://votreserveur.com';
 
     const renderContent = (announcement) => {
         console.log(announcement.Annonce);
