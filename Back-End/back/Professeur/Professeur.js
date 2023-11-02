@@ -117,4 +117,23 @@ router.post('/devoirs', upload.single('Devoirs'), (req,res) => {
     res.status(500).send('Erreur interne du serveur.');
   }
 });
+
+router.get('/cours', (req, res) => {
+  const Id = req.body;
+  const sql = "select * from cours where Id_professeur = ?";
+  connection.query(sql, [Id], (err, results) => {
+    if(err) throw err;
+  });
+  res.json(results);
+});
+
+router.get('/devoirs', (req, res) => {
+  const Id = fs.req.body;
+  const sql = "select * from devoir where Id_professeur = ?";
+  connection.query(sql, [Id], (err, results) => {
+    if(err) throw err;
+  });
+  res.json(results);
+});
+
 module.exports = router;

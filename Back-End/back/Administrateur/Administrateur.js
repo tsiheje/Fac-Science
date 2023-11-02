@@ -127,5 +127,30 @@ router.delete('/supprimer:Id_compte', (req, res) => {
     res.status(500).send('Erreur interne du serveur.');
   }
 
+});
+
+router.get('/dashbord', (req, res) => {
+  const sql = "select Niveau, count(Niveau) as Total from compte where Roles = 'Etudiant' group by (Niveau)";
+  connection.query(sql, (err, results) => {
+    if(err) {
+      console.error(err);
+      res.status(500).send('Misy erreur');
+      return;
+    }
+
+    res.json(results);
+  })
+})
+
+router.get('/mention', (req, res) => {
+  const sql = "select Mention, count(Mention) as Total from compte where Roles = 'Etudiant' group by (Mention)";
+  connection.query(sql, (err, results) => {
+    if(err){
+      console.error(err);
+      res.status(500).send('Misy erreur');
+      return;
+    }
+    res.json(results);
+  })
 })
 module.exports = router;

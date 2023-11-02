@@ -34,51 +34,26 @@ const ModalProfesseur = ({onClose}) => {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     return emailPattern.test(email);
   };
-
-  const isTelephoneValid = (telephone) => {
-    const telephonePattern = /^(034|033|032|038|020)[0-9]{7}$/;
-    return telephonePattern.test(telephone);
-  };
-
   const handleSuccess = () => {
     Swal.fire({
       icon: 'success',
       title: 'Compte créé avec succès',
       text: 'Vous pouvez maintenant vous connecter.',
-    }).then(() => {
-      navigate('/');
-    });
+    })
+    onClose();
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     
-    if (name === 'Telephone' && value.length <= 10) {
-      return;
-    };
     setFormData({ ...formData, [name]: value });
 
     setFormErrors({ ...formErrors, [name]: '' });
-    if (name === 'Confirmation') {
-        setPasswordsMatch(formData.Mot_de_passe === value);
-      }
       if (name === 'Email' && !isEmailValid(value)) {
         setFormErrors({ ...formErrors, Email: 'Adresse e-mail invalide' });
       }
-      if (name === 'Telephone' && !isTelephoneValid(value)) {
-        setFormErrors({
-          ...formErrors,
-          Telephone: 'Numéro de téléphone invalide .',
-        });
-      }
     };
 
-    const handleKeyDown = (e) => {
-        const { name, value } = e.target;
-        if (name === 'Telephone' && !/^[0-9]+$/.test(e.key)) {
-          e.preventDefault();
-        }
-      };
       const handleSubmit = async (e) => {
         e.preventDefault();
         if (!formData.Email || !formData.Mot_de_passe || !formData.Nom || !formData.Prenom || !formData.Telephone) {
@@ -92,27 +67,9 @@ const ModalProfesseur = ({onClose}) => {
           });
           return;
         }
-        if (!isTelephoneValid(formData.Telephone)) {
-          setFormErrors({
-            ...formErrors,
-            Telephone: 'Numéro de téléphone doit etre des chiffres.',
-          });
-          return;
-        }
-    
-        try {
-          const emailCheckResponse = await axios.get(`http://localhost:4000/Authentification/CheckEmail/${formData.Email}`);
-          if (emailCheckResponse.data.exists) {
-            setFormErrors({ ...formErrors, Email: 'Cet e-mail est déjà utilisé.' });
-            return;
-          }
-        } catch (error) {
-          console.error('Erreur lors de la vérification de l\'e-mail', error);
-        }
-    
         try {
         console.log(formData);
-        const response = await axios.post('http://localhost:4000/Authentification/SignupProfesseur', formData);
+        const response = await axios.post('http://localhost:4000/Authentification/signup_professeur', formData);
         if (response.status === 200) {
           handleSuccess();
         }
@@ -190,7 +147,6 @@ const ModalProfesseur = ({onClose}) => {
                             id="Telephone"
                             label="Telephone"
                             name="Telephone"
-                            onKeyDown={handleKeyDown}
                             onChange={handleChange}
                             error={!!formErrors.Telephone}
                             helperText={formErrors.Telephone}

@@ -74,14 +74,7 @@ const CompteEtudiant = () => {
         try {
           console.log(formData);
       
-          const response = await fetch('http://localhost:4000/Authentification/Signup', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-          });
-      
+          const response = await axios.post('http://localhost:4000/Authentification/signup', formData);
           if (response.ok) {
             handleSuccess();
           } else {
@@ -270,7 +263,7 @@ const CompteEtudiant = () => {
                 <div className="inscri">
                       Vous aves de compte?
                       <NavLink to="/" variant="body2"  underline='none'>
-                          Connecter vous
+                          Connectez-vous
                       </NavLink>
                   </div>
             </div>

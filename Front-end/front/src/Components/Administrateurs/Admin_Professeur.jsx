@@ -4,6 +4,8 @@ import jwt_decode from 'jwt-decode';
 import NavBar from "../Navbar/Navbar";
 import ModalProfesseur from "./ModalProfesseur";
 import sary from '../../Assets/Images/3135715.png';
+import tel from '../../Assets/Images/telephone.png';
+import mail from '../../Assets/Images/email.png';
 import axios from "axios";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -58,20 +60,26 @@ const Admin_Professeur = () => {
                 <div className="card-prof"key={Professeurs.id}>
                     <div className="anatiny-prof">
                         <div className="left">
-                        <img src={sary} width="100%" height="80%">
-                            </img>
+                            <img src={sary} width="100%" height="100%">
+                                </img>
                         </div>
                         <div className="right">
-                            <p>Nom : {Professeurs.Nom}</p>
-                            <p>Prenom : {Professeurs.Prenom}</p>
-                            <p>Telephone : {Professeurs.Telephone}</p>
-                            <p>Email : {Professeurs.Email}</p>
+                            <p className="Nom">{Professeurs.Nom} {Professeurs.Prenom}</p>
+                            <div className="tel">
+                                {/* <img src={tel}></img> :  */}
+                                <p>{Professeurs.Telephone}</p>  
+                            </div>
+                            <div className="mail">
+                                {/* <img src={mail}></img> :  */}
+                                <p>{Professeurs.Email}</p>
+                            </div>
                         </div>
                     </div>
-                    <div className="action">
-                        <div className="modifier"><EditIcon/></div>
-                        <div className="supprimer"><DeleteIcon/></div>
-                        <div className="message"><ChatBubbleIcon/></div>
+                    <div>
+                        <div className="action">
+                            <div className="supprimer"><DeleteIcon/></div>
+                            <div className="message"><ChatBubbleIcon/></div>
+                        </div>
                     </div>
                 </div>
                 ))}

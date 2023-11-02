@@ -20,9 +20,9 @@ const Administrateur = () => {
         labels: ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9', 'S10'],
         datasets: [
           {
-            label: 'Sample Data',
+            label: 'Total des Niveaux',
             data: [12, 19, 3, 5, 2,4,5,20,1,2],
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            backgroundColor: ['red','gree','yellow','blue'],
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1,
           },
