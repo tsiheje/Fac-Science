@@ -71,7 +71,7 @@ router.post('/cours', upload.single('Cours'), (req,res) => {
   const filePath = Cours.filename;
 
   try{
-    const sql = 'INSERT INTO cours (Libelle, Niveau, Mention, Parcours, Date_de_creation, Id_Professeur) VALUES (?, ?, ?, ?, ?, ?, ?)';
+    const sql = 'INSERT INTO cours (Libelle, Niveau, Mention, Parcours, Cours, Date_de_creation, Id_Professeur) VALUES (?, ?, ?, ?, ?, ?, ?)';
     connection.query(sql, [Libelle, Niveau, Mention, Parcours, filePath, new Date(), Id_Professeur], (err, results) => {
       if(err) throw err;
 
@@ -99,14 +99,14 @@ router.get('/cours', (req, res) => {
 });
 
 router.post('/devoirs', upload.single('Devoirs'), (req,res) => {
-  const {Libelle, Niveau, Mention, Parcours, Id_Professeur} = req.body;
-  const Cours = req.file;
-
-  const filePath = Cours.filename;
+  const {Libelle, Niveau, Mention, Parcours, Date_de_soumise, Id_Professeur} = req.body;
+  const Devoirs = req.file;
+  console.log(Date_de_soumise);
+  const filePath = Devoirs.filename;
 
   try{
-    const sql = 'INSERT INTO cours (Libelle, Niveau, Mention, Parcours, Date_de_creation, Id_Professeur) VALUES (?, ?, ?, ?, ?, ?, ?)';
-    connection.query(sql, [Libelle, Niveau, Mention, Parcours, filePath, new Date(), Id_Professeur], (err, results) => {
+    const sql = 'INSERT INTO devoirs (Libelle, Niveau, Mention, Parcours, Devoirs, Date_de_devoirs, Date_de_soumise, Id_Professeur) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+    connection.query(sql, [Libelle, Niveau, Mention, Parcours, filePath, new Date(), Date_de_soumise , Id_Professeur], (err, results) => {
       if(err) throw err;
 
     });
