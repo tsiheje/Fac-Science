@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Cookies from 'js-cookie';
 import jwt_decode from 'jwt-decode';
 import NavBar from "../Navbar/Navbar";
 import ModaleCours from "./ModaleCours";
+import axios from "axios";
 
 const Professeur_Cours = () => {
     const token = Cookies.get('token');
-    console.log(token);
 
     //jwt_decode pour décoder le token
     const decodedToken = jwt_decode(token);
-
-    console.log(decodedToken.Roles);
+    const Id = decodedToken.Id_compte;
 
     const [showModal, setshowModal] = useState(false);
 
@@ -21,6 +20,23 @@ const Professeur_Cours = () => {
     const handlehideModal = () => {
         setshowModal(false);
     }
+
+    const [cours, setCours] = useState([]);
+    useEffect(() => {
+        
+        const getAllCours = async () => {
+            try {
+                const response = await axios.get(`http://localhost:4000/Professeur/cours/${Id}`);
+                setCours(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        getAllCours(); 
+        
+    }, []);
+
 
     return(
         <div className="content">

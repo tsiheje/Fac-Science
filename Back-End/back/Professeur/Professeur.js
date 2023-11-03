@@ -84,20 +84,6 @@ router.post('/cours', upload.single('Cours'), (req,res) => {
   }
 });
 
-router.get('/cours', (req, res) => {
-  const Id_Professeur = req.body;
-  const sql = 'select * from cours where Id_Professeur = ?';
-  connection.query(sql, [Id_Professeur], (err, results) => {
-    if (err) {
-      console.error(err);
-      res.status(500).send('Misy erreur.');
-      return;
-    }
-
-    res.json(results);
-  })
-});
-
 router.post('/devoirs', upload.single('Devoirs'), (req,res) => {
   const {Libelle, Niveau, Mention, Parcours, Date_de_soumise, Id_Professeur} = req.body;
   const Devoirs = req.file;
@@ -118,22 +104,29 @@ router.post('/devoirs', upload.single('Devoirs'), (req,res) => {
   }
 });
 
-router.get('/cours', (req, res) => {
-  const Id = req.body;
-  const sql = "select * from cours where Id_professeur = ?";
-  connection.query(sql, [Id], (err, results) => {
-    if(err) throw err;
+router.get('/cours/:Id_Professeur', (req, res) => {
+  const Id_Professeur = req.params.Id_Professeur;
+  const sql = 'SELECT * FROM cours WHERE Id_Professeur = ?';
+  connection.query(sql, [Id_Professeur], (err, results) => {
+    if (err) {
+      throw err;
+    } else {
+      res.json(results);
+    }
   });
-  res.json(results);
 });
 
-router.get('/devoirs', (req, res) => {
-  const Id = fs.req.body;
-  const sql = "select * from devoir where Id_professeur = ?";
-  connection.query(sql, [Id], (err, results) => {
-    if(err) throw err;
+
+router.get('/devoirs/:Id_Professeur', (req, res) => {
+  const Id_Professeur = req.params.Id_Professeur;
+  const sql = "select * from devoirs where Id_professeur = ?";
+  connection.query(sql, [Id_Professeur], (err, results) => {
+    if (err) {
+      throw err;
+    } else {
+      res.json(results);
+    }
   });
-  res.json(results);
 });
 
 module.exports = router;

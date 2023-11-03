@@ -17,29 +17,45 @@ router.get('/annonce', (req, res) => {
     connection.query(sql, (err, results) => {
       if(err){
         console.error(err);
-        res.status(500).send("misy erreur");
         return;
       }
       res.json(results);
     })
   });
 
-router.get('/cours', (req, res) => {
-  const {Niveau, Mention , Parcours} = req.params.body;
+router.get('/professeur', (req, res) => {
+  const sql = "select * from compte where Roles = 'Professeur' ";
+  connection.query(sql, (err, results) => {
+    if(err){
+      console.error(err);
+      return;
+    }
+    res.json(results);
+  })
+})
+
+router.get('/cours/:Niveau/:Mention/:Parcours', (req, res) => {
+  const {Niveau, Mention, Parcours} = req.params;
   const sql = "select * from cours where Niveau = ? and Mention = ? and Parcours = ?";
   connection.query(sql, [Niveau, Mention, Parcours], (err, results) => {
-    if(err) throw err
+    if (err) {
+      throw err;
+    } else {
+      res.json(results);
+    }
   });
-  res.json(results);
 });
 
-router.get('/devoirs', (req, res) => {
-  const {Niveau, Mention , Parcours} = req.params.body;
+router.get('/devoirs/:Niveau/:Mention/:Parcours', (req, res) => {
+  const {Niveau, Mention, Parcours} = req.params;
   const sql = "select * from devoirs where Niveau = ? and Mention = ? and Parcours = ?";
   connection.query(sql, [Niveau, Mention, Parcours], (err, results) => {
-    if(err) throw err
+    if (err) {
+      throw err;
+    } else {
+      res.json(results);
+    }
   });
-  res.json(results);
 });
 
 module.exports = router;
