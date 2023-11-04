@@ -137,7 +137,6 @@ router.get('/dashbord', (req, res) => {
       res.status(500).send('Misy erreur');
       return;
     }
-
     res.json(results);
   })
 })

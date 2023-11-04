@@ -1,20 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Cookies from 'js-cookie';
 import jwt_decode from 'jwt-decode';
 import NavBar from "../Navbar/Navbar";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement,} from "chart.js";
 import { Doughnut, Bar} from "react-chartjs-2";
-
+import axios from 'axios';
+  
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale,  BarElement,);
 
 const Administrateur = () => {
     const token = Cookies.get('token');
-    console.log(token);
-
-    //jwt_decode pour décoder le token
     const decodedToken = jwt_decode(token);
 
-    console.log(decodedToken.Roles);
+    const [dash, setDash] = useState([]);
+    useEffect(() => {
+      const getAllDash = async () => {
+        try{
+          const response = await axios.get('http://localhost:4000/Administrateur/dashbord');
+          setDash(response.data);
+          console.log(response.data);
+        }catch(error){
+          console.error(error);
+        }
+      }
+      getAllDash();
+    }, []);
 
     const data = {
         labels: ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9', 'S10'],
