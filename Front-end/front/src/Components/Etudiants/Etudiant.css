@@ -80,3 +80,38 @@
     float: right;
     margin: 0;
 }
+
+/* Dans votre fichier CSS ou dans le fichier de style de votre composant React */
+.file-input-container {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+  }
+  
+  .file-input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0); /* Pour IE */
+  }
+  
+  .file-input-label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .file-input-label:hover {
+    background-color: #0056b3;
+  }
+  

@@ -40,7 +40,6 @@ const Login = () => {
           return; 
         }
         try{
-            console.log(formData);
             const Reponsetoken = await axios.post('http://localhost:4000/Authentification/Login', formData);
             const token = Reponsetoken.data;
             const tokenString = JSON.stringify(token);
@@ -51,7 +50,6 @@ const Login = () => {
             Cookies.set('token', tokenString, { expires: oneYearFromNow });
             const storedTokenString = Cookies.get('token');
             const storedToken = JSON.parse(storedTokenString);
-            console.log(storedToken);
 
             //recuperer les donnees dans la token
             const user = await axios.get('http://localhost:4000/Authentification/me', {

@@ -16,13 +16,14 @@
             Annonce: null,
             Id_source: Id,
         });
-
+        const [selectedFile, setSelectedFile] = useState(null);
         const handleChange = (event) => {
             const { name, value } = event.target;
             setAnnonce((prevAnnonce) => ({
                 ...prevAnnonce,
                 [name]: value,
             }));
+            setSelectedFile(name);
         };
 
         const handleImageChange = (event) => {
@@ -87,14 +88,17 @@
                         <form onSubmit={handleSubmit}>
                             <div className="form-anaty">
                             <div className="fichier">
-                            <label className={`input-file ${annonce.Annonce ? 'has-file' : ''}`}>
+                            <label>Choisissez votre image</label>
+                            <div className="file-input-container">
+                                <label className="file-input-label"></label>
                                 <input
                                     type="file"
+                                    className="file-input"
                                     name="Annonce"
                                     onChange={handleImageChange}
-                                />
-                                Choisissez votre image
-                            </label>
+                                    />
+                            </div>
+                            {selectedFile && <p>Fichier sélectionné : {selectedFile.name}</p>}
                             </div>
                             <div className="champ">
                                 <TextareaAutosize
