@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Cookies from 'js-cookie';
 import jwt_decode from 'jwt-decode';
-import NavBar from "../Navbar/Navbar";
+// import NavBar from "../Navbar/Navbar";
 import ModalAnnonce from "./ModalAnnonce";
 import axios from "axios";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -10,6 +10,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import GetAppIcon from '@mui/icons-material/GetApp';
 import Swal from 'sweetalert2';
 import pdfjsLib from 'pdfjs-dist';
+import BarNav from "./Navbar";
 
 const Admin_Annonce_et_Information = () => {
     const token = Cookies.get('token');
@@ -52,7 +53,7 @@ const Admin_Annonce_et_Information = () => {
                 return (
                 <div>
                     <canvas id={`pdf-canvas-${announcement.id}`}></canvas>
-                    <script>
+                    {/* <script>
                         pdfjsLib.getDocument(fileURL).then((pdf) => {
                         pdf.getPage(1).then((page) => {
                           const canvas = document.querySelector(`#pdf-canvas-${announcement.id}`);
@@ -63,7 +64,7 @@ const Admin_Annonce_et_Information = () => {
                           page.render({ canvasContext: context, viewport: viewport });
                         })
                       });
-                    </script>
+                    </script> */}
                   </div>
                   );
             } else if (fileExtension === "mp4" || fileExtension === "avi" || fileExtension === "mkv") {
@@ -127,7 +128,7 @@ const Admin_Annonce_et_Information = () => {
 
     return (
         <div className="content">
-            <NavBar />
+            <BarNav />
             <div className="scroll">
                 <div className="buttonajouter" onClick={handleshowModal}>
                     Faire Une Annonce

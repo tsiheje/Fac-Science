@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Cookies from 'js-cookie';
 import jwt_decode from 'jwt-decode';
-import NavBar from "../Navbar/Navbar";
+// import NavBar from "../Navbar/Navbar";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement,} from "chart.js";
 import { Doughnut, Bar} from "react-chartjs-2";
 import axios from 'axios';
-  
+import BarNav from "./Navbar";
+
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale,  BarElement,);
 
 const Administrateur = () => {
@@ -49,7 +50,7 @@ const Administrateur = () => {
       };
     return(
         <div className="content">
-            <NavBar/>
+            <BarNav/>
             <div className="dashbord">
                 <div className="dash-left">
                     <h3>statistique des etudiants</h3>
