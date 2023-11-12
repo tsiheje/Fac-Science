@@ -4,7 +4,11 @@ import jwt_decode from 'jwt-decode';
 import NavBar from "../Navbar/Navbar";
 import './Etudiant.css';
 import axios from "axios";
+import profil from '../../Assets/Images/3135715.png';
 import { containerClasses } from "@mui/system";
+import Visibility from "@mui/icons-material/Visibility";
+import GetAppIcon from '@mui/icons-material/GetApp';
+import Profile from "./profile";
 
 const Cours = () => {
     const token = Cookies.get('token');
@@ -52,16 +56,46 @@ const Cours = () => {
         <div className="content">
             <NavBar/>
             <div className="Etudiant">
-                {cours.map(cours => (
-                    <div className="card-etudiant" key={cours.id}>
-                        <div className="anatiny-etudiant">
-                            <p>{cours.Libelle}</p>
-                            <div className="fichier-anatiny">
-                            {renderContent(cours)}
+                {/* <div className="left">
+                    <Profile/>
+                </div> */}
+                <div className="gauche">
+                    {/* <div className="recherche">
+                        <input type="search" name="recherche" id="recherche" placeholder="rechercher votre besoin..."/>
+                        <div className="search-icon"></div>
+                    </div> */}
+                    <div className="right-contenu">
+                        <div className="anaty-cours">
+                            <div className="cours">
+                                Cours
+                            </div>
+                            <div className="couverture">
+
+                            </div>
+                            <div className="description">
+                                <p>MATHEMATIQUE</p>
+                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla animi suscipit unde adipisci architecto temporibus quis officiis ut explicabo doloremque!</p>
+                            </div>
+                            <div className="ambany">
+                                <div className="publieur">
+                                    <img src={profil} alt="" width={'15%'}/>
+                                    <div className="nom">
+                                        <p className="anarana">Pr. Marie Mickelio</p>
+                                        <p className="date">22/11/2023</p>
+                                    </div>
+                                </div>
+                                <div className="action">
+                                    <div className="voire">
+                                        <Visibility/>
+                                    </div>
+                                    <div className="down">
+                                        <GetAppIcon/>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        </div>
-                    </div> 
-                ))}
+                    </div>
+                </div>
             </div>
         </div>
     )

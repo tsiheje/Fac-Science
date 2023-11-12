@@ -1,0 +1,224 @@
+
+.Modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Modal > div {
+    width: 40%;
+    margin-top: -50px;
+    background-color: rgb(253, 243, 243);
+    border-radius: 5px;
+}
+
+.Modal .fermer{
+    float: right;
+    font-size: 25px;
+    cursor: pointer;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.Modal .titre h2{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 0;
+    /* padding: 20px;
+    box-sizing: border-box; */
+}
+
+.Modal .formulaire, .formulaire-prof {
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
+}
+.content {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+.content .nav{
+    width: 20%;
+    /* height: 100vh; */
+    background-color: rgb(255, 127, 127);
+}
+.content .dashbord{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.content .dashbord .dash-left{
+    background-color: rgb(240, 240, 240);
+    width: 60%;
+    height: 86vh;
+    border-radius: 10px;
+}
+
+.content .dashbord .dash-right{
+    background-color: rgb(240, 240, 240);
+    width: 40%;
+    height: 86vh;
+    border-radius: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.dashbord .dash-right .anatiny{
+    background-color: white;
+    width: 49%;
+    height: 49%;
+    border-radius: 5px;
+}
+
+.content .scroll{
+    margin-top: 9%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.content .scroll .card{
+    width: 27.5em;
+    height: 25em;
+    border-radius: 10px;
+    background-color: rgb(219, 219, 219);
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.scroll .card .anatiny p{
+    /* float: right; */
+    margin-top: -5px;
+    margin-left: 310px;
+    font-size: 20px;
+}
+
+.card .anatiny .soratra p{
+    word-wrap: break-word;
+    margin-left: 0;
+}
+
+ .anatiny .sary{
+    width: 100%;
+    height: 250px;
+    text-align: center;
+}
+
+.anatiny .action{
+    display: flex;
+    gap: 20px;
+    float: right;
+    margin-top: 15px;
+    margin-right: 20px;
+}
+
+.formulaire .form-anaty{
+    display: flex;
+}
+
+.scroll .card-professeur {
+    width: 27.5em;
+    height: 22em;
+    border-radius: 10px;
+    background-color: rgb(219, 219, 219);
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.scroll .card-professeur .anatiny-professeur{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-professeur .anatiny-professeur .left{
+    width: 45%;
+}
+
+.card-professeur .anatiny-professeur .right{
+    width: 55%;
+}
+
+.card-professeur  .action{
+    display: flex;
+    gap: 20px;
+    float: right;
+    margin-top: 5px;
+    margin-right: 20px;
+}
+
+.scroll .card-prof {
+    width: 25em;
+    height: 10em;
+    border-radius: 10px;
+    background-color: rgb(219, 219, 219);
+    padding-top: 10px;
+}
+
+.scroll .card-prof .anatiny-prof{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card-prof .anatiny-prof .left{
+    width: 60%;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: rgb(190, 187, 187);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.anatiny-prof .left img{
+    border-radius: 50%;
+    text-align: center;
+}
+
+.card-prof .anatiny-prof .right{
+    width: 100%;
+}
+
+.anatiny-prof .right .Nom{
+    font-size: 25px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.anatiny-prof .right .tel p{
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.anatiny-prof .right .mail p{
+    font-weight: bold;
+}
+
+.card-prof  .action{
+    display: none;
+}
+
+.card-prof:hover .action{
+   display: flex;
+   gap: 10px;
+   float: right;
+   margin-top: -15px;
+    margin-right: 15px;
+}

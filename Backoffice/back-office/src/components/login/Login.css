@@ -1,0 +1,61 @@
+.contenu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../../Assets/Images/pexels-armin-rimoldi-5553074.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.left{
+    width: 60%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.left p{
+    color: white;
+    font-size: 25px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.left h1{
+    background:  linear-gradient(to right,blue,#adc1fa);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: 100px;
+    text-align: center;
+    margin-top: -50px;
+    margin-bottom: 0;
+    font-weight: bolder;
+    font-family: 'Times New Roman', Times, serif;
+}
+.right{
+    width: 40%;
+}
+.right .formulaire{
+    background-color: #ffffff;
+    padding: 15px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    width: 80%;
+    box-shadow: black;
+}
+.right .formulaire h2{
+    text-align: center;
+    margin-bottom: 0;
+}
+.right .formulaire .oublier a{
+    color: blue;
+    text-decoration: none;
+    float: right;
+}
+.right .formulaire .inscri{
+    margin-bottom: 10px;
+}
+.right .formulaire .inscri a{
+    color: blue;
+    text-decoration: none;
+}

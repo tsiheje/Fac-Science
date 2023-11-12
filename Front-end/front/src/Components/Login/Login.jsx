@@ -9,7 +9,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import './Login.css'
 
-const Login = () => {
+const Login = ({ onClose }) => {
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
     const [formData, setFormData] = React.useState({
@@ -61,16 +61,10 @@ const Login = () => {
           const roles = Utilisateur.Roles
           
           if (roles === 'Etudiant') {
-            navigate('/Etudiant'); 
-          } else if (roles === 'Professeur') { 
-            navigate('/Professeur');
-          } else if(roles === 'Administrateur'){
-            navigate('/Administrateur');
+            navigate('/Annonce_et_Information'); 
           }else{
             navigate('/');
           }
-
-
 
         }catch(error){
             console.error('Erreur lors de la connexion', error);
@@ -107,11 +101,8 @@ const Login = () => {
     }
     return(
         <div className="contenu">
-            <div className="left">
-                <h1>ONE NOTE</h1>
-                <p>Explorez le savoir partagé par nos enseignants et restez à jour avec les dernières annonces liées à vos cours et à propos de vos études. Connectez-vous pour enrichir votre expérience académique!</p>
-            </div>
             <div className="right">
+                <div className="fermer" onClick={ onClose }>X</div>
                 <div className="formulaire">
                   <h2>CONNEXION</h2>
                   <form onSubmit={handleSubmit}>
@@ -165,12 +156,6 @@ const Login = () => {
                       Se connecter
                       </Button>
                   </form>
-                  <div className="inscri">
-                      Vous n'aves pas de compte?
-                      <NavLink to="/CompteEtudiant" variant="body2"  underline='none'>
-                          S'inscrire
-                      </NavLink>
-                  </div>
                 </div>
             </div>
         </div>

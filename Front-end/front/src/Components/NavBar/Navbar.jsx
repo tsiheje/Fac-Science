@@ -53,118 +53,44 @@ const NavBar = ({ onSearch }) => {
             
         });
     };
-      
     
     return(
         <div className="navbar">
             <h2>One Note</h2>
-            <div className="searchbar">
-                <input
-                    type="text"
-                    name="search"
-                    placeholder="Rechercher..."
-                    className="search-input"
-                />
-                <SearchIcon className="search-icon" />
+            <div className="recherche">
+                <input type="search" name="recherche" id="recherche" placeholder="rechercher votre besoin..."/>
+                <div className="search-icon"></div>
             </div>
-            {role === "Etudiant" && (
-                    <div className="link">
-                        <NavLink to="/Etudiant">
-                            <p>Acceuil</p>
-                        </NavLink>
-                        <NavLink to="/Etudiant/Annonce_et_Information">
-                            <p>Annonce et information</p>
-                        </NavLink>
-                        <NavLink to="/Etudiant/Cours">
-                            <p>Cours</p>
-                        </NavLink>
-                        <NavLink to="/Etudiant/Devoirs">
-                            <p>Devoirs</p>
-                        </NavLink>
-                        <NavLink to="/Etudiant/Professeurs">
-                            <p>Professeurs</p>
-                        </NavLink>
-                        <div className="profil" onClick={handleMenuOpen}>
-                            <img src={profil} width="100%" style={{ borderRadius: '50%' }} alt="Profil" /><img src={fleche} width="30%" height="15px" style={{ margintop: '50px' }}/>
-                        </div>
-                        <Menu
-                                anchorEl={anchorEl}
-                                open={Boolean(anchorEl)}
-                                onClose={handleMenuClose}
-                                keepMounted
-                                >
-                            <MenuItem onClick={handleMenuClose}><img src={setting} width="10%" alt="Profil" />Paramètres</MenuItem>
-                            <MenuItem onClick={handleMenuClose}><img src={notification} width="10%" alt="Profil" />Notifications</MenuItem>
-                            <MenuItem onClick={handleMenuClose}><img src={message} width="10%" alt="Profil" />Messages</MenuItem>
-                            <MenuItem onClick={handleDeconnexion}><img src={logout} width="10%" alt="Profil" />Déconnexion</MenuItem>
-                        </Menu>
-                    </div>
-                )
-            }
-
-            {role === "Professeur" && (
-                    <div className="link">
-                        <NavLink to="/Professeur">
-                            <p>Acceuil</p>
-                        </NavLink>
-                        <NavLink to="/Professeur/Annonce_et_Information">
-                            <p>Annonce et information</p>
-                        </NavLink>
-                        <NavLink to="/Professeur/Cours">
-                            <p>Cours</p>
-                        </NavLink>
-                        <NavLink to="/Professeur/Devoirs">
-                            <p>Devoirs</p>
-                        </NavLink>
-                        <div className="profil" onClick={handleMenuOpen}>
-                            <img src={profil} width="100%" style={{ borderRadius: '50%' }} alt="Profil" /><img src={fleche} width="30%" height="15px" style={{ margintop: '50px' }}/>
-                        </div>
-                        <Menu
-                                anchorEl={anchorEl}
-                                open={Boolean(anchorEl)}
-                                onClose={handleMenuClose}
-                                keepMounted
-                                >
-                            <MenuItem onClick={handleMenuClose}><img src={setting} width="10%" alt="Profil" />Paramètres</MenuItem>
-                            <MenuItem onClick={handleMenuClose}><img src={notification} width="10%" alt="Profil" />Notifications</MenuItem>
-                            <MenuItem onClick={handleMenuClose}><img src={message} width="10%" alt="Profil" />Messages</MenuItem>
-                            <MenuItem onClick={handleDeconnexion}><img src={logout} width="10%" alt="Profil" />Déconnexion</MenuItem>
-                        </Menu>
-                    </div>
-                )
-            }
-
-            {role === "Administrateur" && (
-                    <div className="link">
-                        <NavLink to="/Administrateur">
-                            <p>Dashbord</p>
-                        </NavLink>
-                        <NavLink to="/Administrateur/Annonce_et_Information">
-                            <p>Annonce et information</p>
-                        </NavLink>
-                        <NavLink to="/Administrateur/Professeur">
-                            <p>Professeur</p>
-                        </NavLink>
-                        <NavLink to="/Administrateur/Etudiant">
-                            <p>Etudiant</p>
-                        </NavLink>
-                        <div className="profil" onClick={handleMenuOpen}>
-                            <img src={profil} width="100%" style={{ borderRadius: '50%' }} alt="Profil" /><img src={fleche} width="30%" height="15px" style={{ margintop: '50px' }}/>
-                        </div>
-                        <Menu
-                                anchorEl={anchorEl}
-                                open={Boolean(anchorEl)}
-                                onClose={handleMenuClose}
-                                keepMounted
-                                >
-                            <MenuItem onClick={handleMenuClose}><img src={setting} width="10%" alt="Profil" />Paramètres</MenuItem>
-                            <MenuItem onClick={handleMenuClose}><img src={notification} width="10%" alt="Profil" />Notifications</MenuItem>
-                            <MenuItem onClick={handleMenuClose}><img src={message} width="10%" alt="Profil" />Messages</MenuItem>
-                            <MenuItem onClick={handleDeconnexion}><img src={logout} width="10%" alt="Profil" />Déconnexion</MenuItem>
-                        </Menu>
-                    </div>
-                )
-            }   
+            <div className="link">
+                <NavLink to="/Annonce_et_Information">
+                    <p>Annonce</p>
+                </NavLink>
+                <NavLink to="/Cours">
+                    <p>Cours</p>
+                </NavLink>
+                <NavLink to="/Devoirs">
+                    <p>Devoirs</p>
+                </NavLink>
+                <NavLink to="/Professeurs">
+                    <p>Professeurs</p>
+                </NavLink>
+            </div>
+            <div className="sary">
+                <div className="profil" onClick={handleMenuOpen}>
+                    <img src={profil} width="100%" style={{ borderRadius: '50%' }} alt="Profil" /><img src={fleche} width="30%" height="15px" style={{ margintop: '50px' }}/>
+                </div>
+                <Menu
+                    anchorEl={anchorEl}
+                    open={Boolean(anchorEl)}
+                    onClose={handleMenuClose}
+                    keepMounted
+                >
+                    <MenuItem onClick={handleMenuClose}><img src={setting} width="10%" alt="Profil" />Paramètres</MenuItem>
+                    <MenuItem onClick={handleMenuClose}><img src={notification} width="10%" alt="Profil" />Notifications</MenuItem>
+                    <MenuItem onClick={handleMenuClose}><img src={message} width="10%" alt="Profil" />Messages</MenuItem>
+                    <MenuItem onClick={handleDeconnexion}><img src={logout} width="10%" alt="Profil" />Déconnexion</MenuItem>
+                </Menu>
+            </div>
         </div>
     )
 }

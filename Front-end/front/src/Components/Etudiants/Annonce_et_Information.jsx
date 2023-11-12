@@ -6,6 +6,8 @@ import './Etudiant.css';
 import axios from "axios";
 import Visibility from "@mui/icons-material/Visibility";
 import GetAppIcon from '@mui/icons-material/GetApp';
+import profil from '../../Assets/Images/3135715.png';
+import Profile from "./profile";
 
 const Annonce_et_Information = () => {
     const token = Cookies.get('token');
@@ -54,23 +56,32 @@ const Annonce_et_Information = () => {
         <div className="content">
             <NavBar/>
             <div className="Etudiant">
-            {announcements.map(announcement => (
-                <div className="card-etudiant" key={announcement.id}>
-                    <div className="anatiny-etudiant">
-                        <p>{announcement.Date_de_publication.split('T')[0]}</p>
-                        <div className="Desc">
-                        <p>{announcement.Description}</p>
-                        </div>
-                        <div className="fichier-anatiny">
-                            {renderContent(announcement)}
-                        </div>
-                        <div className="action">
-                            <div className="voire"><Visibility/></div>
-                            <div className="telecharger"><GetAppIcon/></div>
+                {/* <div className="left">
+                    <Profile/>
+                </div> */}
+                <div className="gauche">
+                    {/* <div className="recherche">
+                        <input type="search" name="recherche" id="recherche" placeholder="rechercher votre besoin..."/>
+                        <div className="search-icon"></div>
+                    </div> */}
+                    <div className="right-contenu">
+                        <div className="anaty-annonce">
+                            <div className="publieur">
+                                <img src={profil} alt="" width={'15%'}/>
+                                <div className="nom">
+                                    <p className="anarana">Rasolofoniaine Tsiheje Marie Mickelio</p>
+                                    <p className="date">22/11/2023</p>
+                                </div>
+                            </div>
+                            <div className="description">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima modi asperiores nesciunt in hic reprehenderit qui quod ad repellat molestias quo quas deserunt, maiores alias enim consequuntur est aspernatur? Veritatis?</p>
+                            </div>
+                            <div className="couverture">
+                                {/* <img src="" alt="" /> */}
+                            </div>
                         </div>
                     </div>
-                </div> 
-            ))}
+                </div>
             </div>
         </div>
     )
