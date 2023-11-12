@@ -14,29 +14,13 @@ import SearchIcon from '@mui/icons-material/Search';
 import Swal from 'sweetalert2';
 import './NavBar.css';
 
-const NavBar = ({ onSearch }) => {
-    const [searchTerm, setSearchTerm] = useState('');
-
-    const handleSearchInputChange = (event) => {
-        setSearchTerm(event.target.value);
-        onSearch(event.target.value);
-    };
+const NavBar = () => {
     const token = Cookies.get('token');
-
     const decodedToken = jwt_decode(token);
-
     const role = decodedToken.Roles
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [logoutAlert, setLogoutAlert] = useState(false);
-
-    const handleMenuOpen = (event) => {
-        setAnchorEl(event.currentTarget);
-      };
-
-      const handleMenuClose = () => {
-        setAnchorEl(null);
-      };
 
       const handleDeconnexion = () => {
         handleMenuClose();
@@ -53,7 +37,17 @@ const NavBar = ({ onSearch }) => {
             
         });
     };
-    
+
+    const [menuOpen, setMenuOpen] = useState(false);
+    const handleMenuOpen = (event) => {
+        setAnchorEl(event.currentTarget);
+        setMenuOpen(true);
+    };
+
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+      };
+
     return(
         <div className="navbar">
             <h2>One Note</h2>
@@ -79,17 +73,26 @@ const NavBar = ({ onSearch }) => {
                 <div className="profil" onClick={handleMenuOpen}>
                     <img src={profil} width="100%" style={{ borderRadius: '50%' }} alt="Profil" /><img src={fleche} width="30%" height="15px" style={{ margintop: '50px' }}/>
                 </div>
-                <Menu
-                    anchorEl={anchorEl}
-                    open={Boolean(anchorEl)}
-                    onClose={handleMenuClose}
-                    keepMounted
-                >
-                    <MenuItem onClick={handleMenuClose}><img src={setting} width="10%" alt="Profil" />Paramètres</MenuItem>
-                    <MenuItem onClick={handleMenuClose}><img src={notification} width="10%" alt="Profil" />Notifications</MenuItem>
-                    <MenuItem onClick={handleMenuClose}><img src={message} width="10%" alt="Profil" />Messages</MenuItem>
-                    <MenuItem onClick={handleDeconnexion}><img src={logout} width="10%" alt="Profil" />Déconnexion</MenuItem>
-                </Menu>
+                {menuOpen && (
+                    <div className="menu">
+                        <NavLink to="/Parametre">
+                            <img src={setting} alt="" width={'15%'}/>
+                            <p>Parametres</p>
+                        </NavLink>
+                        <NavLink to="/Notification">
+                            <img src={notification} alt="" width={'15%'}/>
+                            <p>Notifications</p>
+                        </NavLink>
+                        <NavLink to="/Message">
+                            <img src={message} alt="" width={'15%'}/>
+                            <p>Messages</p>
+                        </NavLink>
+                        <div className="deconnexion" onClick={handleDeconnexion}>
+                            <img src={logout} alt="" width={'15%'}/>
+                            Se déconnecter
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     )

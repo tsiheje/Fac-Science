@@ -38,7 +38,7 @@ const Admin_Annonce_et_Information = () => {
         }
         getAllAnnonces(); 
         
-    }, []);
+    }, [setAnnouncements]);
 
     const renderContent = (announcement) => {
         if (announcement.Annonce) {
@@ -140,36 +140,25 @@ const Admin_Annonce_et_Information = () => {
                         <th>Date de publication</th>
                         <th colSpan={2}>Action</th>
                     </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    {announcements.map(announcement => (
+                            <tr key={announcement.id}>
+                                <td>{announcement.Annonce}</td>
+                                <td>{announcement.Description}</td>
+                                <td>{announcement.Date_de_publication.split('T')[0]}</td>
+                                <td>
+                                    <div className="action">
+                                        <div className="voir"><Visibility/></div>
+                                        <div className="modifier" onClick={() => handleEdit(announcement.id)}>
+                                            <EditIcon/>
+                                        </div>
+                                        <div className="supprimer" onClick={() => showDeleteConfirmation(announcement.Id_Annonce)}>
+                                            <DeleteIcon/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
                 </table>
-                {announcements.map(announcement => (
-                    <div className="card"  key={announcement.id}>
-                        <div className="anatiny">
-                            <p>{announcement.Date_de_publication.split('T')[0]}</p>
-                            <div className="soratra">
-                                <p>{announcement.Description}</p>
-                            </div>
-                            <div className="sary">
-                                {renderContent(announcement)} 
-                            </div>
-                            <div className="action">
-                                <div className="voir"><Visibility/></div>
-                                <div className="modifier"  onClick={() => handleEdit(announcement.id)} >
-                                    <EditIcon/>
-                                </div>
-                                <div className="supprimer" onClick={() => showDeleteConfirmation(announcement.Id_Annonce)}>
-                                    <DeleteIcon/>
-                                </div>
-                            </div>
-                        </div>  
-                    </div>
-                ))}
             </div>
         </div>
     );

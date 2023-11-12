@@ -10,11 +10,27 @@ const Notification = () => {
         <div className="content">
             <NavBar/>
             <div className="Etudiant">
-                <div className="left">
-
-                </div>
-                <div className="gauche">
-                    
+                <div className="notif">
+                    <div className="anaty-notif">
+                        <p>Mes Notifications</p>
+                        <div className="filtre">
+                            <div className="tous">
+                                tous
+                            </div>
+                            <div className="annonce">
+                                Annonces
+                            </div>
+                            <div className="cours">
+                                Cours
+                            </div>
+                            <div className="devoirs">
+                                Devoirs
+                            </div>
+                            <div className="message">
+                                Messages
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

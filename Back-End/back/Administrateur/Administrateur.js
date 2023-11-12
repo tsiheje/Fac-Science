@@ -23,6 +23,7 @@ const storage = multer.diskStorage({
   });
   
   const fs = require('fs');
+const { send } = require('process');
   
   const uploadDirectory = './uploads';
   if (!fs.existsSync(uploadDirectory)) {
@@ -41,12 +42,53 @@ router.post('/annonce',upload.single('Annonce'), (req, res) => {
   
   try {
     const sql = 'INSERT INTO annonce (Description,Annonce, date_de_publication, Id_source) VALUES ( ?, ?, ?, ?)';
-    connection.query(sql, [ Description, filePath, new Date(), Id_source ], (err, result) => {
-      if (err) throw err;
-      console.log('Fichier enregistré dans la base de données');
-    });
+    // ...
 
-    res.send('Fichier uploadé avec succès');
+connection.query(sql, [Description, filePath, new Date(), Id_source], (err, result) => {
+  if (err) {
+    console.error(err);
+    res.status(500).send('Erreur interne du serveur.');
+  } else {
+    const idAnnonce = result.insertId; // Récupérer l'ID de l'annonce nouvellement insérée
+    
+    // Maintenant, utilisez idAnnonce pour créer des notifications pour les étudiants
+    const studentsQuery = "SELECT Id_compte FROM compte WHERE Roles = 'Etudiant'";
+    connection.query(studentsQuery, (err, students) => {
+      if (err) {
+        console.error(err);
+        // Gérer l'erreur de la requête
+      } else {
+        students.forEach(etudiant => {
+          const notification = {
+            ID_destinataire: etudiant.Id_compte,
+            type: 'annonce',
+            contenu: 'Une nouvelle annonce a été publiée',
+            Id_element: idAnnonce, // Utilisation de l'ID de l'annonce ici
+            date: new Date(),
+            statut: 'non_lue'
+          };
+    
+          // Insérer cette notification dans la table des notifications
+          connection.query('INSERT INTO notification (Id_compte, Type, contenu, Id_element, date, statu) VALUES (?, ?, ?, ?, ?, ?)', 
+            [notification.ID_destinataire, notification.type ,notification.contenu, notification.Id_element, notification.date, notification.statut],
+            (err, result) => {
+              if (err) {
+                console.error(err);
+                // Gérer l'échec de l'insertion de la notification
+              } else {
+                // Notification insérée avec succès
+                console.log('Notification insérée pour l\'étudiant ID:', notification.ID_destinataire);
+              }
+            }
+          );
+        });
+      }
+    });
+  }
+});
+
+res.send('Creation de cours avec succès');
+  
   } catch (error) {
     console.error(error);
     res.status(500).send('Erreur interne du serveur.');
@@ -151,5 +193,55 @@ router.get('/mention', (req, res) => {
     }
     res.json(results);
   })
-})
+});
+
+// ...
+
+// Après avoir reçu les données du message depuis la requête POST
+router.post('/message', (req, res) => {
+  const { messageText, senderId, receiverId } = req.body; // Supposons que vous envoyez le texte du message, l'ID de l'expéditeur et le destinataire
+  
+  try {
+    const sql = 'INSERT INTO messages (Texte, Id_Expediteur, Id_Destinataire, Date_Envoi) VALUES (?, ?, ?, ?)';
+    connection.query(sql, [messageText, senderId, receiverId, new Date()], (err, result) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Erreur interne du serveur.');
+      } else {
+        // Le message a été enregistré avec succès
+        res.send('Message envoyé avec succès');
+        const messageId = result.insertId; // Récupérer l'ID du message inséré
+        
+        const notification = {
+          ID_destinataire: receiverId,
+          type: 'message',
+          contenu: 'Vous avez reçu un nouveau message',
+          Id_element: messageId, // Utilisation de l'ID du message ici
+          date: new Date(),
+          statut: 'non_lue'
+        };
+
+        // Insérer cette notification dans la table des notifications
+        connection.query('INSERT INTO notification (Id_compte, Type, contenu, Id_element, date, statu) VALUES (?, ?, ?, ?, ?, ?)', 
+          [notification.ID_destinataire, notification.type ,notification.contenu, notification.Id_element, notification.date, notification.statut],
+          (err, result) => {
+            if (err) {
+              console.error(err);
+              // Gérer l'échec de l'insertion de la notification
+            } else {
+              // Notification insérée avec succès
+              console.log('Notification insérée pour l\'étudiant ID:', notification.ID_destinataire);
+            }
+          }
+        );
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Erreur interne du serveur.');
+  }
+});
+
+// ...
+
 module.exports = router;

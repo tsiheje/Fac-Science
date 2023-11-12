@@ -25,7 +25,7 @@ function App() {
         <Route path="/Professeurs" element={<ProtectedRoute element={ <Professeurs />} /> } />
         <Route path="/Message" element={<ProtectedRoute element={ <Message />} /> } />
         <Route path="/Notification" element={<ProtectedRoute element={ <Notification />} /> } />
-        <Route path="/Paremetre" element={<ProtectedRoute element={ <Paremetre />} /> } />
+        <Route path="/Parametre" element={<ProtectedRoute element={ <Paremetre />} /> } />
       </Routes>
     </BrowserRouter>
   );
