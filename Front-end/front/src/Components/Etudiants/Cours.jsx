@@ -9,6 +9,7 @@ import { containerClasses } from "@mui/system";
 import Visibility from "@mui/icons-material/Visibility";
 import GetAppIcon from '@mui/icons-material/GetApp';
 import Profile from "./profile";
+import Voire from "./Voire";
 
 const Cours = () => {
     const token = Cookies.get('token');
@@ -30,6 +31,14 @@ const Cours = () => {
         }
         getAllCours();
     }, []);
+
+    const [showVoire, setshowVoire] = useState(false);
+    const handleShowVoire = () => {
+        setshowVoire(true);
+    };
+    const handlehideVoire = () => {
+        setshowVoire(false);
+    }
 
     const renderContent = (cours) => {
         if (cours.Cours) {
@@ -73,8 +82,8 @@ const Cours = () => {
 
                             </div>
                             <div className="description">
-                                <p>MATHEMATIQUE</p>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla animi suscipit unde adipisci architecto temporibus quis officiis ut explicabo doloremque!</p>
+                                <p className="libelle">MATHEMATIQUE</p>
+                                <p className="resume">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla animi suscipit unde adipisci architecto temporibus quis officiis ut explicabo doloremque!</p>
                             </div>
                             <div className="ambany">
                                 <div className="publieur">
@@ -85,7 +94,7 @@ const Cours = () => {
                                     </div>
                                 </div>
                                 <div className="action">
-                                    <div className="voire">
+                                    <div className="voire" onClick={handleShowVoire}>
                                         <Visibility/>
                                     </div>
                                     <div className="down">
@@ -97,6 +106,7 @@ const Cours = () => {
                     </div>
                 </div>
             </div>
+            {showVoire && <Voire onClose={handlehideVoire}/>}
         </div>
     )
 }

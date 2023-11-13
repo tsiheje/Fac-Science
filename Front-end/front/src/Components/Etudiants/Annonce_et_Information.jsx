@@ -8,6 +8,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import GetAppIcon from '@mui/icons-material/GetApp';
 import profil from '../../Assets/Images/3135715.png';
 import Profile from "./profile";
+import Voire from "./Voire";
 
 const Annonce_et_Information = () => {
     const token = Cookies.get('token');
@@ -27,6 +28,14 @@ const Annonce_et_Information = () => {
         getAllAnnonces(); 
         
     }, []);
+
+    const [showVoire, setshowVoire] = useState(false);
+    const handleShowVoire = () => {
+        setshowVoire(true);
+    };
+    const handlehideVoire = () => {
+        setshowVoire(false);
+    }
 
     const renderContent = (announcement) => {
         console.log(announcement.Annonce);
@@ -79,10 +88,16 @@ const Annonce_et_Information = () => {
                             <div className="couverture">
                                 {/* <img src="" alt="" /> */}
                             </div>
+                            <div className="action">
+                                <div className="voire" onClick={handleShowVoire}>
+                                    <Visibility/>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            {showVoire && <Voire onClose={handlehideVoire}/>}
         </div>
     )
 }

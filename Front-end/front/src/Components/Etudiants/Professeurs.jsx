@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate, NavLink } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import jwt_decode from 'jwt-decode';
 import NavBar from "../Navbar/Navbar";
@@ -10,6 +11,7 @@ import profil from '../../Assets/Images/3135715.png';
 const Professeur = () => {
     const token = Cookies.get('token');
     const decodedToken = jwt_decode(token);
+    const navigate = useNavigate();
 
     const [professeur, setProfesseur] = useState([]);
     useEffect(() => {
@@ -25,6 +27,10 @@ const Professeur = () => {
         getAllProfesseur();
     }, []);
 
+    const sendMessage = () => {
+        navigate('/message');
+    }
+
     return(
         <div className="content">
             <NavBar/>
@@ -33,22 +39,20 @@ const Professeur = () => {
                     <Profile/>
                 </div> */}
                 <div className="gauche">
-                    {/* <div className="recherche">
-                        <input type="search" name="recherche" id="recherche" placeholder="rechercher votre besoin..."/>
-                        <div className="search-icon"></div>
-                    </div> */}
                     <div className="right-contenu">
-                        <div className="anaty-prof">
-                            <img src={profil} alt="" width={'50%'}/>
-                            <div className="bio">
-                                <p className="anarany">Rasolofoniaina Tsiheje Marie Mickaelio</p>
-                                <p className="tel">0342341566</p>
-                                <p className="mail">tsihejem@gmail.com</p>
+                        {professeur.map(professeur => (
+                            <div className="anaty-prof" key={professeur.id}>
+                                <img src={profil} alt="" width={'50%'}/>
+                                <div className="bio">
+                                    <p className="anarany">{professeur.Nom} {professeur.Prenom}</p>
+                                    <p className="tel">{professeur.Telephone}</p>
+                                    <p className="mail">{professeur.Email}</p>
+                                </div>
+                                <div className="message" onClick={sendMessage}>
+                                    Message
+                                </div>
                             </div>
-                            <div className="message">
-                                Message
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </div>

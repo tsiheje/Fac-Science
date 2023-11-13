@@ -58,4 +58,28 @@ router.get('/devoirs/:Niveau/:Mention/:Parcours', (req, res) => {
   });
 });
 
+router.get('/notification/:Id_compte', (req, res) => {
+  const {Id_compte} = req.params;
+  const sql = "select * from notification where Id_compte = ?";
+  connection.query(sql, [Id_compte], (err, results) => {
+    if (err) {
+      throw err;
+    } else {
+      res.json(results);
+    }
+  })
+});
+
+router.get('/notification/:Id_compte/:filtre', (req, res) => {
+  const {Id_compte, filtre} = req.params;
+  const sql = "select * from notification where Id_compte = ? and Type = ?";
+  connection.query(sql, [Id_compte, filtre], (err, results) => {
+    if (err) {
+      throw err;
+    } else {
+      res.json(results);
+    }
+  })
+})
+
 module.exports = router;

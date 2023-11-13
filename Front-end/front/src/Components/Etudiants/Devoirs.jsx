@@ -10,6 +10,8 @@ import { containerClasses } from "@mui/system";
 import Visibility from "@mui/icons-material/Visibility";
 import GetAppIcon from '@mui/icons-material/GetApp';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import Soumettre from "./Soumettre";
+import Voire from "./Voire";
 
 const Devoirs = () => {
     const token = Cookies.get('token');
@@ -31,6 +33,21 @@ const Devoirs = () => {
         }
         getAllDevoirs();
     }, []);
+    const [showSoumettre, setShowSoumettre] = useState(false);
+    const handleShowSoumettre = () =>{
+        setShowSoumettre(true);
+    };
+    const handlehideShowSoumettre = () =>{
+        setShowSoumettre(false)
+    };
+
+    const [showVoire, setshowVoire] = useState(false);
+    const handleShowVoire = () => {
+        setshowVoire(true);
+    };
+    const handlehideVoire = () => {
+        setshowVoire(false);
+    }
 
     return(
         <div className="content">
@@ -52,8 +69,8 @@ const Devoirs = () => {
                         <div className="couverture">
                             </div>
                             <div className="description">
-                                <p>MATHEMATIQUE</p>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla animi suscipit unde adipisci architecto temporibus quis officiis ut explicabo doloremque!</p>
+                                <p className="libelle">MATHEMATIQUE</p>
+                                <p className="resume">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla animi suscipit unde adipisci architecto temporibus quis officiis ut explicabo doloremque!</p>
                             </div>
                             <div className="ambany">
                                 <div className="publieur">
@@ -64,10 +81,10 @@ const Devoirs = () => {
                                     </div>
                                 </div>
                                 <div className="action">
-                                    <div className="upload">
+                                    <div className="upload" onClick={handleShowSoumettre}>
                                         <CloudUploadIcon/>
                                     </div>
-                                    <div className="voire">
+                                    <div className="voire" onClick={handleShowVoire}>
                                         <Visibility/>
                                     </div>
                                     <div className="down">
@@ -79,6 +96,8 @@ const Devoirs = () => {
                     </div>
                 </div>
             </div>
+            {showSoumettre && <Soumettre onClose={handlehideShowSoumettre}/>}
+            {showVoire && <Voire onClose={handlehideVoire}/>}
         </div>
     )
 }

@@ -74,6 +74,11 @@
     font-size: 20px;
   }
 
+  .menu a:hover, .deconnexion:hover{
+    background-color: #ccc;
+    border-radius: 5px;
+  }
+
   .menu .deconnexion{
     cursor: pointer;
     display: flex;
@@ -81,4 +86,8 @@
     gap: 15px;
     font-size: 20px;
     color: black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-sizing: border-box;
   }
+
