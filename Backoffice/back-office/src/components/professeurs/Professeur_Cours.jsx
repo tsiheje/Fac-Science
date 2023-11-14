@@ -3,11 +3,10 @@ import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import ModaleCours from "./ModaleCours";
 import axios from "axios";
+import BarNav from "./Navbar";
 
 const Professeur_Cours = () => {
     const token = Cookies.get('token');
-
-    //jwt_decode pour décoder le token
     const decodedToken = jwtDecode(token);
     const Id = decodedToken.Id_compte;
 
@@ -39,13 +38,23 @@ const Professeur_Cours = () => {
 
     return(
         <div className="content">
-            {/* <NavBar/> */}
-            <div className="professeur">
-                <div className="buttonajouter" onClick={handleshowModal}>
-                    Creer un Cours
-                </div>
-                {showModal && <ModaleCours onClose={handlehideModal}/>}
+            <div className="nav">
+                <BarNav/>
             </div>
+            <div className="compents">
+                <div className="haut">
+                    <div className="rechercher">
+                        <input type="search" name="recherche" id="" placeholder="rechercher votre cours..."/>
+                    </div>
+                    <div className="buttonajouter" onClick={handleshowModal}>
+                        Créer un cour
+                    </div>
+                </div>
+                <table>
+
+                </table>
+            </div>
+            {showModal && <ModaleCours onClose={handlehideModal}/>}
         </div>
     )
 }

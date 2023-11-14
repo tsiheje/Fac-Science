@@ -105,10 +105,10 @@ const Login = () => {
     }
     return(
         <div className="contenu">
-            <div className="left">
+            {/* <div className="left">
                 <h1>ONE NOTE</h1>
                 <p>Explorez le savoir partagé par nos enseignants et restez à jour avec les dernières annonces liées à vos cours et à propos de vos études. Connectez-vous pour enrichir votre expérience académique!</p>
-            </div>
+            </div> */}
             <div className="right">
                 <div className="formulaire">
                   <h2>CONNEXION</h2>

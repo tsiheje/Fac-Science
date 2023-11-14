@@ -2,18 +2,3 @@
     font-family: 'Times New Roman', Times, serif;
     scroll-behavior: smooth;
 }
-.buttonajouter{
-    position: fixed;
-    top: 10%;
-    right: 0;
-    cursor: pointer;
-    background-color: blue;
-    float: right;
-    padding: 10px;
-    box-sizing: border-box;
-    border-radius: 3px;
-    font-size: 20px;
-    color: white;
-    margin-right: 10px;
-    margin-top: 5px;
-}

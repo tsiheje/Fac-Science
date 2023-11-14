@@ -1,7 +1,5 @@
 .cont {
-  background-image: url('../../Assets/Images/pexels-buro-millennial-1438072.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
+    background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
     align-items: center; 

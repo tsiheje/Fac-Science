@@ -127,12 +127,18 @@ const Admin_Annonce_et_Information = () => {
 
     return (
         <div className="content">
-            <BarNav />
-            <div className="scroll">
-                <div className="buttonajouter" onClick={handleshowModal}>
-                    Faire Une Annonce
+            <div className="nav">
+                <BarNav/>
+            </div>
+            <div className="compent">
+                <div className="haut">
+                    <div className="rechercher">
+                        <input type="search" name="recherche" id="" placeholder="rechercher votre annonce..."/>
+                    </div>
+                    <div className="buttonajouter" onClick={handleshowModal}>
+                        Faire Une Annonce
+                    </div>
                 </div>
-                {showModal && <ModalAnnonce onClose={handleCloseModal} />}
                 <table>
                     <tr>
                         <th>Annonce</th>
@@ -160,6 +166,7 @@ const Admin_Annonce_et_Information = () => {
                         ))}
                 </table>
             </div>
+            {showModal && <ModalAnnonce onClose={handleCloseModal} />}
         </div>
     );
 }

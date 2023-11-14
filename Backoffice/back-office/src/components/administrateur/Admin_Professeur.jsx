@@ -10,6 +10,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import BarNav from "./Navbar";
+import Swal from 'sweetalert2';
+import Visibility from '@mui/icons-material/Visibility';
 
 
 const Admin_Professeur = () => {
@@ -47,15 +49,61 @@ const Admin_Professeur = () => {
 
         getAllProfesseurs(); 
     }, []);
+    const handleDelete = (announcementID) => {
+        console.log(announcementID);
+        axios.delete(`http://localhost:4000/Administrateur/delete${announcementID}`)
+        .then((response) => {
+            console.log('Annonce supprimée avec succès');
+            
+        })
+    }
 
+    const showDeleteConfirmation = (announcementID) => {
+        Swal.fire({
+            title: 'Confirmation',
+            text: 'Voulez-vous vraiment supprimer cette annonce ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Supprimer',
+            cancelButtonText: 'Annuler',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                handleDelete(announcementID);
+                displaySweetAlert();
+            }
+        });
+    };
+
+    const displaySweetAlert = (success) => {
+        if (success) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Succès',
+                text: 'Suppression avec succès!',
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Erreur',
+                text: 'Une erreur lors de la suppression des données.',
+            });
+        }
+    };
+    
     return(
         <div className="content">
-            <BarNav/>
-            <div className="scroll">
-                <div className="buttonajouter" onClick={handleshowModal}>
-                    Ajouter Un(e) Professeur
+            <div className="nav">
+                <BarNav/>
+            </div>
+            <div className="compent">
+                <div className="haut">
+                    <div className="rechercher">
+                        <input type="search" name="recherche" id="" placeholder="rechercher Professeur..."/>
+                    </div>
+                    <div className="buttonajouter" onClick={handleshowModal}>
+                        Creer compte Professeur
+                    </div>
                 </div>
-                {showModal && <ModalProfesseur onClose={handleCloseModal}/>}
                 <table>
                     <tr>
                         <th>Nom</th>
@@ -64,43 +112,25 @@ const Admin_Professeur = () => {
                         <th>Email</th>
                         <th colSpan={2}>Action</th>
                     </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    {Professeur.map(Professeurs => (
+                        <tr key={Professeurs.id}>
+                            <td>{Professeurs.Nom}</td>
+                            <td>{Professeurs.Prenom}</td>
+                            <td>{Professeurs.Telephone}</td>
+                            <td>{Professeurs.Email}</td>
+                            <td>
+                            <div className="action">
+                                <div className="voir"><Visibility/></div>
+                                <div className="supprimer" onClick={() => showDeleteConfirmation(Professeurs.Id_compte)}>
+                                    <DeleteIcon/>
+                                </div>
+                            </div>
+                        </td>
+                        </tr>
+                    ))}
                 </table>
-                {Professeur.map(Professeurs => (
-                <div className="card-prof"key={Professeurs.id}>
-                    <div className="anatiny-prof">
-                        <div className="left">
-                            <img src={sary} width="100%" height="100%">
-                                </img>
-                        </div>
-                        <div className="right">
-                            <p className="Nom">{Professeurs.Nom} {Professeurs.Prenom}</p>
-                            <div className="tel">
-                                {/* <img src={tel}></img> :  */}
-                                <p>{Professeurs.Telephone}</p>  
-                            </div>
-                            <div className="mail">
-                                {/* <img src={mail}></img> :  */}
-                                <p>{Professeurs.Email}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="action">
-                            <div className="supprimer"><DeleteIcon/></div>
-                            <div className="message"><ChatBubbleIcon/></div>
-                        </div>
-                    </div>
-                </div>
-                ))}
             </div>
+            {showModal && <ModalProfesseur onClose={handleCloseModal}/>}
         </div>
     )
 }

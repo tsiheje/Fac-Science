@@ -8,6 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import Swal from 'sweetalert2';
 import BarNav from "./Navbar";
+import Visibility from '@mui/icons-material/Visibility';
 
 
 const Admin_Etudiant = () => {
@@ -29,10 +30,59 @@ const Admin_Etudiant = () => {
         getAllEtudiants(); 
     }, []);
 
+    const handleDelete = (announcementID) => {
+        console.log(announcementID);
+        axios.delete(`http://localhost:4000/Administrateur/delete${announcementID}`)
+        .then((response) => {
+            console.log('Annonce supprimée avec succès');
+            
+        })
+    }
+
+    const showDeleteConfirmation = (announcementID) => {
+        Swal.fire({
+            title: 'Confirmation',
+            text: 'Voulez-vous vraiment supprimer cette annonce ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Supprimer',
+            cancelButtonText: 'Annuler',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                handleDelete(announcementID);
+                displaySweetAlert();
+            }
+        });
+    };
+
+    const displaySweetAlert = (success) => {
+        if (success) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Succès',
+                text: 'Suppression avec succès!',
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Erreur',
+                text: 'Une erreur lors de la suppression des données.',
+            });
+        }
+    };
+    
+
     return (
         <div className="content">
-            <BarNav />
-            <div className="scroll">
+            <div className="nav">
+                <BarNav/>
+            </div>
+            <div className="compent">
+                <  div className="haut">
+                    <div className="rechercher">
+                        <input type="search" name="recherche" id="" placeholder="rechercher Etudiants..."/>
+                    </div>
+                </div>
             <table>
                     <tr>
                         <th>Matricule</th>
@@ -45,43 +95,27 @@ const Admin_Etudiant = () => {
                         <th>Email</th>
                         <th colSpan={2}>Action</th>
                     </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                {etudiants.map(etudiant => (
+                    <tr key={etudiant.id}>
+                        <td>{etudiant.Matricul}</td>
+                        <td>{etudiant.Nom}</td>
+                        <td>{etudiant.Prenom}</td>
+                        <td>{etudiant.Niveau}</td>
+                        <td>{etudiant.Mention}</td>
+                        <td>{etudiant.Parcours}</td>
+                        <td>{etudiant.Telephone}</td>
+                        <td>{etudiant.Email}</td>
+                        <td>
+                            <div className="action">
+                                <div className="voir"><Visibility/></div>
+                                <div className="supprimer" onClick={() => showDeleteConfirmation(etudiant.Id_compte)}>
+                                    <DeleteIcon/>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
+                ))}
                 </table>
-                        {etudiants.map(etudiant => (
-                    <div className="card-professeur"key={etudiant.id} >
-                            <div className="anatiny-professeur" >
-                            <div className="left">
-                                <img src={sary} width="100%" height="80%" alt="Image de l'étudiant" />
-                            </div>
-                            <div className="right">
-                                <p>Nom : {etudiant.Nom}</p>
-                                <p>Prenom : {etudiant.Prenom}</p>
-                                <p>Matricul : {etudiant.Matricul}</p>
-                                <p>Niveau : {etudiant.Niveau}</p>
-                                <p>Mention : {etudiant.Mention}</p>
-                                <p>Parcours : {etudiant.Parcours}</p>
-                                <p>Telephone : {etudiant.Telephone}</p>
-                                <p>Email : {etudiant.Email}</p>
-                            </div>
-                        </div>
-                        <div className="action">
-                            <div className="modifier"><EditIcon/></div>
-                            <div className="supprimer"><DeleteIcon/></div>
-                            <div className="message"><ChatBubbleIcon/></div>
-                        </div>
-                </div>
-            ))}
             </div>
         </div>
     )

@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import ModaleDevoirs from "./ModaleDevoirs";
 import axios from "axios";
+import BarNav from "./Navbar";
 
 const Professeur_Devoirs = () => {
     const token = Cookies.get('token');
@@ -37,13 +38,23 @@ const Professeur_Devoirs = () => {
 
     return(
         <div className="content">
-            {/* <NavBar/> */}
-            <div className="professeur">
-                <div className="buttonajouter" onClick={handleshowModal}>
-                    Donner un Devoirs
-                </div>
-                {showModal && <ModaleDevoirs onClose={handlehideModal}/>}
+            <div className="nav">
+                <BarNav/>
             </div>
+            <div className="compents">
+                <div className="haut">
+                    <div className="rechercher">
+                        <input type="search" name="recherche" id="" placeholder="rechercher votre devoirs..."/>
+                    </div>
+                    <div className="buttonajouter" onClick={handleshowModal}>
+                        Donner un devoirs
+                    </div>
+                </div>
+                <table>
+                    
+                </table>
+            </div>
+            {showModal && <ModaleDevoirs onClose={handlehideModal}/>}
         </div>
     )
 }

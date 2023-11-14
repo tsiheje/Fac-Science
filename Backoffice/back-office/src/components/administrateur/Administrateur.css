@@ -30,8 +30,6 @@
     text-align: center;
     margin-top: 20px;
     margin-bottom: 0;
-    /* padding: 20px;
-    box-sizing: border-box; */
 }
 
 .Modal .formulaire, .formulaire-prof {
@@ -46,179 +44,106 @@
 }
 .content .nav{
     width: 20%;
-    /* height: 100vh; */
-    background-color: rgb(255, 127, 127);
+    background-color: gray;
 }
-.content .dashbord{
+.content .compent{
     width: 80%;
+    background-color: rgb(46, 1, 1);
+}
+.barnav{
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.barnav .profil{
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.content .dashbord .dash-left{
-    background-color: rgb(240, 240, 240);
-    width: 60%;
-    height: 86vh;
-    border-radius: 10px;
+.barnav .profil p{
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+.barnav .link{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
 
-.content .dashbord .dash-right{
-    background-color: rgb(240, 240, 240);
-    width: 40%;
-    height: 86vh;
-    border-radius: 10px;
-    padding: 10px;
-    box-sizing: border-box;
+.barnav .link a{
     display: flex;
-    flex-wrap: wrap;
+    text-decoration: none;
     gap: 5px;
 }
 
-.dashbord .dash-right .anatiny{
-    background-color: white;
-    width: 49%;
-    height: 49%;
+.barnav .link a:hover{
+    background-color: gray;
     border-radius: 5px;
 }
 
-.content .scroll{
-    margin-top: 9%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 5px;
-}
-
-.content .scroll .card{
-    width: 27.5em;
-    height: 25em;
-    border-radius: 10px;
-    background-color: rgb(219, 219, 219);
-    padding: 10px;
-    box-sizing: border-box;
-}
-
-.scroll .card .anatiny p{
-    /* float: right; */
-    margin-top: -5px;
-    margin-left: 310px;
+.barnav .link a p{
     font-size: 20px;
 }
 
-.card .anatiny .soratra p{
-    word-wrap: break-word;
-    margin-left: 0;
-}
-
- .anatiny .sary{
-    width: 100%;
-    height: 250px;
-    text-align: center;
-}
-
-.anatiny .action{
+.barnav .logout{
     display: flex;
-    gap: 20px;
-    float: right;
-    margin-top: 15px;
-    margin-right: 20px;
+    align-items: center;
+    margin-top: 10px;
+    cursor: pointer;
 }
 
-.formulaire .form-anaty{
+.barnav .logout:hover{
+    background-color: gray;
+    border-radius: 5px;
+}
+
+.barnav .logout p{
+    font-size: 20px;
+    color: white;
+}
+.compent{
     display: flex;
-}
-
-.scroll .card-professeur {
-    width: 27.5em;
-    height: 22em;
-    border-radius: 10px;
-    background-color: rgb(219, 219, 219);
+    flex-direction: column;
     padding: 10px;
     box-sizing: border-box;
 }
 
-.scroll .card-professeur .anatiny-professeur{
+.compent .haut{
     display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
 
-.card-professeur .anatiny-professeur .left{
-    width: 45%;
+.compent .haut .rechercher{
+    width: 500px;
 }
 
-.card-professeur .anatiny-professeur .right{
-    width: 55%;
+.haut .rechercher input{
+    width: 100%;
+    padding: 10px 30px 10px 10px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 20px;
+    border-radius: 5px;
+    margin-left: 10px;
 }
-
-.card-professeur  .action{
-    display: flex;
-    gap: 20px;
-    float: right;
-    margin-top: 5px;
-    margin-right: 20px;
-}
-
-.scroll .card-prof {
-    width: 25em;
-    height: 10em;
-    border-radius: 10px;
-    background-color: rgb(219, 219, 219);
-    padding-top: 10px;
-}
-
-.scroll .card-prof .anatiny-prof{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-}
-
-.card-prof .anatiny-prof .left{
-    width: 60%;
+.compent .haut .buttonajouter{
+    cursor: pointer;
+    background-color: blue;
     padding: 10px;
     box-sizing: border-box;
-    background-color: rgb(190, 187, 187);
-    border-radius: 50%;
+    border-radius: 3px;
+    font-size: 20px;
+    color: white;
+    margin-right: 10px;
+}
+
+table .action{
     display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.anatiny-prof .left img{
-    border-radius: 50%;
-    text-align: center;
-}
-
-.card-prof .anatiny-prof .right{
-    width: 100%;
-}
-
-.anatiny-prof .right .Nom{
-    font-size: 25px;
-    font-weight: bold;
-    margin: 0;
-}
-
-.anatiny-prof .right .tel p{
-    font-weight: bold;
-    margin-bottom: 0;
-}
-
-.anatiny-prof .right .mail p{
-    font-weight: bold;
-}
-
-.card-prof  .action{
-    display: none;
-}
-
-.card-prof:hover .action{
-   display: flex;
-   gap: 10px;
-   float: right;
-   margin-top: -15px;
-    margin-right: 15px;
+    cursor: pointer;
+    gap: 10px;
 }

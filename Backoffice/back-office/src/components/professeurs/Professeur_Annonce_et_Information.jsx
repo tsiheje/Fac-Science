@@ -8,6 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import Visibility from '@mui/icons-material/Visibility';
 import GetAppIcon from '@mui/icons-material/GetApp';
 import Swal from 'sweetalert2';
+import BarNav from "./Navbar";
 
 const Professeur_Annonce_et_Information = () => {
     const token = Cookies.get('token');
@@ -84,35 +85,46 @@ const Professeur_Annonce_et_Information = () => {
     }
     return(
         <div className="content">
-            {/* <NavBar/> */}
-            <div className="professeur">
-                <div className="buttonajouter" onClick={handleshowModal}>
-                    Faire une Annonce
-                </div>
-                {showModal && <ModaleAnnonce onClose={handleCloseModal}/>}
-                {announcements.map(announcement => (
-                    <div className="card"  key={announcement.id}>
-                        <div className="anatiny">
-                            <p>{announcement.Date_de_publication.split('T')[0]}</p>
-                            <div className="soratra">
-                                <p>{announcement.Description}</p>
-                            </div>
-                            <div className="sary">
-                                {renderContent(announcement)} 
-                            </div>
-                            <div className="action">
-                                <div className="voir"><Visibility/></div>
-                                <div className="modifier"  onClick={() => handleEdit(announcement.id)} >
-                                    <EditIcon/>
-                                </div>
-                                <div className="supprimer" onClick={() => showDeleteConfirmation(announcement.Id_Annonce)}>
-                                    <DeleteIcon/>
-                                </div>
-                            </div>
-                        </div>  
-                    </div>
-                ))}
+            <div className="nav">
+                <BarNav/>
             </div>
+            <div className="compent">
+                <div className="haut">
+                    <div className="rechercher">
+                        <input type="search" name="recherche" id="" placeholder="rechercher votre annonce..."/>
+                    </div>
+                    <div className="buttonajouter" onClick={handleshowModal}>
+                        Faire Une Annonce
+                    </div>
+                </div>
+                <table>
+                    <tr>
+                        <th>Annonce</th>
+                        <th>Description</th>
+                        <th>Date de publication</th>
+                        <th colSpan={2}>Action</th>
+                    </tr>
+                    {announcements.map(announcement => (
+                            <tr key={announcement.id}>
+                                <td>{announcement.Annonce}</td>
+                                <td>{announcement.Description}</td>
+                                <td>{announcement.Date_de_publication.split('T')[0]}</td>
+                                <td>
+                                    <div className="action">
+                                        <div className="voir"><Visibility/></div>
+                                        <div className="modifier" onClick={() => handleEdit(announcement.id)}>
+                                            <EditIcon/>
+                                        </div>
+                                        <div className="supprimer" onClick={() => showDeleteConfirmation(announcement.Id_Annonce)}>
+                                            <DeleteIcon/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+                </table>
+            </div>
+            {showModal && <ModaleAnnonce onClose={handleCloseModal} />}
         </div>
     )
 }

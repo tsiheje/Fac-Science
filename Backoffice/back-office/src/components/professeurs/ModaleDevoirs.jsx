@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, InputAdornment, MenuItem, TextField } from "@mui/material";
+import { Button, TextareaAutosize, MenuItem, TextField } from "@mui/material";
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import Cookies from 'js-cookie';
@@ -90,7 +90,6 @@ const ModaleDevoirs = ({onClose}) => {
     const handleSubmit = async (e) => {
       e.preventDefault();
   
-      // Utilisez FormData pour envoyer le fichier
       const formData = new FormData();
       formData.append("Devoirs", devoirs.Devoirs);
       formData.append("Libelle", devoirs.Libelle);
@@ -132,6 +131,15 @@ const ModaleDevoirs = ({onClose}) => {
                 label="Libellé"
                 name="Libelle"
                 onChange={handleChange}
+              />
+              <TextareaAutosize
+                  minRows={5}
+                  maxRows={6}
+                  style={{ width: '100%' }}
+                  placeholder="Entrez la description de l'annonce"
+                  name="Description"
+                  value={devoirs.Description}
+                  onChange={handleChange}
               />
               <label className={`input-file ${devoirs.devoirs ? 'has-file' : ''}`}>
                 <input

@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Swal from 'sweetalert2';
+import BarNav from "./Navbar";
+import { jwtDecode } from "jwt-decode";
+
 
 const Admin_Notification = () => {
     return(
-        <div>
-
+        <div className="content">
+            <div className="nav">
+                <BarNav/>
+            </div>
+            <div className="compent">
+                
+            </div>
         </div>
     )
 }

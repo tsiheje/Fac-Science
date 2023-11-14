@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { NavLink } from "react-router-dom";
 import Cookies from 'js-cookie';
-import jwtDecode from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 import profil from '../../Assets/Images/3135715.png';
 import fleche from '../../Assets/Images/fleche-vers-le-bas.png';
 import logout from '../../Assets/Images/logout.svg';
@@ -12,22 +12,16 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import SearchIcon from '@mui/icons-material/Search';
 import Swal from 'sweetalert2';
-// import './NavBar.css';
+import './Administrateur';
 
 const BarNav = () => {
-    const [anchorEl, setAnchorEl] = useState(null);
+    const token = Cookies.get('token');
+    const decodedToken = jwtDecode(token);
+
+    const prenom = decodedToken.Prenom;
     const [logoutAlert, setLogoutAlert] = useState(false);
 
-    const handleMenuOpen = (event) => {
-        setAnchorEl(event.currentTarget);
-      };
-
-      const handleMenuClose = () => {
-        setAnchorEl(null);
-      };
-
       const handleDeconnexion = () => {
-        handleMenuClose();
         Swal.fire({
             title: "Voulez-vous vraiment vous déconnecter ?",
             text: "Cliquez sur OK pour vous déconnecter.",
@@ -42,44 +36,45 @@ const BarNav = () => {
         });
     };
     return(
-        <div>
+        <div className='barnav'>
+            <div className="profil">
+                <img src={profil} width="20%" style={{ borderRadius: '50%' }} alt="Profil" />
+                <p>{prenom}</p>
+            </div>
             <div className="link">
                         <NavLink to="/Administrateur">
+                            <img src={setting} width="10%" alt="Profil" />
                             <p>Dashbord</p>
                         </NavLink>
                         <NavLink to="/Administrateur/Annonce_et_Information">
-                            <p>Annonce et information</p>
+                            <img src={setting} width="10%" alt="Profil" />
+                            <p>Annonces</p>
                         </NavLink>
                         <NavLink to="/Administrateur/Professeur">
-                            <p>Professeur</p>
+                            <img src={setting} width="10%" alt="Profil" />
+                            <p>Professeurs</p>
                         </NavLink>
                         <NavLink to="/Administrateur/Etudiant">
-                            <p>Etudiant</p>
+                            <img src={setting} width="10%" alt="Profil" />
+                            <p>Etudiants</p>
                         </NavLink>
-                        <NavLink>
-                            <p><img src={setting} width="10%" alt="Profil" />Paramètres</p>
+                        <NavLink to="/Administrateur/Parametre">
+                            <img src={setting} width="10%" alt="Profil" />
+                            <p>Paramètres</p>
                         </NavLink>
-                        <NavLink>
-                            <p><img src={notification} width="10%" alt="Profil" />Notifications</p>
+                        <NavLink to="/Administrateur/Notification">
+                            <img src={notification} width="10%" alt="Profil" />
+                            <p>Notifications</p>
                         </NavLink>
-                        <NavLink>
-                            <p><img src={message} width="10%" alt="Profil" />Messages</p>
+                        <NavLink to="/Administrateur/Message">
+                            <img src={message} width="10%" alt="Profil" />
+                            <p>Messages</p>
                         </NavLink>
-                        <div className="profil" onClick={handleMenuOpen}>
-                            <img src={profil} width="100%" style={{ borderRadius: '50%' }} alt="Profil" /><img src={fleche} width="30%" height="15px" style={{ margintop: '50px' }}/>
-                        </div>
-                        <Menu
-                                anchorEl={anchorEl}
-                                open={Boolean(anchorEl)}
-                                onClose={handleMenuClose}
-                                keepMounted
-                                >
-                            <MenuItem onClick={handleMenuClose}><img src={setting} width="10%" alt="Profil" />Paramètres</MenuItem>
-                            <MenuItem onClick={handleMenuClose}><img src={notification} width="10%" alt="Profil" />Notifications</MenuItem>
-                            <MenuItem onClick={handleMenuClose}><img src={message} width="10%" alt="Profil" />Messages</MenuItem>
-                            <MenuItem onClick={handleDeconnexion}><img src={logout} width="10%" alt="Profil" />Déconnexion</MenuItem>
-                        </Menu>
-                    </div>
+                </div>
+            <div className="logout" onClick={handleDeconnexion}>
+                <img src={logout} width="25%" style={{ borderRadius: '50%' }} alt="Profil" />
+                <p>Se déconneter</p>
+            </div>
         </div>
     )
 }

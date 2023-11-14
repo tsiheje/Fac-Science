@@ -25,9 +25,9 @@ function App() {
             <Route path="/Professeur/Annonce_et_Information" element={<ProtectedRoute element={ <Professeur_Annonce_et_Information />} />}/>
             <Route path="/Professeur/Cours" element={<ProtectedRoute element={ <Professeur_Cours/>}/>}/>
             <Route path="/Professeur/Devoirs" element={<ProtectedRoute element={ <Professeur_Devoirs/>}/>}/>
-            <Route path="/Professeur/Professeur_Message" element={<ProtectedRoute element={ <Professeur_Message/>}/>}/>
-            <Route path="/Professeur/Professeur_Notification" element={<ProtectedRoute element={ <Professeur_Notification/>}/>}/>
-            <Route path="/Professeur/Professeur_Parametre" element={<ProtectedRoute element={ <Professeur_Parametre/>}/>}/>
+            <Route path="/Professeur/Message" element={<ProtectedRoute element={ <Professeur_Message/>}/>}/>
+            <Route path="/Professeur/Notification" element={<ProtectedRoute element={ <Professeur_Notification/>}/>}/>
+            <Route path="/Professeur/Parametre" element={<ProtectedRoute element={ <Professeur_Parametre/>}/>}/>
             <Route path="/Administrateur" element={<ProtectedRoute element={ <Administrateur/>}/>}/>
             <Route path="/Administrateur/Annonce_et_Information" element={<ProtectedRoute element={ <Admin_Annonce_et_Information />} />}/>
             <Route path="/Administrateur/Professeur" element={<ProtectedRoute element={ <Admin_Professeur/>}/>}/>
