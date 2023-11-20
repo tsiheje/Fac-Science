@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, TextareaAutosize, MenuItem, TextField } from "@mui/material";
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import Cookies from 'js-cookie';
 import { jwtDecode } from "jwt-decode";
 
-const ModaleModifDevoir = ({ onClose }) => {
+const ModaleModifDevoir = ({ onClose, selectedDevoir }) => {
     const token = Cookies.get('token');
     const decodedToken = jwtDecode(token);
     const Id = decodedToken.Id_compte;
@@ -24,6 +24,41 @@ const ModaleModifDevoir = ({ onClose }) => {
       Id_Professeur: Id,
     });
   
+    useEffect(() => {
+      if (selectedDevoir) {
+        setDevoirs({
+          Libelle: selectedDevoir.Libelle || '',
+          Description: selectedDevoir.Description || '',
+          Niveau: selectedDevoir.Niveau || '',
+          Mention: selectedDevoir.Mention || '',
+          Parcours: selectedDevoir.Parcours || '',
+          Date_de_soumise: selectedDevoir.Date_de_soumise.split('T')[0] || '',
+          Devoirs: null,
+          Id_Professeur: Id,
+        });
+        console.log(Date_de_soumise);
+
+        setNiveau(selectedDevoir.Niveau || '');
+        setMention(selectedDevoir.Mention || '');
+        setParcours(selectedDevoir.Parcours || '');
+      }
+    }, [selectedDevoir, Id]);
+  
+    const displaySweetAlert = (success) => {
+      if (success) {
+          Swal.fire({
+              icon: 'success',
+              title: 'Succès',
+              text: 'Les données ont été modifier avec succès!',
+          });
+      } else {
+          Swal.fire({
+              icon: 'error',
+              title: 'Erreur',
+              text: 'Une erreur est survenue lors de la suppression des données.',
+          });
+      }
+  };
     const handleNiveauChange = (event) => {
       const { value } = event.target;
       setNiveau(value);
@@ -87,6 +122,8 @@ const ModaleModifDevoir = ({ onClose }) => {
         : []
       : [];
   
+    const { Libelle, Devoirs, Description,niveau, mention, parcours, Date_de_soumise } = selectedDevoir || {};
+
     const handleSubmit = async (e) => {
       e.preventDefault();
   
@@ -101,27 +138,29 @@ const ModaleModifDevoir = ({ onClose }) => {
       formData.append("Id_Professeur", devoirs.Id_Professeur);
   
       try {
-        const response = await axios.post('http://localhost:4000/Professeur/devoirs', formData, {
+        const response = await axios.put(`http://localhost:4000/Professeur/devoirs/${selectedDevoir.Id_devoirs}`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
         });
         console.log('Réponse du serveur:', response.data);
-        // displaySweetAlert(true);
+        displaySweetAlert(true);
       } catch (error) {
         console.error('Erreur:', error);
-        // displaySweetAlert(false);
+        displaySweetAlert(false);
       }
   
       onClose();
     };
+
+    
   
     return (
       <div className="Modal">
         <div>
           <div className="fermer" onClick={onClose}>X</div>
           <div className="Titre">
-            <h2>CRÉER UN COURS</h2>
+            <h2>MODIFICATION D'UN DEVOIR</h2>
           </div>
           <div className="formulaire">
             <form onSubmit={handleSubmit}>
@@ -131,6 +170,7 @@ const ModaleModifDevoir = ({ onClose }) => {
                 id="Libelle"
                 label="Libellé"
                 name="Libelle"
+                value={devoirs.Libelle}
                 onChange={handleChange}
               />
               <label className={`input-file ${devoirs.devoirs ? 'has-file' : ''}`}>
@@ -205,14 +245,15 @@ const ModaleModifDevoir = ({ onClose }) => {
                 required
                 fullWidth
                 id="date"
-                // label="date fin de remise"
+                label="date fin de remise"  
                 name="Date_de_soumise"
                 margin="normal"
                 type="date"
+                value={devoirs.Date_de_soumise}
                 onChange={handleChange}
               />
               <Button type="submit" fullWidth variant="contained" color="primary">
-                Créer
+                Modifier
               </Button>
             </form>
           </div>

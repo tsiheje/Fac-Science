@@ -87,7 +87,6 @@
                         <form onSubmit={handleSubmit}>
                             <div className="form-anaty">
                             <div className="fichier">
-                            <label>Choisissez votre image</label>
                             <div className="file-input-container">
                                 <label className="file-input-label"></label>
                                 <input

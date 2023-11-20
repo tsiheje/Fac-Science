@@ -5,6 +5,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearSca
 import { Doughnut, Bar} from "react-chartjs-2";
 import axios from 'axios';
 import BarNav from "./Navbar";
+import sary from '../../Assets/Images/school-svgrepo-com.svg';
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale,  BarElement,);
 
@@ -12,7 +13,9 @@ const Administrateur = () => {
     const token = Cookies.get('token');
     const decodedToken = jwtDecode(token);
 
-    const [dash, setDash] = useState([]);
+    const [dash, setDash] = useState({
+      Niveau: [], // Assurez-vous que niveaux est une propriété dans votre objet dash
+    });
     useEffect(() => {
       const getAllDash = async () => {
         try{
@@ -25,13 +28,26 @@ const Administrateur = () => {
       }
       getAllDash();
     }, []);
+    const [mention, setMention] = useState([])
+    useEffect(() => {
+      const getAllMention = async () => {
+        try{
+          const response = await axios.get('http://localhost:4000/Administrateur/mention');
+          setMention(response.data);
+          console.log(response.data);
+        }catch(error){
+          console.error(error);
+        }
+      }
+      getAllMention();
+    }, []);
 
     const data = {
-        labels: ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9', 'S10'],
+        labels: Object.values(dash).map((niveau) => niveau.Niveau),
         datasets: [
           {
             label: 'Par Niveaux',
-            data: [12, 19, 3, 5, 2,4,5,20,1,2],
+            data: Object.values(dash).map((niveau) => niveau.Total),
             backgroundColor: [  'blue'],
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1,
@@ -46,6 +62,8 @@ const Administrateur = () => {
             beginAtZero: true,
           },
         },
+        responsive: true,
+        maintainAspectRatio: false,
       };
     return(
         <div className="content">
@@ -57,10 +75,13 @@ const Administrateur = () => {
                   <h3>statistique des étudiants</h3>
                   <div className="dashboard">
                     <div className="dash-top">
-                        <div className="anatiny"></div>
-                        <div className="anatiny"></div>
-                        <div className="anatiny"></div>
-                        <div className="anatiny"></div>
+                    {mention.map((item, index) => (
+                      <div key={index} className="anatiny">
+                        <img src={sary} alt="" width={'25%'}/>
+                        <p className="men">{item.Mention}</p>
+                        <p className="tot">{item.Total}</p>
+                      </div>
+                    ))}
                     </div>
                     <div className="dash-bottom">
                         <div className="chart-anatiny">

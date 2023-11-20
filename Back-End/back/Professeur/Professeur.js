@@ -202,6 +202,75 @@ router.post('/devoirs', upload.single('Devoirs'), (req,res) => {
   }
 });
 
+router.put('/cours/:id', upload.single('Cours'), async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { Libelle, Description, Niveau, Mention, Parcours, Id_Professeur } = req.body;
+
+    // Si un nouveau fichier a été téléchargé, récupérez le nom du fichier
+    const newCoursFileName = req.file ? req.file.filename : null;
+
+    // Construisez la requête SQL en fonction de la présence d'un nouveau fichier
+    let sqlQuery;
+    let sqlParams;
+
+    if (newCoursFileName) {
+      sqlQuery = 'UPDATE cours SET Libelle=?, Description=?, Niveau=?, Mention=?, Parcours=?, Cours=?, Id_Professeur=? WHERE Id_cours=?';
+      sqlParams = [Libelle, Description, Niveau, Mention, Parcours, newCoursFileName, Id_Professeur, id];
+    } else {
+      sqlQuery = 'UPDATE cours SET Libelle=?, Description=?, Niveau=?, Mention=?, Parcours=?, Id_Professeur=? WHERE Id_cours=?';
+      sqlParams = [Libelle, Description, Niveau, Mention, Parcours, Id_Professeur, id];
+    }
+
+    // Exécutez la requête SQL
+    connection.query(sqlQuery, sqlParams, (err, results) => {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Erreur lors de la mise à jour du cours' });
+      } else {
+        res.json({ message: 'Cours mis à jour avec succès' });
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erreur lors de la mise à jour du cours' });
+  }
+});
+
+router.put('/devoirs/:id', upload.single('Devoirs'), async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { Libelle, Description, Niveau, Mention, Parcours, Id_Professeur, Date_de_soumise } = req.body;
+
+    // Si un nouveau fichier a été téléchargé, récupérez le nom du fichier
+    const newCoursFileName = req.file ? req.file.filename : null;
+
+    // Construisez la requête SQL en fonction de la présence d'un nouveau fichier
+    let sqlQuery;
+    let sqlParams;
+    console.log('ato izao')
+    if (newCoursFileName) {
+      sqlQuery = 'UPDATE devoirs SET Libelle=?, Description=?, Niveau=?, Mention=?, Parcours=?, Devoirs=?, Date_de_soumise=? WHERE Id_devoirs=?';
+      sqlParams = [Libelle, Description, Niveau, Mention, Parcours, newCoursFileName, Date_de_soumise, id];
+    } else {
+      sqlQuery = 'UPDATE devoirs SET Libelle=?, Description=?, Niveau=?, Mention=?, Parcours=?, Date_de_soumise=? WHERE Id_devoirs=?';
+      sqlParams = [Libelle, Description, Niveau, Mention, Parcours, Date_de_soumise, id];
+    }
+
+    // Exécutez la requête SQL
+    connection.query(sqlQuery, sqlParams, (err, results) => {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Erreur lors de la mise à jour du cours' });
+      } else {
+        res.json({ message: 'Cours mis à jour avec succès' });
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erreur lors de la mise à jour du cours' });
+  }
+});
 router.get('/cours/:Id_Professeur', (req, res) => {
   const Id_Professeur = req.params.Id_Professeur;
   const sql = 'SELECT * FROM cours WHERE Id_Professeur = ?';
@@ -227,4 +296,60 @@ router.get('/devoirs/:Id_Professeur', (req, res) => {
   });
 });
 
+router.delete('/cours/:Id_cours', (req, res) => {
+  const { Id_cours } = req.params;
+
+  const sql = 'DELETE FROM cours WHERE Id_cours = ?';
+
+  connection.query(sql, [Id_cours], (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Erreur lors de la suppression du cour' });
+    } else {
+      if (result.affectedRows > 0) {
+        res.json({ message: 'Cour supprimé avec succès' });
+      } else {
+        res.status(404).json({ message: 'Cour non trouvé' });
+      }
+    }
+  });
+});
+
+router.delete('/devoirs/:Id_devoirs', (req, res) => {
+  const { Id_devoirs } = req.params;
+
+  const sql = 'DELETE FROM devoirs WHERE Id_devoirs = ?';
+
+  connection.query(sql, [Id_devoirs], (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Erreur lors de la suppression du devoir' });
+    } else {
+      if (result.affectedRows > 0) {
+        res.json({ message: 'Devoir supprimé avec succès' });
+      } else {
+        res.status(404).json({ message: 'Devoir non trouvé' });
+      }
+    }
+  });
+});
+
+router.delete('/annonce/:Id_annonce', (req, res) => {
+  const { Id_devoirs } = req.params;
+
+  const sql = 'DELETE FROM annonce WHERE Id_Annonce = ?';
+
+  connection.query(sql, [Id_devoirs], (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Erreur lors de la suppression d\' Annonce' });
+    } else {
+      if (result.affectedRows > 0) {
+        res.json({ message: 'Annonce supprimé avec succès' });
+      } else {
+        res.status(404).json({ message: 'Annonce non trouvé' });
+      }
+    }
+  });
+});
 module.exports = router;

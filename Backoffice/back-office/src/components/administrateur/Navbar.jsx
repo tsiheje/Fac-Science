@@ -6,7 +6,7 @@ import profil from '../../Assets/Images/3135715.png';
 import fleche from '../../Assets/Images/fleche-vers-le-bas.png';
 import logout from '../../Assets/Images/logout.svg';
 import setting from '../../Assets/Images/icons8-paramètres-64.svg';
-import message from '../../Assets/Images/message.svg';
+import personne from '../../Assets/Images/User_fill@3x.png';
 import notification from '../../Assets/Images/notifications-active.svg';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -54,11 +54,11 @@ const BarNav = () => {
                             <p>Annonces</p>
                         </NavLink>
                         <NavLink to="/Administrateur/Professeur">
-                            <img src={image} width="10%" alt="Profil" />
+                            <img src={personne} width="10%" alt="Profil" />
                             <p>Professeurs</p>
                         </NavLink>
                         <NavLink to="/Administrateur/Etudiant">
-                            <img src={setting} width="10%" alt="Profil" />
+                            <img src={personne} width="10%" alt="Profil" />
                             <p>Etudiants</p>
                         </NavLink>
                         <NavLink to="/Administrateur/Parametre">

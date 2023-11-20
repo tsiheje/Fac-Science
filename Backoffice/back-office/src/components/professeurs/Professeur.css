@@ -1,3 +1,6 @@
+*{
+    font-family:'Times New Roman', Times, serif ;
+}
 .content {
     display: flex;
     width: 100%;
@@ -34,15 +37,15 @@
 .barnav .link{
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    margin-top: 10px;
+    gap: 10px;
+    margin-top: 30px;
 }
 
 .barnav .link a{
     display: flex;
     align-items: center;
     text-decoration: none;
-    gap: 5px;
+    gap: 9px;
     color: rgb(113, 119, 156);
 }
 
@@ -59,7 +62,7 @@
 .barnav .logout{
     display: flex;
     align-items: center;
-    margin-top: 30px;
+    margin-top: 80px;
     cursor: pointer;
 }
 
@@ -134,25 +137,20 @@ table .action{
     background-color: rgb(245, 245, 245);
     border-radius: 10px;
 }
-table{
+table {
+    font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
-    background-color: rgb(245, 245, 245);
-    border-radius: 10px;
-}
-th{
-    background-color: rgb(41, 41, 100);
-    color: white;
-}
-
-th, td{
-    padding: 0px 3px;
-    border-bottom: 2px solid rgb(228, 221, 221);
-}
-
-tr:nth-child(even){
-    background-color: rgb(170, 169, 169);
-}
+  }
+  
+  td, th {
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
 
 h1{
     text-align: center;
@@ -169,7 +167,7 @@ h1{
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
 }
 
 .param .anaty-param{
@@ -204,6 +202,15 @@ form .form-ambony, .form-ambany{
     height: 1px;
     background-color: black;
 
+}
+.param .param-kozy{
+    font-size: 20px;
+    margin: 0;
+}
+
+.kozy p{
+    font-size: 20px;
+    margin: 0;
 }
 
 .mdp{

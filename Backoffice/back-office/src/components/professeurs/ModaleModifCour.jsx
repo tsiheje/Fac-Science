@@ -1,18 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, TextareaAutosize, MenuItem, TextField } from "@mui/material";
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import Cookies from 'js-cookie';
 import { jwtDecode } from "jwt-decode";
 
-const ModaleModifCour = ({ onClose }) => {
-    const token = Cookies.get('token');
+const ModaleModifCour = ({ onClose, selectedCours }) => {
+  const token = Cookies.get('token');
   const decodedToken = jwtDecode(token);
   const Id = decodedToken.Id_compte;
-  console.log(Id);
+
   const [Niveau, setNiveau] = useState('');
   const [Mention, setMention] = useState('');
   const [Parcours, setParcours] = useState('');
+
   const [cours, setCours] = useState({
     Libelle: '',
     Description : '',
@@ -22,6 +23,24 @@ const ModaleModifCour = ({ onClose }) => {
     Cours: null,
     Id_Professeur: Id,
   });
+
+  useEffect(() => {
+    if (selectedCours) {
+      setCours({
+        Libelle: selectedCours.Libelle || '',
+        Description: selectedCours.Description || '',
+        Niveau: selectedCours.Niveau || '',
+        Mention: selectedCours.Mention || '',
+        Parcours: selectedCours.Parcours || '',
+        Cours: null,
+        Id_Professeur: Id,
+      });
+
+      setNiveau(selectedCours.Niveau || '');
+      setMention(selectedCours.Mention || '');
+      setParcours(selectedCours.Parcours || '');
+    }
+  }, [selectedCours, Id]);
 
   const displaySweetAlert = (success) => {
     if (success) {
@@ -38,7 +57,8 @@ const ModaleModifCour = ({ onClose }) => {
         });
     }
 };
-
+  const { Libelle, Cours, Description,niveau, mention, parcours, Date_de_publication } = selectedCours || {};
+  console.log(Libelle); 
   const handleNiveauChange = (event) => {
     const { value } = event.target;
     setNiveau(value);
@@ -103,41 +123,49 @@ const ModaleModifCour = ({ onClose }) => {
       : []
     : [];
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    // Utilisez FormData pour envoyer le fichier
-    const formData = new FormData();
-    formData.append("Cours", cours.Cours);
-    formData.append("Libelle", cours.Libelle);
-    formData.append("Description", cours.Description);
-    formData.append("Niveau", cours.Niveau);
-    formData.append("Mention", cours.Mention);
-    formData.append("Parcours", cours.Parcours);
-    formData.append("Id_Professeur", cours.Id_Professeur);
-    console.log(formData);
-    try {
-      const response = await axios.post('http://localhost:4000/Professeur/cours', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-      console.log('Réponse du serveur:', response.data);
-      displaySweetAlert(true);
-    } catch (error) {
-      console.error('Erreur:', error);
-      displaySweetAlert(false);
-    }
-
-    onClose();
-  };
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+  
+      const token = Cookies.get('token');
+      const decodedToken = jwtDecode(token);
+      const Id = decodedToken.Id_compte;
+  
+      const formData = new FormData();
+      formData.append("Libelle", cours.Libelle);
+      formData.append("Description", cours.Description);
+      formData.append("Niveau", cours.Niveau);
+      formData.append("Mention", cours.Mention);
+      formData.append("Parcours", cours.Parcours);
+      formData.append("Id_Professeur", Id);
+  
+      // Ajoutez la logique pour append le fichier uniquement s'il est sélectionné
+      if (cours.Cours) {
+        formData.append("Cours", cours.Cours);
+      }
+  
+      try {
+        const response = await axios.put(`http://localhost:4000/Professeur/cours/${selectedCours.Id_cours}`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+  
+        console.log('Réponse du serveur:', response.data);
+        displaySweetAlert(true);
+      } catch (error) {
+        console.error('Erreur:', error);
+        displaySweetAlert(false);
+      }
+  
+      onClose();
+    };
 
   return (
     <div className="Modal">
       <div>
         <div className="fermer" onClick={onClose}>X</div>
         <div className="Titre">
-          <h2>CRÉER UN COURS</h2>
+          <h2>MODIFICATION D'UN COUR</h2>
         </div>
         <div className="formulaire">
           <form onSubmit={handleSubmit}>
@@ -147,6 +175,7 @@ const ModaleModifCour = ({ onClose }) => {
               id="Libelle"
               label="Libellé"
               name="Libelle"
+              value={cours.Libelle}
               onChange={handleChange}
             />
             <label className={`input-file ${cours.Cours ? 'has-file' : ''}`}>
@@ -218,7 +247,7 @@ const ModaleModifCour = ({ onClose }) => {
               ))}
             </TextField>
             <Button type="submit" fullWidth variant="contained" color="primary">
-              Créer
+              Modifier  
             </Button>
           </form>
         </div>

@@ -11,10 +11,12 @@ import Mdp from "./mdp";
 const Admin_parametre = () => {
     const token = Cookies.get('token');
     const decodedToken = jwtDecode(token);
-    const Nom = decodedToken.Nom;
-    const Prenom = decodedToken.Prenom;
-    const Telephone = decodedToken.Telephone;
-    const Email = decodedToken.Email;
+    const [user, setUser] = useState({
+        Nom: decodedToken.Nom,
+        Prenom: decodedToken.Prenom,
+        Telephone: decodedToken.Telephone,
+        Email: decodedToken.Email,
+    });
 
 
     const [showMdp, setshowMdp] = useState(false);
@@ -23,6 +25,35 @@ const Admin_parametre = () => {
     }
     const hideModalMdp = () => {
         setshowMdp(false)
+    }
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setUser((prevUser) => ({ ...prevUser, [name]: value }));
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await axios.put(`http://localhost:4000/Administrateur/update/${decodedToken.Id_compte}`, {
+                Telephone: user.Telephone,
+                Email: user.Email,
+            });
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Mise à jour réussie',
+                text: 'Vos informations ont été mises à jour avec succès!',
+            });
+
+        } catch (error) {
+            console.error(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Erreur',
+                text: 'Une erreur est survenue lors de la mise à jour des informations.',
+            });
+        }
     }
 
     return(
@@ -34,12 +65,13 @@ const Admin_parametre = () => {
                 <div className="componet-content">
                     <h1>GERER SON PROFIL</h1>
                     <div className="param">
+                        <p className="param-kozy">Cette interface vous permet de mettre à jour les informations de votre compte en toute simplicité. Vous pouvez visualiser et modifier des détails tels que votre nom, prénom, numéro de téléphone et adresse e-mail. Assurez-vous que vos informations sont toujours à jour pour une communication efficace</p>
                         <div className="anaty-param">
                             <div className="sary">
                                 <img src={profil} alt="" width={'90%'}/>
                             </div>
                             <div className="formulaire">
-                                <form>
+                                <form onSubmit={handleSubmit}>
                                     <div className="form-ambony">
                                         <TextField
                                             margin="normal"
@@ -48,7 +80,7 @@ const Admin_parametre = () => {
                                             label="Nom"
                                             name="Nom"
                                             autoComplete="Nom"
-                                            value={Nom}
+                                            value={user.Nom}
                                             // onChange={handleChange}
                                         />
                                         <TextField
@@ -58,7 +90,7 @@ const Admin_parametre = () => {
                                             label="Prenom"
                                             name="Prenom"
                                             autoComplete="Prenom"
-                                            value={Prenom}
+                                            value={user.Prenom}
                                             // onChange={handleChange}
                                         />
                                     </div>
@@ -70,8 +102,8 @@ const Admin_parametre = () => {
                                             label="Telephone"
                                             name="Telephone"
                                             autoComplete="Telephone"
-                                            value={Telephone}
-                                            // onChange={handleChange}
+                                            value={user.Telephone}
+                                            onChange={handleChange}
                                         />
                                         <TextField
                                             margin="normal"
@@ -80,8 +112,8 @@ const Admin_parametre = () => {
                                             label="Email"
                                             name="Email"
                                             autoComplete="Email"
-                                            value={Email}
-                                            // onChange={handleChange}
+                                            value={user.Email}
+                                            onChange={handleChange}
                                         />
                                     </div>
                                     <div className="btn">
@@ -93,7 +125,9 @@ const Admin_parametre = () => {
                             </div>
                         </div>
                         <div className="bar"></div>
-                        <div className="kozy"></div>
+                        <div className="kozy">
+                            <p>De plus, vous avez la possibilité de renforcer la sécurité de votre compte en changeant régulièrement votre mot de passe. Cliquez sur "Changer le mot de passe" pour accéder à cette fonctionnalité</p>
+                        </div>
                         <div className="mdp" onClick={showModalMdp}>
                             Changer le mot de passe
                         </div>

@@ -24,6 +24,8 @@ const Admin_Professeur = () => {
     console.log(decodedToken.Roles);
     
     const [showModal, setshowModal] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [professeurs, setProfesseurs] = useState([]);
 
     const handleshowModal = () => {
         setshowModal(true);
@@ -40,7 +42,7 @@ const Admin_Professeur = () => {
         const getAllProfesseurs = async () => {
             try {
                 const response = await axios.get('http://localhost:4000/Administrateur/professeurs');
-                setprofesseur(response.data);
+                setProfesseurs(response.data);
                 console.log(response.data);
             } catch (error) {
                 console.error(error);
@@ -51,7 +53,7 @@ const Admin_Professeur = () => {
     }, []);
     const handleDelete = (announcementID) => {
         console.log(announcementID);
-        axios.delete(`http://localhost:4000/Administrateur/delete${announcementID}`)
+        axios.delete(`http://localhost:4000/Administrateur/supprimer${announcementID}`)
         .then((response) => {
             console.log('Annonce supprimée avec succès');
             
@@ -89,6 +91,13 @@ const Admin_Professeur = () => {
             });
         }
     };
+
+    const filteredProfesseurs = professeurs.filter(professeur =>
+        professeur.Nom.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        professeur.Prenom.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        professeur.Telephone.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        professeur.Email.toLowerCase().includes(searchQuery.toLowerCase())
+    );
     
     return(
         <div className="content">
@@ -99,7 +108,7 @@ const Admin_Professeur = () => {
                 <div className="componet-content">
                     <div className="haut">
                         <div className="rechercher">
-                            <input type="search" name="recherche" id="" placeholder="rechercher Professeur..."/>
+                            <input type="search" name="recherche" id="" placeholder="rechercher Professeur..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}/>
                         </div>
                         <div className="buttonajouter" onClick={handleshowModal}>
                             Creer compte Professeur
@@ -114,19 +123,19 @@ const Admin_Professeur = () => {
                                 <th>Email</th>
                                 <th colSpan={2}>Action</th>
                             </tr>
-                            {Professeur.map(Professeurs => (
-                                <tr key={Professeurs.id}>
-                                    <td>{Professeurs.Nom}</td>
-                                    <td>{Professeurs.Prenom}</td>
-                                    <td>{Professeurs.Telephone}</td>
-                                    <td>{Professeurs.Email}</td>
+                            {filteredProfesseurs.map(professeur => (
+                                <tr key={professeur.id}>
+                                    <td>{professeur.Nom}</td>
+                                    <td>{professeur.Prenom}</td>
+                                    <td>{professeur.Telephone}</td>
+                                    <td>{professeur.Email}</td>
                                     <td>
-                                    <div className="action">
-                                        <div className="supprimer" onClick={() => showDeleteConfirmation(Professeurs.Id_compte)}>
-                                            <DeleteIcon/>
+                                        <div className="action">
+                                            <div className="supprimer" onClick={() => showDeleteConfirmation(professeur.Id_compte)}>
+                                                <DeleteIcon />
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
+                                    </td>
                                 </tr>
                             ))}
                         </table>

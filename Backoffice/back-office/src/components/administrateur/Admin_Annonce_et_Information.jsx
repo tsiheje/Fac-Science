@@ -79,15 +79,34 @@ const Admin_Annonce_et_Information = () => {
         }
     }
 
-    const handleDelete = (announcementID) => {
-        console.log(announcementID);
-        axios.delete(`http://localhost:4000/Administrateur/delete${announcementID}`)
-        .then((response) => {
-            console.log('Annonce supprimée avec succès');
-            
-        })
-    }
+    const handleDelete = async (annonceID) => {
+        if (annonceID === undefined) {
+            console.error('L\'identifiant du devoir est undefined.');
+            return;
+        }
+        try {
+            // Faites une requête DELETE pour supprimer le devoir
+           await axios.delete(`http://localhost:4000/Administrateur/delete${annonceID}`)
 
+    
+            // Affiche une alerte de succès
+            Swal.fire({
+                icon: 'success',
+                title: 'Succès',
+                text: 'L\'annonce a été supprimé avec succès!',
+            });
+        } catch (error) {
+            console.error(error);
+    
+            // Affiche une alerte d'erreur
+            Swal.fire({
+                icon: 'error',
+                title: 'Erreur',
+                text: 'Une erreur est survenue lors de la suppression de l\'annonce.',
+            });
+        }
+    };
+    
     const showDeleteConfirmation = (announcementID) => {
         Swal.fire({
             title: 'Confirmation',
@@ -119,16 +138,36 @@ const Admin_Annonce_et_Information = () => {
             });
         }
     };
+    const [selectedAnnouncement, setSelectedAnnouncement] = useState(null);
     
     const [showModalModif, setshowModalModif] = useState(false);
 
-    const handleEdit = (Id) => {
-        setshowModalModif(true)
+    const handleEdit = (announcementId) => {
+        const selectedAnnouncement = announcements.find(announcement => announcement.Id_Annonce === announcementId);
+        setSelectedAnnouncement(selectedAnnouncement);
+        setshowModalModif(true);
     }
 
     const handelhideEdit = () => {
         setshowModalModif(false)
     }
+
+    const [searchQuery, setSearchQuery] = useState('');
+    const [filteredAnnouncements, setFilteredAnnouncements] = useState([]);
+
+    const handleSearch = (event) => {
+        const query = event.target.value;
+        setSearchQuery(query);
+    
+        const filtered = announcements.filter(
+          (announcement) =>
+            announcement.Annonce.toLowerCase().includes(query.toLowerCase()) ||
+            announcement.Description.toLowerCase().includes(query.toLowerCase())
+        );
+    
+        setFilteredAnnouncements(filtered);
+      };
+
     return (
         <div className="content">
             <div className="nav">
@@ -138,7 +177,7 @@ const Admin_Annonce_et_Information = () => {
                 <div className="componet-content">
                     <div className="haut">
                         <div className="rechercher">
-                            <input type="search" name="recherche" id="" placeholder="rechercher votre annonce..."/>
+                            <input type="search" name="recherche" id="" placeholder="rechercher votre annonce..." value={searchQuery} onChange={handleSearch}/>
                         </div>
                         <div className="buttonajouter" onClick={handleshowModal}>
                             Faire Une Annonce
@@ -152,29 +191,63 @@ const Admin_Annonce_et_Information = () => {
                                 <th>Date de publication</th>
                                 <th colSpan={2}>Action</th>
                             </tr>
-                            {announcements.map(announcement => (
-                                    <tr key={announcement.id}>
-                                        <td>{announcement.Annonce}</td>
-                                        <td>{announcement.Description}</td>
-                                        <td>{announcement.Date_de_publication.split('T')[0]}</td>
-                                        <td>
-                                            <div className="action">
-                                                <div className="modifier" onClick={() => handleEdit(announcement.id)}>
-                                                    <EditIcon/>
-                                                </div>
-                                                <div className="supprimer" onClick={() => showDeleteConfirmation(announcement.Id_Annonce)}>
-                                                    <DeleteIcon/>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))}
+                            {searchQuery.length === 0
+                ? announcements.map((announcement) => (
+                    <tr key={announcement.id}>
+                      <td>{announcement.Annonce}</td>
+                      <td>{announcement.Description}</td>
+                      <td>{announcement.Date_de_publication.split('T')[0]}</td>
+                      <td>
+                        <div className="action">
+                          <div
+                            className="modifier"
+                            onClick={() => handleEdit(announcement.Id_Annonce)}
+                          >
+                            <EditIcon />
+                          </div>
+                          <div
+                            className="supprimer"
+                            onClick={() =>
+                              showDeleteConfirmation(announcement.Id_Annonce)
+                            }
+                          >
+                            <DeleteIcon />
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                : filteredAnnouncements.map((announcement) => (
+                    <tr key={announcement.id}>
+                      <td>{announcement.Annonce}</td>
+                      <td>{announcement.Description}</td>
+                      <td>{announcement.Date_de_publication.split('T')[0]}</td>
+                      <td>
+                        <div className="action">
+                          <div
+                            className="modifier"
+                            onClick={() => handleEdit(announcement.Id_Annonce)}
+                          >
+                            <EditIcon />
+                          </div>
+                          <div
+                            className="supprimer"
+                            onClick={() =>
+                              showDeleteConfirmation(announcement.Id_Annonce)
+                            }
+                          >
+                            <DeleteIcon />
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
                         </table>
                     </div>
                 </div>
             </div>
             {showModal && <ModalAnnonce onClose={handleCloseModal} />}
-            {showModalModif && <ModalModif onClose={handelhideEdit}/>}
+            {showModalModif && <ModalModif onClose={handelhideEdit} selectedAnnouncement={selectedAnnouncement}/>}
         </div>
     );
 }

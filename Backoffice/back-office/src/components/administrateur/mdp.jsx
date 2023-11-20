@@ -6,8 +6,19 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { jwtDecode } from "jwt-decode";
 
 const Mdp = ({ onClose }) => {
+    const token = Cookies.get('token');
+    const decodedToken = jwtDecode(token);
+    const [user, setUser] = useState({
+        Nom: decodedToken.Nom,
+        Prenom: decodedToken.Prenom,
+        Telephone: decodedToken.Telephone,
+        Email: decodedToken.Email,
+        Mot_de_passe: decodedToken.Mot_de_passe,
+    });
+    console.log(user.Mot_de_passe)
     const [showPassword, setShowPassword] = useState(false);
 
     return(

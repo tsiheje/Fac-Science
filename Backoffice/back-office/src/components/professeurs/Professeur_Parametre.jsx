@@ -32,6 +32,7 @@ const Professeur_Parametre = () => {
                 <div className="compents-content">
                     <h1>GERER SON PROFIL</h1>
                     <div className="param">
+                        <p className="param-kozy">Cette interface vous permet de mettre à jour les informations de votre compte en toute simplicité. Vous pouvez visualiser et modifier des détails tels que votre nom, prénom, numéro de téléphone et adresse e-mail. Assurez-vous que vos informations sont toujours à jour pour une communication efficace</p>
                         <div className="anaty-param">
                             <div className="sary">
                                 <img src={profil} alt="" width={'90%'}/>
@@ -91,7 +92,9 @@ const Professeur_Parametre = () => {
                             </div>
                         </div>
                         <div className="bar"></div>
-                        <div className="kozy"></div>
+                        <div className="kozy">
+                            <p>De plus, vous avez la possibilité de renforcer la sécurité de votre compte en changeant régulièrement votre mot de passe. Cliquez sur "Changer le mot de passe" pour accéder à cette fonctionnalité</p>
+                        </div>
                         <div className="mdp" onClick={showModalMdp}>
                             Changer le mot de passe
                         </div>

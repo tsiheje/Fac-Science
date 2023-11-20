@@ -42,7 +42,7 @@ const Professeur_Devoirs = () => {
         
     }, []);
 
-    const showDeleteConfirmation = (announcementID) => {
+    const showDeleteConfirmation = (devoirID) => {
         Swal.fire({
             title: 'Confirmation',
             text: 'Voulez-vous vraiment supprimer cette annonce ?',
@@ -52,19 +52,49 @@ const Professeur_Devoirs = () => {
             cancelButtonText: 'Annuler',
         }).then((result) => {
             if (result.isConfirmed) {
-                handleDelete(announcementID);
+                handleDelete(devoirID);
                 // displaySweetAlert();
             }
         });
     };
+    const [selectedDevoir, setSelectedDevoir] = useState(null);
 
-    const handleDelete = () => {
-
-    }
+    const handleDelete = async (devoirID) => {
+        console.log(devoirID);
+        if (devoirID === undefined || devoirID === 'undefined') {
+            console.error('L\'identifiant du devoir est incorrect ou non défini.');
+            return;
+        }
+        try {
+            
+            // Faites une requête DELETE pour supprimer le devoir
+            await axios.delete(`http://localhost:4000/Professeur/devoirs/${devoirID}`);
+            
+            // Affiche une alerte de succès
+            Swal.fire({
+                icon: 'success',
+                title: 'Succès',
+                text: 'Le devoir a été supprimé avec succès!',
+            });
+        } catch (error) {
+            console.error(error);
+    
+            // Affiche une alerte d'erreur
+            Swal.fire({
+                icon: 'error',
+                title: 'Erreur',
+                text: 'Une erreur est survenue lors de la suppression du devoir.',
+            });
+        }
+    };
+    
     const [showModalModif, setshowModalModif] = useState(false);
 
-    const handleEdit = (Id) => {
-        setshowModalModif(true)
+    const handleEdit = (devoirId) => {
+        const selectedDevoirId = devoirs.find(devoir => devoir.Id_devoir === devoirId);
+        setSelectedDevoir(selectedDevoirId);
+
+        setshowModalModif(true);
     }
 
     const handelhideEdit = () => {
@@ -110,10 +140,10 @@ const Professeur_Devoirs = () => {
                                 <td>{devoir.Date_de_soumise.split('T')[0]}</td>
                                 <td>
                                         <div className="action">
-                                            <div className="modifier" onClick={() => handleEdit(devoir.id)}>
+                                            <div className="modifier" onClick={() => handleEdit(devoir.Id_devoir)}>
                                                 <EditIcon/>
                                             </div>
-                                            <div className="supprimer" onClick={() => showDeleteConfirmation(devoir.Id_Annonce)}>
+                                            <div className="supprimer" onClick={() => showDeleteConfirmation(devoir.Id_devoirs)}>
                                                 <DeleteIcon/>
                                             </div>
                                         </div>
@@ -125,7 +155,7 @@ const Professeur_Devoirs = () => {
                 </div>
             </div>
             {showModal && <ModaleDevoirs onClose={handlehideModal}/>}
-            {showModalModif && <ModaleModifDevoir onClose={handelhideEdit}/>}
+            {showModalModif && <ModaleModifDevoir onClose={handelhideEdit} selectedDevoir={selectedDevoir}/>}
         </div>
     )
 }

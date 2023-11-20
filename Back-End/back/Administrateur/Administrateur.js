@@ -4,6 +4,8 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path');
+const jwt = require('jsonwebtoken');
+const jwt_decode = require('jwt-decode');
 
 router.use(cors());
 router.use(express.json());
@@ -186,53 +188,27 @@ router.get('/mention', (req, res) => {
   })
 });
 
-// ...
+router.put('/update/:Id_compte', (req, res) => {
+  const { Id_compte } = req.params;
+  const { Nom, Prenom, Telephone, Email } = req.body;
 
-// Après avoir reçu les données du message depuis la requête POST
-router.post('/message', (req, res) => {
-  const { messageText, senderId, receiverId } = req.body; // Supposons que vous envoyez le texte du message, l'ID de l'expéditeur et le destinataire
-  
   try {
-    const sql = 'INSERT INTO messages (Texte, Id_Expediteur, Id_Destinataire, Date_Envoi) VALUES (?, ?, ?, ?)';
-    connection.query(sql, [messageText, senderId, receiverId, new Date()], (err, result) => {
+    const sql = "UPDATE compte SET Telephone=?, Email=? WHERE Id_compte=?";
+    connection.query(sql, [Telephone, Email, Id_compte], (err, result) => {
       if (err) {
         console.error(err);
-        res.status(500).send('Erreur interne du serveur.');
+        res.status(500).json({ error: 'Erreur lors de la mise à jour des informations utilisateur' });
       } else {
-        // Le message a été enregistré avec succès
-        res.send('Message envoyé avec succès');
-        const messageId = result.insertId; // Récupérer l'ID du message inséré
-        
-        const notification = {
-          ID_destinataire: receiverId,
-          type: 'message',
-          contenu: 'Vous avez reçu un nouveau message',
-          Id_element: messageId, // Utilisation de l'ID du message ici
-          date: new Date(),
-          statut: 'non_lue'
-        };
+        // Mise à jour réussie, maintenant mettez à jour le cookie
 
-        // Insérer cette notification dans la table des notifications
-        connection.query('INSERT INTO notification (Id_compte, Type, contenu, Id_element, date, statu) VALUES (?, ?, ?, ?, ?, ?)', 
-          [notification.ID_destinataire, notification.type ,notification.contenu, notification.Id_element, notification.date, notification.statut],
-          (err, result) => {
-            if (err) {
-              console.error(err);
-              // Gérer l'échec de l'insertion de la notification
-            } else {
-              // Notification insérée avec succès
-              console.log('Notification insérée pour l\'étudiant ID:', notification.ID_destinataire);
-            }
-          }
-        );
+        res.status(200).json({ message: 'Mise à jour réussie', /* autres données mises à jour si nécessaire */ });
       }
     });
   } catch (error) {
     console.error(error);
-    res.status(500).send('Erreur interne du serveur.');
+    res.status(500).json({ error: 'Erreur lors de la mise à jour des informations utilisateur' });
   }
 });
 
-// ...
 
 module.exports = router;

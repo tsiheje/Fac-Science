@@ -66,10 +66,6 @@ const BarNav = () => {
                             <img src={setting} width="10%" alt="Profil" />
                             <p>Paramètres</p>
                         </NavLink>
-                        <NavLink to="/Professeur/Notification">
-                            <img src={notification} width="10%" alt="Profil" />
-                            <p>Notifications</p>
-                        </NavLink>
                 </div>
             <div className="logout" onClick={handleDeconnexion}>
                 <img src={logout} width="25%" style={{ borderRadius: '50%' }} alt="Profil" />

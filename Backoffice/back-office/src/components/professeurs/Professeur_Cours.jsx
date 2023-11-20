@@ -26,22 +26,24 @@ const Professeur_Cours = () => {
     }
 
     const [cours, setCours] = useState([]);
-    useEffect(() => {
-        
-        const getAllCours = async () => {
-            try {
-                const response = await axios.get(`http://localhost:4000/Professeur/cours/${Id}`);
-                setCours(response.data);
-                console.log(response.data);
-            } catch (error) {
-                console.error(error);
-            }
+    const getAllCours = async () => {
+        try {
+            const response = await axios.get(`http://localhost:4000/Professeur/cours/${Id}`);
+            setCours(response.data);
+            console.log(response.data);
+        } catch (error) {
+            console.error(error);
         }
-        getAllCours(); 
-        
-    }, []);
+    }
+    useEffect(() => {
+        if(showModal){
+            getAllCours();
+        }
+        getAllCours();
 
-    const showDeleteConfirmation = (announcementID) => {
+    }, [showModal]);
+
+    const showDeleteConfirmation = (coursID) => {
         Swal.fire({
             title: 'Confirmation',
             text: 'Voulez-vous vraiment supprimer cette annonce ?',
@@ -51,19 +53,48 @@ const Professeur_Cours = () => {
             cancelButtonText: 'Annuler',
         }).then((result) => {
             if (result.isConfirmed) {
-                handleDelete(announcementID);
+                handleDelete(coursID);
                 // displaySweetAlert();
             }
         });
     };
 
-    const handleDelete = () => {
+    const [selectedCours, setSelectedCours] = useState(null);
 
-    }
+    const handleDelete = async (coursID) => {
+        if (coursID === undefined) {
+            console.error('L\'identifiant du devoir est undefined.');
+            return;
+        }
+        try {
+            // Faites une requête DELETE pour supprimer le devoir
+            await axios.delete(`http://localhost:4000/Professeur/cours/${coursID}`);
+    
+            // Affiche une alerte de succès
+            Swal.fire({
+                icon: 'success',
+                title: 'Succès',
+                text: 'Le devoir a été supprimé avec succès!',
+            });
+        } catch (error) {
+            console.error(error);
+    
+            // Affiche une alerte d'erreur
+            Swal.fire({
+                icon: 'error',
+                title: 'Erreur',
+                text: 'Une erreur est survenue lors de la suppression du devoir.',
+            });
+        }
+    };
     const [showModalModif, setshowModalModif] = useState(false);
 
-    const handleEdit = (Id) => {
-        setshowModalModif(true)
+    const handleEdit = (courId) => {
+        const selectedCoursId = cours.find(cour => cour.Id_cours === courId);
+        setSelectedCours(selectedCoursId);
+        console.log(selectedCoursId);
+
+        setshowModalModif(true);
     }
 
     const handelhideEdit = () => {
@@ -107,10 +138,10 @@ const Professeur_Cours = () => {
                                 <td>{cour.Date_de_creation.split('T')[0]}</td>
                                 <td>
                                         <div className="action">
-                                            <div className="modifier" onClick={() => handleEdit(cour.id)}>
+                                            <div className="modifier" onClick={() => handleEdit(cour.Id_cours)}>
                                                 <EditIcon/>
                                             </div>
-                                            <div className="supprimer" onClick={() => showDeleteConfirmation(cour.Id_Annonce)}>
+                                            <div className="supprimer" onClick={() => showDeleteConfirmation(cour.Id_cours)}>
                                                 <DeleteIcon/>
                                             </div>
                                         </div>
@@ -122,7 +153,7 @@ const Professeur_Cours = () => {
                 </div>
             </div>
             {showModal && <ModaleCours onClose={handlehideModal}/>}
-            {showModalModif && <ModaleModifCour onClose={handelhideEdit}/>}
+            {showModalModif && <ModaleModifCour onClose={handelhideEdit} selectedCours={selectedCours}/>}
         </div>
     )
 }

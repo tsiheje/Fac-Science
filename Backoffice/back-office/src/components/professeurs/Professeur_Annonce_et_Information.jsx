@@ -74,20 +74,47 @@ const Professeur_Annonce_et_Information = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 handleDelete(announcementID);
-                // displaySweetAlert();
             }
         });
     };
+    const [selectedAnnouncement, setSelectedAnnouncement] = useState(null);
+    
 
-    const handleDelete = () => {
-
-    }
+    const handleDelete = async (annonceID) => {
+        if (annonceID === undefined) {
+            console.error('L\'identifiant du devoir est undefined.');
+            return;
+        }
+        try {
+            // Faites une requête DELETE pour supprimer le devoir
+            await axios.delete(`http://localhost:4000/Professeur/annonce/${annonceID}`);
+    
+            // Affiche une alerte de succès
+            Swal.fire({
+                icon: 'success',
+                title: 'Succès',
+                text: 'L\'annonce a été supprimé avec succès!',
+            });
+        } catch (error) {
+            console.error(error);
+    
+            // Affiche une alerte d'erreur
+            Swal.fire({
+                icon: 'error',
+                title: 'Erreur',
+                text: 'Une erreur est survenue lors de la suppression de l\'annonce.',
+            });
+        }
+    };
 
     const [showModalModif, setshowModalModif] = useState(false);
 
-    const handleEdit = (Id) => {
-        setshowModalModif(true)
+    const handleEdit = (announcementId) => {
+        const selectedAnnouncement = announcements.find(announcement => announcement.Id_Annonce === announcementId);
+        setSelectedAnnouncement(selectedAnnouncement);
+        setshowModalModif(true);
     }
+    
 
     const handelhideEdit = () => {
         setshowModalModif(false)
@@ -122,7 +149,7 @@ const Professeur_Annonce_et_Information = () => {
                                     <td>{announcement.Date_de_publication.split('T')[0]}</td>
                                     <td>
                                         <div className="action">
-                                            <div className="modifier" onClick={() => handleEdit(announcement.id)}>
+                                            <div className="modifier" onClick={() => handleEdit(announcement.Id_Annonce)}>
                                                 <EditIcon/>
                                             </div>
                                             <div className="supprimer" onClick={() => showDeleteConfirmation(announcement.Id_Annonce)}>
@@ -137,7 +164,7 @@ const Professeur_Annonce_et_Information = () => {
                 </div>
             </div>
             {showModal && <ModaleAnnonce onClose={handleCloseModal} />}
-            {showModalModif && <ModaleModifAnnonce onClose={handelhideEdit}/>}
+            {showModalModif && <ModaleModifAnnonce onClose={handelhideEdit} selectedAnnouncement={selectedAnnouncement} />}
         </div>
     )
 }
