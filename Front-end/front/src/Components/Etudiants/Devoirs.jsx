@@ -72,15 +72,15 @@ const Devoirs = () => {
                                     <img src={couverture} alt=""/>
                                 </div>
                                 <div className="description">
-                                    <p className="libelle">MATHEMATIQUE</p>
-                                    <p className="resume">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla animi suscipit unde adipisci architecto temporibus quis officiis ut explicabo doloremque!</p>
+                                    <p className="libelle">{devoir.Libelle}</p>
+                                    <p className="resume">{devoir.Description}</p>
                                 </div>
                                 <div className="ambany">
                                     <div className="publieur">
                                         <img src={profil} alt="" width={'15%'}/>
                                         <div className="nom">
-                                            <p className="anarana">Pr. Marie Mickelio</p>
-                                            <p className="date">22/11/2023</p>
+                                            <p className="anarana">Pr. {devoir.Prenom}</p>
+                                            <p className="date">{devoir.Date_de_devoirs.split('T')[0]}</p>
                                         </div>
                                     </div>
                                     <div className="action">

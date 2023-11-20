@@ -77,7 +77,7 @@ const Annonce_et_Information = () => {
                                 <div className="publieur">
                                     <img src={profil} alt="" width={'15%'}/>
                                     <div className="nom">
-                                        <p className="anarana">{announcement.Id_source}</p>
+                                        <p className="anarana">{announcement.Nom} {announcement.Prenom}</p>
                                         <p className="date">{announcement.Date_de_publication.split('T')[0]}</p>
                                     </div>
                                 </div>

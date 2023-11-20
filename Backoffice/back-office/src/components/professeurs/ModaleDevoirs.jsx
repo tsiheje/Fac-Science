@@ -122,7 +122,7 @@ const ModaleDevoirs = ({onClose}) => {
         <div>
           <div className="fermer" onClick={onClose}>X</div>
           <div className="Titre">
-            <h2>CRÉER UN COURS</h2>
+            <h2>CRÉER UN DEVOIRS</h2>
           </div>
           <div className="formulaire">
             <form onSubmit={handleSubmit}>

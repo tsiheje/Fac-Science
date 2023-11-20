@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
   });
 
 router.get('/annonce', (req, res) => {
-    const sql = "select * from annonce";
+  const sql = "SELECT compte.Nom,compte.Prenom, annonce.Annonce, annonce.Description, annonce.Date_de_publication FROM compte JOIN annonce ON compte.Id_compte = annonce.Id_source";
     connection.query(sql, (err, results) => {
       if(err){
         console.error(err);
@@ -36,7 +36,7 @@ router.get('/professeur', (req, res) => {
 
 router.get('/cours/:Niveau/:Mention/:Parcours', (req, res) => {
   const {Niveau, Mention, Parcours} = req.params;
-  const sql = "select * from cours where Niveau = ? and Mention = ? and Parcours = ?";
+  const sql = "select compte.Prenom, Cours, Libelle, Description, Date_de_creation FROM compte JOIN cours ON compte.Id_compte = cours.Id_Professeur where cours.Niveau = ? and cours.Mention = ? and cours.Parcours = ?";
   connection.query(sql, [Niveau, Mention, Parcours], (err, results) => {
     if (err) {
       throw err;
@@ -48,7 +48,7 @@ router.get('/cours/:Niveau/:Mention/:Parcours', (req, res) => {
 
 router.get('/devoirs/:Niveau/:Mention/:Parcours', (req, res) => {
   const {Niveau, Mention, Parcours} = req.params;
-  const sql = "select * from devoirs where Niveau = ? and Mention = ? and Parcours = ?";
+  const sql = "select compte.Prenom, Devoirs, Libelle, Description, Date_de_devoirs FROM compte JOIN devoirs ON compte.Id_compte = devoirs.Id_Professeur where devoirs.Niveau = ? and devoirs.Mention = ? and devoirs.Parcours = ?";
   connection.query(sql, [Niveau, Mention, Parcours], (err, results) => {
     if (err) {
       throw err;

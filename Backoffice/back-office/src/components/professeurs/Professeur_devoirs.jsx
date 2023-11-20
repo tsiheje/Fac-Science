@@ -106,8 +106,8 @@ const Professeur_Devoirs = () => {
                                 <td>{devoir.Mention}</td>
                                 <td>{devoir.Parcours}</td>
                                 <td>{devoir.Devoirs }</td>
-                                <td>{devoir.Date_de_devoirs}</td>
-                                <td>{devoir.Date_de_soumise}</td>
+                                <td>{devoir.Date_de_devoirs.split('T')[0]}</td>
+                                <td>{devoir.Date_de_soumise.split('T')[0]}</td>
                                 <td>
                                         <div className="action">
                                             <div className="modifier" onClick={() => handleEdit(devoir.id)}>

@@ -91,7 +91,7 @@ const Cours = () => {
                                     <div className="publieur">
                                         <img src={profil} alt="" width={'15%'}/>
                                         <div className="nom">
-                                            <p className="anarana">{cour.Id_Professeur}</p>
+                                            <p className="anarana">Pr. {cour.Prenom}</p>
                                             <p className="date">{cour.Date_de_creation.split('T')[0]}</p>
                                         </div>
                                     </div>
