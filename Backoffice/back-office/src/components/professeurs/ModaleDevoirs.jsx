@@ -17,6 +17,7 @@ const ModaleDevoirs = ({onClose}) => {
     const [devoirs, setDevoirs] = useState({
       Libelle: '',
       Devoirs: null,
+      Description: '',
       Niveau: '',
       Mention: '',
       Parcours: '',
@@ -93,6 +94,7 @@ const ModaleDevoirs = ({onClose}) => {
       const formData = new FormData();
       formData.append("Devoirs", devoirs.Devoirs);
       formData.append("Libelle", devoirs.Libelle);
+      formData.append("Description", devoirs.Description);
       formData.append("Niveau", devoirs.Niveau);
       formData.append("Mention", devoirs.Mention);
       formData.append("Parcours", devoirs.Parcours);
@@ -132,6 +134,13 @@ const ModaleDevoirs = ({onClose}) => {
                 name="Libelle"
                 onChange={handleChange}
               />
+              <label className={`input-file ${devoirs.devoirs ? 'has-file' : ''}`}>
+                <input
+                  type="file"
+                  name="Devoirs"
+                  onChange={handleImageChange}
+                />
+              </label>
               <TextareaAutosize
                   minRows={5}
                   maxRows={6}
@@ -141,13 +150,7 @@ const ModaleDevoirs = ({onClose}) => {
                   value={devoirs.Description}
                   onChange={handleChange}
               />
-              <label className={`input-file ${devoirs.devoirs ? 'has-file' : ''}`}>
-                <input
-                  type="file"
-                  name="Devoirs"
-                  onChange={handleImageChange}
-                />
-              </label>
+              
               <TextField
                 required
                 fullWidth

@@ -9,6 +9,8 @@ import GetAppIcon from '@mui/icons-material/GetApp';
 import profil from '../../Assets/Images/3135715.png';
 import Profile from "./profile";
 import Voire from "./Voire";
+import examen from '../../Assets/Images/depositphotos_352843958-stock-photo-inscription-exam-results-and-stationary.jpg';
+import important from '../../Assets/Images/téléchargement.png';
 
 const Annonce_et_Information = () => {
     const token = Cookies.get('token');
@@ -46,13 +48,9 @@ const Annonce_et_Information = () => {
             console.log(fileURL);
 
             if (fileExtension === "jpg" || fileExtension === "jpeg" || fileExtension === "png" || fileExtension === "gif") {
-                return <img src={fileURL} alt="Image d'annonce" width="100%" height="100%" />;
+                return <img src={important} alt="Image d'annonce" width="100%" height="100%" />;
             } else if (fileExtension === "pdf") {
-                return <embed src={fileURL} type="application/pdf" width="100%" height="100%" />;
-            } else if (fileExtension === "mp4" || fileExtension === "avi" || fileExtension === "mkv") {
-                return <video width="100%" height="100%" controls>
-                    <source src={fileURL} type={`video/${fileExtension}`} />
-                </video>;
+                return <img src={examen} alt="Image d'annonce" width="100%" height="100%" />;
             } else {
                 return <a href={fileURL} target="_blank" rel="noopener noreferrer">Télécharger le fichier</a>;
             }
@@ -74,26 +72,29 @@ const Annonce_et_Information = () => {
                         <div className="search-icon"></div>
                     </div> */}
                     <div className="right-contenu">
-                        <div className="anaty-annonce">
-                            <div className="publieur">
-                                <img src={profil} alt="" width={'15%'}/>
-                                <div className="nom">
-                                    <p className="anarana">Rasolofoniaine Tsiheje Marie Mickelio</p>
-                                    <p className="date">22/11/2023</p>
+                        {announcements.map(announcement => (
+                            <div className="anaty-annonce">
+                                <div className="publieur">
+                                    <img src={profil} alt="" width={'15%'}/>
+                                    <div className="nom">
+                                        <p className="anarana">{announcement.Id_source}</p>
+                                        <p className="date">{announcement.Date_de_publication.split('T')[0]}</p>
+                                    </div>
+                                </div>
+                                <div className="description">
+                                    <p>{announcement.Description}</p>
+                                </div>
+                                <div className="couverture">
+                                    {renderContent(announcement)}
+                                    {/* <img src={couverture} alt="" /> */}
+                                </div>
+                                <div className="action">
+                                    <div className="voire" onClick={handleShowVoire}>
+                                        <Visibility/>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="description">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima modi asperiores nesciunt in hic reprehenderit qui quod ad repellat molestias quo quas deserunt, maiores alias enim consequuntur est aspernatur? Veritatis?</p>
-                            </div>
-                            <div className="couverture">
-                                {/* <img src="" alt="" /> */}
-                            </div>
-                            <div className="action">
-                                <div className="voire" onClick={handleShowVoire}>
-                                    <Visibility/>
-                                </div>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </div>

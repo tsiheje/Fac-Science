@@ -5,18 +5,18 @@
 }
 .content .nav{
     width: 20%;
-    background-color: gray;
+    background-color: rgb(49, 49, 49);
 }
 .content .compents{
     width: 80%;
-    background-color: rgb(46, 1, 1);
+    background-color: rgb(233, 233, 233);
 }
 
 .barnav{
     padding: 10px;
     box-sizing: border-box;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-evenly; */
     flex-direction: column;
 }
 
@@ -35,27 +35,31 @@
     display: flex;
     flex-direction: column;
     gap: 2px;
+    margin-top: 10px;
 }
 
 .barnav .link a{
     display: flex;
+    align-items: center;
     text-decoration: none;
     gap: 5px;
+    color: rgb(113, 119, 156);
 }
 
 .barnav .link a:hover{
     background-color: gray;
     border-radius: 5px;
+    color: black;
 }
 
 .barnav .link a p{
-    font-size: 20px;
+    font-size: 22px;
 }
 
 .barnav .logout{
     display: flex;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 30px;
     cursor: pointer;
 }
 
@@ -91,22 +95,168 @@
     border: 1px solid #ccc;
     outline: none;
     font-size: 20px;
-    border-radius: 5px;
-    margin-left: 10px;
+    border-radius: 20px;
+    margin-left: 50px;
 }
 .compents .haut .buttonajouter{
     cursor: pointer;
     background-color: blue;
     padding: 10px;
     box-sizing: border-box;
-    border-radius: 3px;
-    font-size: 20px;
+    border-radius: 50%;
+    font-size: 15px;
     color: white;
-    margin-right: 10px;
+    /* margin-right: 10px; */
+    text-align: center;
 }
 
 table .action{
     display: flex;
     cursor: pointer;
     gap: 10px;
+}
+
+.compents .compents-content{
+    width: 100%;
+    height: 100vh;
+    border-radius: 10px;
+    background-color: white;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.tab {
+    width: 100%;
+    height: 80vh;
+    background-color: rgb(245, 245, 245);
+    border-radius: 10px;
+}
+table{
+    border-collapse: collapse;
+    width: 100%;
+    background-color: rgb(245, 245, 245);
+    border-radius: 10px;
+}
+th{
+    background-color: rgb(41, 41, 100);
+    color: white;
+}
+
+th, td{
+    padding: 0px 3px;
+    border-bottom: 2px solid rgb(228, 221, 221);
+}
+
+tr:nth-child(even){
+    background-color: rgb(170, 169, 169);
+}
+
+h1{
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: -20px;
+}
+
+.compents-content .param{
+    width: 100%;
+    height: 85vh;
+    background-color: rgb(196, 193, 193);
+    border-radius: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.param .anaty-param{
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    width: 100%;
+    gap: 5px;
+}
+
+.anaty-param .sary{
+    width: 30%;
+}
+
+.anaty-param .formulaire{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+form .form-ambony, .form-ambany{
+    display: flex;
+    gap: 5px;
+}
+
+.btn{
+    font-size: 30px;
+}
+
+.param .bar{
+    width: 100%;
+    height: 1px;
+    background-color: black;
+
+}
+
+.mdp{
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 20%;
+    text-align: center;
+    border-radius: 10px;
+    margin-left: 80%;
+    cursor: pointer;
+}
+
+.mdp-contenu{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 20%;
+    background-color: rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mdp-contenu .mdp-anaty{
+    width: 40%;
+    background-color: #ccc;
+    z-index: 999;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.mdp-anaty .ferme{
+    float: right;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.dash{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 10px;
+    gap: 20px;
+}
+
+.anaty-dash{
+    width: 45%;
+    height: 18em;
+    background-color: rgb(123, 129, 129);
+    border-radius: 10px;
 }

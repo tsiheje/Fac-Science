@@ -3,6 +3,7 @@ import axios from "axios";
 import Swal from 'sweetalert2';
 import BarNav from "./Navbar";
 import { jwtDecode } from "jwt-decode";
+import './Professeur.css';
 
 const Professeur_Notification = () => {
     return(
@@ -10,8 +11,10 @@ const Professeur_Notification = () => {
             <div className="nav">
                 <BarNav/>
             </div>
-            <div className="compent">
-                
+            <div className="compents">
+                <div className="compents-content">
+                    <h1>MES NOTIFICATIONS</h1>
+                </div>
             </div>
         </div>
     )

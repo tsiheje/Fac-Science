@@ -32,7 +32,7 @@ const Administrateur = () => {
           {
             label: 'Par Niveaux',
             data: [12, 19, 3, 5, 2,4,5,20,1,2],
-            backgroundColor: ['red','gree','yellow','blue'],
+            backgroundColor: [  'blue'],
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1,
           },
@@ -53,18 +53,20 @@ const Administrateur = () => {
                 <BarNav/>
             </div>
             <div className="compent">
-              <div className="dashbord">
-                  <div className="dash-left">
-                      <h3>statistique des etudiants</h3>
-                      <div className="chart-anatiny">
-                          <Bar options={options} data={data} />
-                      </div> 
-                  </div>
-                  <div className="dash-right">
-                          <div className="anatiny"></div>
-                          <div className="anatiny"></div>
-                          <div className="anatiny"></div>
-                          <div className="anatiny"></div>
+              <div className="componet-content">
+                  <h3>statistique des étudiants</h3>
+                  <div className="dashboard">
+                    <div className="dash-top">
+                        <div className="anatiny"></div>
+                        <div className="anatiny"></div>
+                        <div className="anatiny"></div>
+                        <div className="anatiny"></div>
+                    </div>
+                    <div className="dash-bottom">
+                        <div className="chart-anatiny">
+                            <Bar options={options} data={data} />
+                        </div> 
+                    </div>
                   </div>
               </div>
             </div>

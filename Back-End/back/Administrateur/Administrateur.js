@@ -42,41 +42,34 @@ router.post('/annonce',upload.single('Annonce'), (req, res) => {
   
   try {
     const sql = 'INSERT INTO annonce (Description,Annonce, date_de_publication, Id_source) VALUES ( ?, ?, ?, ?)';
-    // ...
-
-connection.query(sql, [Description, filePath, new Date(), Id_source], (err, result) => {
+    connection.query(sql, [Description, filePath, new Date(), Id_source], (err, result) => {
   if (err) {
     console.error(err);
     res.status(500).send('Erreur interne du serveur.');
   } else {
-    const idAnnonce = result.insertId; // Récupérer l'ID de l'annonce nouvellement insérée
+    const idAnnonce = result.insertId;
     
-    // Maintenant, utilisez idAnnonce pour créer des notifications pour les étudiants
-    const studentsQuery = "SELECT Id_compte FROM compte WHERE Roles = 'Etudiant'";
-    connection.query(studentsQuery, (err, students) => {
+    const studentsId = "SELECT Id_compte FROM compte WHERE Roles = 'Etudiant'";
+    connection.query(studentsId, (err, students) => {
       if (err) {
         console.error(err);
-        // Gérer l'erreur de la requête
       } else {
         students.forEach(etudiant => {
           const notification = {
             ID_destinataire: etudiant.Id_compte,
             type: 'annonce',
             contenu: 'Une nouvelle annonce a été publiée',
-            Id_element: idAnnonce, // Utilisation de l'ID de l'annonce ici
+            Id_element: idAnnonce,
             date: new Date(),
             statut: 'non_lue'
           };
     
-          // Insérer cette notification dans la table des notifications
           connection.query('INSERT INTO notification (Id_compte, Type, contenu, Id_element, date, statu) VALUES (?, ?, ?, ?, ?, ?)', 
             [notification.ID_destinataire, notification.type ,notification.contenu, notification.Id_element, notification.date, notification.statut],
             (err, result) => {
               if (err) {
                 console.error(err);
-                // Gérer l'échec de l'insertion de la notification
               } else {
-                // Notification insérée avec succès
                 console.log('Notification insérée pour l\'étudiant ID:', notification.ID_destinataire);
               }
             }
@@ -86,9 +79,7 @@ connection.query(sql, [Description, filePath, new Date(), Id_source], (err, resu
     });
   }
 });
-
-res.send('Creation de cours avec succès');
-  
+  res.send('Creation de cours avec succès');
   } catch (error) {
     console.error(error);
     res.status(500).send('Erreur interne du serveur.');

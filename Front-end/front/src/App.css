@@ -2,3 +2,312 @@
     font-family: 'Times New Roman', Times, serif;
     scroll-behavior: smooth;
 }
+
+.body-no-scroll {
+    overflow: hidden;
+}
+
+.landing{
+    display: flex;
+    flex-direction: column;
+    background-color: #0b99ff;
+}
+
+.landing .landing-nav{
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #5689C0;
+    z-index: 2;
+}
+
+.landing-nav .logo h1{
+    font-size: 40px;
+    color: white;
+    margin: 0;
+}
+
+.landing .landing-nav .lien{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.landing-nav .lien a{
+    text-decoration: none;
+    color: whitesmoke;
+    font-size: 20px;
+}
+
+.lien a p{
+    margin: 0;
+}
+
+.landing .landing-nav .landing-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-right: 10px;
+}
+
+.landing-nav .landing-btn .connecte{
+    cursor: pointer;
+    background-color: #0b99ff;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 20px;
+    color: white;
+    border-radius: 5px;
+}
+
+.landing-nav .landing-btn .separateur{
+    color: white;
+    font-size: 40px;
+}
+
+.landing-nav .landing-btn .inscription{
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+}
+
+.landing-content .home{
+    margin-top: 5%;
+    width: 100%;
+    height: 90vh;
+    overflow: hidden;
+    position: relative;
+}
+.home img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.home .kozy{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.home .kozy h1{
+    color: white;
+    font-size: 70px;
+    font-weight: bold;
+    animation: droit 5s;
+}
+
+.kozy h1 span{
+    font-size: 100px;
+    color: #5689C0;
+}
+
+.home .kozy p{
+    color: rgb(255, 255, 255);
+    text-align: center;
+    font-size: 25px;
+    margin-left: 20%;
+    margin-right: 20%;
+    animation: gauche 5s;
+}
+
+.landing-content .About{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.About .about-service{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.about-service .text-service, .text-professeur, .text-etudiant{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 70vh;
+    /* background-color: aqua; */
+}
+
+.text-service .text-service-kozy{
+    width: 50%;
+    text-align: center;
+}
+
+.text-service .text-service-kozy h1{
+    font-size: 60px;
+    animation: droit 10s;
+}
+
+.text-service .text-service-phrase{
+    width: 50%;
+    padding: 15px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.text-service .text-service-phrase p{
+    font-size: 20px;
+}
+.text-professeur .text-professeur-left{
+    width: 50%;
+    text-align: center;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.text-professeur .text-professeur-left p{
+    font-size: 20px;
+}
+
+
+.text-professeur .text-professeur-right{
+    width: 50%;
+}
+
+.text-professeur-right img{
+    animation: slidown 10s;
+}
+
+.text-etudiant .text-etudiant-left{
+    width: 50%;
+}
+
+.text-etudiant .text-etudiant-right{
+    width: 50%;
+    text-align: center;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.text-etudiant .text-etudiant-right p{
+    font-size: 20px;
+}
+
+.About .service{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.About .service .kozy-service{
+    width: 25em;
+    height: 25em;
+    background-color: rgb(201, 201, 201);
+    border-radius: 10px;
+    box-shadow: 4px 5px 4px 2px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    transition: transform .5s;
+}
+
+.kozy-service:hover{
+    transform: scale(1.1);
+}
+
+.About .service .kozy-service .h1{
+    font-size: 20px;
+    margin: 0;
+    color: #5689C0;
+}
+
+.About .service .kozy-service p{
+    font-size: 18px;
+    margin: 0;
+}
+.div{
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.landing-content .footer{
+    display: flex;
+    width: 100%;
+    gap: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+    
+}
+
+.footer .apropo, .contact, .adresse{
+    width: 33.5%;
+}
+
+.copiright{
+    text-align: center;
+    margin: 0;
+    color: rgb(0, 136, 255);
+}
+
+.footer h3{
+    color: #ffffff;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.footer p{
+    font-size: 20px;
+    color: rgb(179, 179, 179);
+}
+
+p span{
+    font-weight: bold;
+    color: rgb(219, 219, 219);
+}
+
+@keyframes slidown{
+    from{
+        transform: translateY(500px);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes droit {
+    from{
+        transform: translateX(-500px);
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes gauche {
+    from{
+        transform: translateX(500px);
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0);
+        opacity: 1;
+    }
+}

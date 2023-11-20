@@ -10,6 +10,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import GetAppIcon from '@mui/icons-material/GetApp';
 import Profile from "./profile";
 import Voire from "./Voire";
+import couverture from '../../Assets/Images/86236b79bc088fbe383716452370016caf64dc31.jpg';
 
 const Cours = () => {
     const token = Cookies.get('token');
@@ -74,35 +75,37 @@ const Cours = () => {
                         <div className="search-icon"></div>
                     </div> */}
                     <div className="right-contenu">
-                        <div className="anaty-cours">
-                            <div className="cours">
-                                Cours
-                            </div>
-                            <div className="couverture">
-
-                            </div>
-                            <div className="description">
-                                <p className="libelle">MATHEMATIQUE</p>
-                                <p className="resume">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla animi suscipit unde adipisci architecto temporibus quis officiis ut explicabo doloremque!</p>
-                            </div>
-                            <div className="ambany">
-                                <div className="publieur">
-                                    <img src={profil} alt="" width={'15%'}/>
-                                    <div className="nom">
-                                        <p className="anarana">Pr. Marie Mickelio</p>
-                                        <p className="date">22/11/2023</p>
+                        {cours.map(cour => (
+                            <div className="anaty-cours">
+                                <div className="cours">
+                                    Cours
+                                </div>
+                                <div className="couverture">
+                                    <img src={couverture} alt=""/>
+                                </div>
+                                <div className="description">
+                                    <p className="libelle">{cour.Libelle}</p>
+                                    <p className="resume">{cour.Description}</p>
+                                </div>
+                                <div className="ambany">
+                                    <div className="publieur">
+                                        <img src={profil} alt="" width={'15%'}/>
+                                        <div className="nom">
+                                            <p className="anarana">{cour.Id_Professeur}</p>
+                                            <p className="date">{cour.Date_de_creation.split('T')[0]}</p>
+                                        </div>
+                                    </div>
+                                    <div className="action">
+                                        <div className="voire" onClick={handleShowVoire}>
+                                            <Visibility/>
+                                        </div>
+                                        <div className="down">
+                                            <GetAppIcon/>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="action">
-                                    <div className="voire" onClick={handleShowVoire}>
-                                        <Visibility/>
-                                    </div>
-                                    <div className="down">
-                                        <GetAppIcon/>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </div>

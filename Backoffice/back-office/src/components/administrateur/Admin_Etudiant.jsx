@@ -78,44 +78,48 @@ const Admin_Etudiant = () => {
                 <BarNav/>
             </div>
             <div className="compent">
-                <  div className="haut">
-                    <div className="rechercher">
-                        <input type="search" name="recherche" id="" placeholder="rechercher Etudiants..."/>
+                <div className="componet-content">
+
+                    <div className="haut">
+                        <div className="rechercher">
+                            <input type="search" name="recherche" id="" placeholder="rechercher Etudiants..."/>
+                        </div>
                     </div>
+                <div className="tab">
+                    <table>
+                            <tr>
+                                <th>Matricule</th>
+                                <th>Nom</th>
+                                <th>Prenom</th>
+                                <th>Niveau</th>
+                                <th>Metion</th>
+                                <th>Parcours</th>
+                                <th>Telephone</th>
+                                <th>Email</th>
+                                <th colSpan={2}>Action</th>
+                            </tr>
+                        {etudiants.map(etudiant => (
+                            <tr key={etudiant.id}>
+                                <td>{etudiant.Matricul}</td>
+                                <td>{etudiant.Nom}</td>
+                                <td>{etudiant.Prenom}</td>
+                                <td>{etudiant.Niveau}</td>
+                                <td>{etudiant.Mention}</td>
+                                <td>{etudiant.Parcours}</td>
+                                <td>{etudiant.Telephone}</td>
+                                <td>{etudiant.Email}</td>
+                                <td>
+                                    <div className="action">
+                                        <div className="supprimer" onClick={() => showDeleteConfirmation(etudiant.Id_compte)}>
+                                            <DeleteIcon/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+                        </table>
                 </div>
-            <table>
-                    <tr>
-                        <th>Matricule</th>
-                        <th>Nom</th>
-                        <th>Prenom</th>
-                        <th>Niveau</th>
-                        <th>Metion</th>
-                        <th>Parcours</th>
-                        <th>Telephone</th>
-                        <th>Email</th>
-                        <th colSpan={2}>Action</th>
-                    </tr>
-                {etudiants.map(etudiant => (
-                    <tr key={etudiant.id}>
-                        <td>{etudiant.Matricul}</td>
-                        <td>{etudiant.Nom}</td>
-                        <td>{etudiant.Prenom}</td>
-                        <td>{etudiant.Niveau}</td>
-                        <td>{etudiant.Mention}</td>
-                        <td>{etudiant.Parcours}</td>
-                        <td>{etudiant.Telephone}</td>
-                        <td>{etudiant.Email}</td>
-                        <td>
-                            <div className="action">
-                                <div className="voir"><Visibility/></div>
-                                <div className="supprimer" onClick={() => showDeleteConfirmation(etudiant.Id_compte)}>
-                                    <DeleteIcon/>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                ))}
-                </table>
+                </div>
             </div>
         </div>
     )

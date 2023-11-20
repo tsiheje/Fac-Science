@@ -1,9 +1,79 @@
 .cont {
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    height: 100vh; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.cont .compte-content{
+    position: relative;
+    width: 85%;
+    height: 90%;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+
+.compte-content .fermer{
+  position: absolute;
+  top: 0;
+  right: 0;
+  float: right;
+  font-size: 25px;
+  cursor: pointer;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.compte-content .anaty-compte{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  /* padding: 10px; */
+  box-sizing: border-box;
+}
+.anaty-compte .left-compte{
+    width: 55%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+.anaty-compte .left-compte .img{
+    width: 100%;
+    height: 100%;
+    /* object-fit: cover; */
+    border-radius: 5px;
+}
+
+.anaty-compte .left-compte .kozy{
+  background-color: rgba(0, 0, 0, 0.8);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+}
+.left-compte .kozy h1{
+  margin: 0;
+  font-size: 70px;
+  color: rgb(50, 50, 255);
+}
+
+.left-compte .kozy p{
+  margin: 0;
+  font-size: 20px;
 }
 
 .compte {
@@ -25,15 +95,8 @@
     align-items: center; 
 }
 
-.compte .inscri a {
-    color: blue; 
-    text-decoration: none;
-    
-}
-
-
-.compte .inscri {
-    text-align: left;
+.btn .suivant{
+  margin-left: 70%;
 }
 
 .steps-list {

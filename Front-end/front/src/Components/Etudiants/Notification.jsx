@@ -33,21 +33,21 @@ const Notification = () => {
             <div className="Etudiant">
                 <div className="notif">
                     <div className="anaty-notif">                        
-                        <p>Mes Notifications</p>
+                        <h1>Mes Notifications</h1>
                         <div className="filtre">
-                            <div className="tous">
+                            <div className="btn">
                                 tous
                             </div>
-                            <div className="annonce">
+                            <div className="btn">
                                 Annonces
                             </div>
-                            <div className="cours">
+                            <div className="btn">
                                 Cours
                             </div>
-                            <div className="devoirs">
+                            <div className="btn">
                                 Devoirs
                             </div>
-                            <div className="message">
+                            <div className="btn">
                                 Messages
                             </div>
                         </div>

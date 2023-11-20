@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 // import pdfjsLib from 'pdfjs-dist';
 import BarNav from "./Navbar";
 import { jwtDecode } from "jwt-decode";
+import ModalModif from "./ModalModifAnnonce";
 
 const Admin_Annonce_et_Information = () => {
     const token = Cookies.get('token');
@@ -38,7 +39,7 @@ const Admin_Annonce_et_Information = () => {
         }
         getAllAnnonces(); 
         
-    }, [setAnnouncements]);
+    }, []);
 
     const renderContent = (announcement) => {
         if (announcement.Annonce) {
@@ -119,54 +120,61 @@ const Admin_Annonce_et_Information = () => {
         }
     };
     
-    
+    const [showModalModif, setshowModalModif] = useState(false);
 
-    const handleEdit = () => {
-
+    const handleEdit = (Id) => {
+        setshowModalModif(true)
     }
 
+    const handelhideEdit = () => {
+        setshowModalModif(false)
+    }
     return (
         <div className="content">
             <div className="nav">
                 <BarNav/>
             </div>
             <div className="compent">
-                <div className="haut">
-                    <div className="rechercher">
-                        <input type="search" name="recherche" id="" placeholder="rechercher votre annonce..."/>
+                <div className="componet-content">
+                    <div className="haut">
+                        <div className="rechercher">
+                            <input type="search" name="recherche" id="" placeholder="rechercher votre annonce..."/>
+                        </div>
+                        <div className="buttonajouter" onClick={handleshowModal}>
+                            Faire Une Annonce
+                        </div>
                     </div>
-                    <div className="buttonajouter" onClick={handleshowModal}>
-                        Faire Une Annonce
+                    <div className="tab">
+                        <table>
+                            <tr>
+                                <th>Annonce</th>
+                                <th>Description</th>
+                                <th>Date de publication</th>
+                                <th colSpan={2}>Action</th>
+                            </tr>
+                            {announcements.map(announcement => (
+                                    <tr key={announcement.id}>
+                                        <td>{announcement.Annonce}</td>
+                                        <td>{announcement.Description}</td>
+                                        <td>{announcement.Date_de_publication.split('T')[0]}</td>
+                                        <td>
+                                            <div className="action">
+                                                <div className="modifier" onClick={() => handleEdit(announcement.id)}>
+                                                    <EditIcon/>
+                                                </div>
+                                                <div className="supprimer" onClick={() => showDeleteConfirmation(announcement.Id_Annonce)}>
+                                                    <DeleteIcon/>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                        </table>
                     </div>
                 </div>
-                <table>
-                    <tr>
-                        <th>Annonce</th>
-                        <th>Description</th>
-                        <th>Date de publication</th>
-                        <th colSpan={2}>Action</th>
-                    </tr>
-                    {announcements.map(announcement => (
-                            <tr key={announcement.id}>
-                                <td>{announcement.Annonce}</td>
-                                <td>{announcement.Description}</td>
-                                <td>{announcement.Date_de_publication.split('T')[0]}</td>
-                                <td>
-                                    <div className="action">
-                                        <div className="voir"><Visibility/></div>
-                                        <div className="modifier" onClick={() => handleEdit(announcement.id)}>
-                                            <EditIcon/>
-                                        </div>
-                                        <div className="supprimer" onClick={() => showDeleteConfirmation(announcement.Id_Annonce)}>
-                                            <DeleteIcon/>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
-                </table>
             </div>
             {showModal && <ModalAnnonce onClose={handleCloseModal} />}
+            {showModalModif && <ModalModif onClose={handelhideEdit}/>}
         </div>
     );
 }

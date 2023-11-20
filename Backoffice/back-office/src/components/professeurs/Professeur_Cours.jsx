@@ -3,7 +3,13 @@ import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import ModaleCours from "./ModaleCours";
 import axios from "axios";
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import Visibility from '@mui/icons-material/Visibility';
+import GetAppIcon from '@mui/icons-material/GetApp';
+import Swal from 'sweetalert2';
 import BarNav from "./Navbar";
+import ModaleModifCour from "./ModaleModifCour";
 
 const Professeur_Cours = () => {
     const token = Cookies.get('token');
@@ -35,26 +41,88 @@ const Professeur_Cours = () => {
         
     }, []);
 
+    const showDeleteConfirmation = (announcementID) => {
+        Swal.fire({
+            title: 'Confirmation',
+            text: 'Voulez-vous vraiment supprimer cette annonce ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Supprimer',
+            cancelButtonText: 'Annuler',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                handleDelete(announcementID);
+                // displaySweetAlert();
+            }
+        });
+    };
 
+    const handleDelete = () => {
+
+    }
+    const [showModalModif, setshowModalModif] = useState(false);
+
+    const handleEdit = (Id) => {
+        setshowModalModif(true)
+    }
+
+    const handelhideEdit = () => {
+        setshowModalModif(false)
+    }
     return(
         <div className="content">
             <div className="nav">
                 <BarNav/>
             </div>
             <div className="compents">
-                <div className="haut">
-                    <div className="rechercher">
-                        <input type="search" name="recherche" id="" placeholder="rechercher votre cours..."/>
+                <div className="compents-content">
+                    <div className="haut">
+                        <div className="rechercher">
+                            <input type="search" name="recherche" id="" placeholder="rechercher votre cours..."/>
+                        </div>
+                        <div className="buttonajouter" onClick={handleshowModal}>
+                            +
+                        </div>
                     </div>
-                    <div className="buttonajouter" onClick={handleshowModal}>
-                        Créer un cour
+                    <div className="tab">
+                        <table>
+                            <tr>
+                                <th>Libelle</th>
+                                <th>Description</th>
+                                <th>Niveau</th>
+                                <th>Mention</th>
+                                <th>Parcours</th>
+                                <th>Cours</th>
+                                <th>Date de creation</th>
+                                <th>Action</th>
+                            </tr>
+                            {cours.map(cour => (
+                            <tr key={cour.id}>
+                                <td>{cour.Libelle}</td>
+                                <td>{cour.Description}</td>
+                                <td>{cour.Niveau}</td>
+                                <td>{cour.Mention}</td>
+                                <td>{cour.Parcours}</td>
+                                <td>{cour.Cours}</td>
+                                <td>{cour.Date_de_creation.split('T')[0]}</td>
+                                <td>
+                                        <div className="action">
+                                            <div className="modifier" onClick={() => handleEdit(cour.id)}>
+                                                <EditIcon/>
+                                            </div>
+                                            <div className="supprimer" onClick={() => showDeleteConfirmation(cour.Id_Annonce)}>
+                                                <DeleteIcon/>
+                                            </div>
+                                        </div>
+                                    </td>
+                            </tr>
+                            ))}
+                        </table>
                     </div>
                 </div>
-                <table>
-
-                </table>
             </div>
             {showModal && <ModaleCours onClose={handlehideModal}/>}
+            {showModalModif && <ModaleModifCour onClose={handelhideEdit}/>}
         </div>
     )
 }

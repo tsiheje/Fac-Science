@@ -26,11 +26,6 @@ const Professeur = () => {
         }
         getAllProfesseur();
     }, []);
-
-    const sendMessage = () => {
-        navigate('/message');
-    }
-
     return(
         <div className="content">
             <NavBar/>
@@ -47,9 +42,6 @@ const Professeur = () => {
                                     <p className="anarany">{professeur.Nom} {professeur.Prenom}</p>
                                     <p className="tel">{professeur.Telephone}</p>
                                     <p className="mail">{professeur.Email}</p>
-                                </div>
-                                <div className="message" onClick={sendMessage}>
-                                    Message
                                 </div>
                             </div>
                         ))}

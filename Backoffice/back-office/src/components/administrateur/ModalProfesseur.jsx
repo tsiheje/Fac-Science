@@ -137,6 +137,7 @@ const ModalProfesseur = ({onClose}) => {
                             id="Email"
                             label="Adresse email"
                             name="Email"
+                            autoComplete="Email"
                             onChange={handleChange}
                             error={!!formErrors.Email}
                             helperText={formErrors.Email}
@@ -156,6 +157,7 @@ const ModalProfesseur = ({onClose}) => {
                             fullWidth
                             name="Mot_de_passe"
                             label="Mot de passe"
+                            autoComplete="Mot de passe"
                             type={showPassword ? "text" : "password"}
                             id="Mot_de_passe"
                             onChange={handleChange}

@@ -80,6 +80,30 @@ router.get('/notification/:Id_compte/:filtre', (req, res) => {
       res.json(results);
     }
   })
-})
+});
+
+router.get('/totaldevoirs/:Niveau/:Mention/:Parcours', (req, res) => {
+  const {Niveau, Mention, Parcours} = req.params;
+  const sql = "select count(Devoirs)as Total from devoirs where Niveau = ? and Mention = ? and Parcours = ?";
+  connection.query(sql, [Niveau, Mention, Parcours], (err, results) => {
+    if (err) {
+      throw err;
+    } else {
+      res.json(results);
+    }
+  });
+});
+
+router.get('/totalcours/:Niveau/:Mention/:Parcours', (req, res) => {
+  const {Niveau, Mention, Parcours} = req.params;
+  const sql = "select count(Cours) as Total from cours where Niveau = ? and Mention = ? and Parcours = ?";
+  connection.query(sql, [Niveau, Mention, Parcours], (err, results) => {
+    if (err) {
+      throw err;
+    } else {
+      res.json(results);
+    }
+  });
+});
 
 module.exports = router;

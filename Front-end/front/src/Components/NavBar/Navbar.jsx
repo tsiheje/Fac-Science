@@ -51,10 +51,10 @@ const NavBar = () => {
     return(
         <div className="navbar">
             <h2>One Note</h2>
-            <div className="recherche">
+            {/* <div className="recherche">
                 <input type="search" name="recherche" id="recherche" placeholder="rechercher votre besoin..."/>
                 <div className="search-icon"></div>
-            </div>
+            </div> */}
             <div className="link">
                 <NavLink to="/Annonce_et_Information">
                     <p>Annonce</p>
@@ -83,10 +83,10 @@ const NavBar = () => {
                             <img src={notification} alt="" width={'15%'}/>
                             <p>Notifications</p>
                         </NavLink>
-                        <NavLink to="/Message">
+                        {/* <NavLink to="/Message">
                             <img src={message} alt="" width={'15%'}/>
                             <p>Messages</p>
-                        </NavLink>
+                        </NavLink> */}
                         <div className="deconnexion" onClick={handleDeconnexion}>
                             <img src={logout} alt="" width={'15%'}/>
                             Se déconnecter

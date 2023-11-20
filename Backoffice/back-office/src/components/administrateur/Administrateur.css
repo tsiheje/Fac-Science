@@ -44,11 +44,11 @@
 }
 .content .nav{
     width: 20%;
-    background-color: gray;
+    background-color: rgb(48, 48, 48);
 }
 .content .compent{
     width: 80%;
-    background-color: rgb(46, 1, 1);
+    background-color: rgb(233, 233, 233);
 }
 .barnav{
     padding: 10px;
@@ -73,6 +73,7 @@
     display: flex;
     flex-direction: column;
     gap: 2px;
+    margin-top: 10px;
 }
 
 .barnav .link a{
@@ -93,7 +94,7 @@
 .barnav .logout{
     display: flex;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 20px;
     cursor: pointer;
 }
 
@@ -128,15 +129,15 @@
     border: 1px solid #ccc;
     outline: none;
     font-size: 20px;
-    border-radius: 5px;
-    margin-left: 10px;
+    border-radius: 20px;
+    margin-left: 50px;
 }
 .compent .haut .buttonajouter{
     cursor: pointer;
     background-color: blue;
     padding: 10px;
     box-sizing: border-box;
-    border-radius: 3px;
+    border-radius: 20px;
     font-size: 20px;
     color: white;
     margin-right: 10px;
@@ -146,4 +147,166 @@ table .action{
     display: flex;
     cursor: pointer;
     gap: 10px;
+}
+
+.compent .componet-content{
+    width: 100%;
+    height: 100vh;
+    border-radius: 10px;
+    background-color: white;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+.tab {
+    width: 100%;
+    height: 80vh;
+    background-color: rgb(245, 245, 245);
+    border-radius: 10px;
+}
+table{
+    border-collapse: collapse;
+    width: 100%;
+    background-color: rgb(245, 245, 245);
+    border-radius: 10px;
+}
+
+th, td{
+    padding: 5px;
+    border-bottom: 2px solid rgb(228, 221, 221);
+}
+
+tr:nth-child(even){
+    background-color: rgb(170, 169, 169);
+}
+
+.componet-content .param{
+    width: 100%;
+    height: 85vh;
+    background-color: rgb(196, 193, 193);
+    border-radius: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.param .anaty-param{
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    width: 100%;
+    gap: 5px;
+}
+
+.anaty-param .sary{
+    width: 30%;
+}
+
+.anaty-param .formulaire{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+form .form-ambony, .form-ambany{
+    display: flex;
+    gap: 5px;
+}
+
+.btn{
+    font-size: 30px;
+}
+
+.param .bar{
+    width: 100%;
+    height: 1px;
+    background-color: black;
+
+}
+
+.mdp{
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 20%;
+    text-align: center;
+    border-radius: 10px;
+    margin-left: 80%;
+    cursor: pointer;
+}
+
+.mdp-contenu{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 20%;
+    background-color: rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mdp-contenu .mdp-anaty{
+    width: 40%;
+    background-color: #ccc;
+    z-index: 999;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.mdp-anaty .ferme{
+    float: right;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+h3{
+    text-align: center;
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 25px;
+}
+
+.componet-content .dashboard{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.dashboard .dash-top{
+    height: 10em;
+}
+.dash-top{
+    display: flex;
+    gap: 10px;
+}
+
+.dash-top .anatiny{
+    width: 25%;
+    height: 100%;
+    background-color: #ccc;
+    border-radius: 5px;
+    transition: transform .5s;
+}
+
+.anatiny:hover{
+    transform: scale(1.1);
+}
+
+.dashboard .dash-bottom{
+    height: 23em;
+    background-color: #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.chart-anatiny{
+    background-color: white;
+    height: 23em;
 }

@@ -96,39 +96,42 @@ const Admin_Professeur = () => {
                 <BarNav/>
             </div>
             <div className="compent">
-                <div className="haut">
-                    <div className="rechercher">
-                        <input type="search" name="recherche" id="" placeholder="rechercher Professeur..."/>
+                <div className="componet-content">
+                    <div className="haut">
+                        <div className="rechercher">
+                            <input type="search" name="recherche" id="" placeholder="rechercher Professeur..."/>
+                        </div>
+                        <div className="buttonajouter" onClick={handleshowModal}>
+                            Creer compte Professeur
+                        </div>
                     </div>
-                    <div className="buttonajouter" onClick={handleshowModal}>
-                        Creer compte Professeur
+                    <div className="tab">
+                        <table>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Prenom</th>
+                                <th>Telephone</th>
+                                <th>Email</th>
+                                <th colSpan={2}>Action</th>
+                            </tr>
+                            {Professeur.map(Professeurs => (
+                                <tr key={Professeurs.id}>
+                                    <td>{Professeurs.Nom}</td>
+                                    <td>{Professeurs.Prenom}</td>
+                                    <td>{Professeurs.Telephone}</td>
+                                    <td>{Professeurs.Email}</td>
+                                    <td>
+                                    <div className="action">
+                                        <div className="supprimer" onClick={() => showDeleteConfirmation(Professeurs.Id_compte)}>
+                                            <DeleteIcon/>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
+                            ))}
+                        </table>
                     </div>
                 </div>
-                <table>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Prenom</th>
-                        <th>Telephone</th>
-                        <th>Email</th>
-                        <th colSpan={2}>Action</th>
-                    </tr>
-                    {Professeur.map(Professeurs => (
-                        <tr key={Professeurs.id}>
-                            <td>{Professeurs.Nom}</td>
-                            <td>{Professeurs.Prenom}</td>
-                            <td>{Professeurs.Telephone}</td>
-                            <td>{Professeurs.Email}</td>
-                            <td>
-                            <div className="action">
-                                <div className="voir"><Visibility/></div>
-                                <div className="supprimer" onClick={() => showDeleteConfirmation(Professeurs.Id_compte)}>
-                                    <DeleteIcon/>
-                                </div>
-                            </div>
-                        </td>
-                        </tr>
-                    ))}
-                </table>
             </div>
             {showModal && <ModalProfesseur onClose={handleCloseModal}/>}
         </div>

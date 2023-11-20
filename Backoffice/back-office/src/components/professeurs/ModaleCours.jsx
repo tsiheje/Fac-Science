@@ -15,12 +15,29 @@ const ModaleCours = ({ onClose }) => {
   const [Parcours, setParcours] = useState('');
   const [cours, setCours] = useState({
     Libelle: '',
+    Description : '',
     Niveau: '',
     Mention: '',
     Parcours: '',
     Cours: null,
     Id_Professeur: Id,
   });
+
+  const displaySweetAlert = (success) => {
+    if (success) {
+        Swal.fire({
+            icon: 'success',
+            title: 'Succès',
+            text: 'Les données ont été ajoutées avec succès!',
+        });
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'Erreur',
+            text: 'Une erreur est survenue lors de l\'ajout des données.',
+        });
+    }
+};
 
   const handleNiveauChange = (event) => {
     const { value } = event.target;
@@ -93,6 +110,7 @@ const ModaleCours = ({ onClose }) => {
     const formData = new FormData();
     formData.append("Cours", cours.Cours);
     formData.append("Libelle", cours.Libelle);
+    formData.append("Description", cours.Description);
     formData.append("Niveau", cours.Niveau);
     formData.append("Mention", cours.Mention);
     formData.append("Parcours", cours.Parcours);
@@ -105,10 +123,10 @@ const ModaleCours = ({ onClose }) => {
         }
       });
       console.log('Réponse du serveur:', response.data);
-      // displaySweetAlert(true);
+      displaySweetAlert(true);
     } catch (error) {
       console.error('Erreur:', error);
-      // displaySweetAlert(false);
+      displaySweetAlert(false);
     }
 
     onClose();
@@ -131,6 +149,13 @@ const ModaleCours = ({ onClose }) => {
               name="Libelle"
               onChange={handleChange}
             />
+            <label className={`input-file ${cours.Cours ? 'has-file' : ''}`}>
+              <input
+                type="file"
+                name="Cours"
+                onChange={handleImageChange}
+              />
+            </label>
             <TextareaAutosize
                 minRows={5}
                 maxRows={6}
@@ -140,13 +165,7 @@ const ModaleCours = ({ onClose }) => {
                 value={cours.Description}
                 onChange={handleChange}
             />
-            <label className={`input-file ${cours.Cours ? 'has-file' : ''}`}>
-              <input
-                type="file"
-                name="Cours"
-                onChange={handleImageChange}
-              />
-            </label>
+            
             <TextField
               required
               fullWidth

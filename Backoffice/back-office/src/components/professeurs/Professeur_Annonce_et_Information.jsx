@@ -9,10 +9,12 @@ import Visibility from '@mui/icons-material/Visibility';
 import GetAppIcon from '@mui/icons-material/GetApp';
 import Swal from 'sweetalert2';
 import BarNav from "./Navbar";
+import ModaleModifAnnonce from "./ModaleModifAnnonce";
 
 const Professeur_Annonce_et_Information = () => {
     const token = Cookies.get('token');
     const decodedToken = jwtDecode(token);
+    const Id = decodedToken.Id_compte;
 
     const [showModal, setshowModal] = useState(false);
     const handleshowModal = () => {
@@ -27,7 +29,7 @@ const Professeur_Annonce_et_Information = () => {
         
         const getAllAnnonces = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/Professeur/annonce');
+                const response = await axios.get(`http://localhost:4000/Professeur/annonce/${Id}`);
                 setAnnouncements(response.data);
                 console.log(response.data);
             } catch (error) {
@@ -80,51 +82,62 @@ const Professeur_Annonce_et_Information = () => {
     const handleDelete = () => {
 
     }
-    const handleEdit = () => {
 
+    const [showModalModif, setshowModalModif] = useState(false);
+
+    const handleEdit = (Id) => {
+        setshowModalModif(true)
+    }
+
+    const handelhideEdit = () => {
+        setshowModalModif(false)
     }
     return(
         <div className="content">
             <div className="nav">
                 <BarNav/>
             </div>
-            <div className="compent">
+            <div className="compents">
+                <div className="compents-content">
                 <div className="haut">
                     <div className="rechercher">
                         <input type="search" name="recherche" id="" placeholder="rechercher votre annonce..."/>
                     </div>
                     <div className="buttonajouter" onClick={handleshowModal}>
-                        Faire Une Annonce
+                        +
                     </div>
                 </div>
-                <table>
-                    <tr>
-                        <th>Annonce</th>
-                        <th>Description</th>
-                        <th>Date de publication</th>
-                        <th colSpan={2}>Action</th>
-                    </tr>
-                    {announcements.map(announcement => (
-                            <tr key={announcement.id}>
-                                <td>{announcement.Annonce}</td>
-                                <td>{announcement.Description}</td>
-                                <td>{announcement.Date_de_publication.split('T')[0]}</td>
-                                <td>
-                                    <div className="action">
-                                        <div className="voir"><Visibility/></div>
-                                        <div className="modifier" onClick={() => handleEdit(announcement.id)}>
-                                            <EditIcon/>
+                <div className="tab">
+                    <table>
+                        <tr>
+                            <th>Annonce</th>
+                            <th>Description</th>
+                            <th>Date de publication</th>
+                            <th colSpan={2}>Action</th>
+                        </tr>
+                        {announcements.map(announcement => (
+                                <tr key={announcement.id}>
+                                    <td>{announcement.Annonce}</td>
+                                    <td>{announcement.Description}</td>
+                                    <td>{announcement.Date_de_publication.split('T')[0]}</td>
+                                    <td>
+                                        <div className="action">
+                                            <div className="modifier" onClick={() => handleEdit(announcement.id)}>
+                                                <EditIcon/>
+                                            </div>
+                                            <div className="supprimer" onClick={() => showDeleteConfirmation(announcement.Id_Annonce)}>
+                                                <DeleteIcon/>
+                                            </div>
                                         </div>
-                                        <div className="supprimer" onClick={() => showDeleteConfirmation(announcement.Id_Annonce)}>
-                                            <DeleteIcon/>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
-                </table>
+                                    </td>
+                                </tr>
+                            ))}
+                    </table>
+                </div>
+                </div>
             </div>
             {showModal && <ModaleAnnonce onClose={handleCloseModal} />}
+            {showModalModif && <ModaleModifAnnonce onClose={handelhideEdit}/>}
         </div>
     )
 }

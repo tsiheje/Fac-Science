@@ -8,6 +8,8 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import './Login.css'
+import sary from '../../Assets/Images/cours-particuliers-soutien-regulier-toulouse-capa-dom_2_0.jpg';
+import login from '../../Assets/Images/images (1).png';
 
 const Login = ({ onClose }) => {
     const [showPassword, setShowPassword] = useState(false);
@@ -98,66 +100,79 @@ const Login = ({ onClose }) => {
       }
         }
 
-    }
+    };
+
     return(
-        <div className="contenu">
-            <div className="right">
-                <div className="fermer" onClick={ onClose }>X</div>
-                <div className="formulaire">
-                  <h2>CONNEXION</h2>
-                  <form onSubmit={handleSubmit}>
-                      <TextField
-                      margin="normal"
-                      fullWidth
-                      id="Email"
-                      label="Adresse email"
-                      name="Email"
-                      autoComplete="email"
-                      autoFocus
-                      onChange={handleChange}
-                      error={!!formErrors.Email}
-                      helperText={formErrors.Email}
-                      />
-                      <TextField
-                          margin="normal"
-                          fullWidth
-                          name="Mot_de_passe"
-                          label="Mot de passe"
-                          type={showPassword ? "text" : "password"}
-                          id="Mot_de_passe"
-                          autoComplete="current-password"
-                          onChange={handleChange}
-                          error={!!formErrors.Mot_de_passe}
-                          helperText={formErrors.Mot_de_passe}
-                          InputProps={{
-                              endAdornment: (
-                                <InputAdornment position="end">
-                                  <IconButton
-                                    onClick={() => setShowPassword(!showPassword)}
-                                    edge="end"
-                                  >
-                                    {showPassword ? <Visibility /> : <VisibilityOff />}
-                                  </IconButton>
-                                </InputAdornment>
-                              ),
-                            }}
-                      />
-                      <div className="oublier">
-                        <NavLink to="/Mot_de_passe_oublier" variant="body2"  underline='none'>
-                            Mot de passe oublié?
-                        </NavLink>
-                      </div>
-                      <Button
-                          type="submit"
-                          fullWidth
-                          variant="contained"
-                          sx={{ mt: 2, mb: 2 }}
-                      >
-                      Se connecter
-                      </Button>
-                  </form>
+      <div className="contenu">
+            <div className="login-content">
+              <div className="fermer" onClick={ onClose }>X</div>
+              <div className="anaty-login">
+                <div className="left-login">
+                    <img src={sary} alt="" />
+                    <div className="kozy">
+                        <h1>One Note</h1>
+                        <p>"Connectez-vous pour accéder à votre compte et explorer un monde d'opportunités éducatives passionnantes avec One Note."</p>
+                    </div>
                 </div>
-            </div>
+                <div className="right">
+                  <img src={login} alt=""/>
+                  <div className="formulaire">
+                    <h2>CONNEXION</h2>
+                    <form onSubmit={handleSubmit}>
+                        <TextField
+                        margin="normal"
+                        fullWidth
+                        id="Email"
+                        label="Adresse email"
+                        name="Email"
+                        autoComplete="email"
+                        autoFocus
+                        onChange={handleChange}
+                        error={!!formErrors.Email}
+                        helperText={formErrors.Email}
+                        />
+                        <TextField
+                            margin="normal"
+                            fullWidth
+                            name="Mot_de_passe"
+                            label="Mot de passe"
+                            type={showPassword ? "text" : "password"}
+                            id="Mot_de_passe"
+                            autoComplete="current-password"
+                            onChange={handleChange}
+                            error={!!formErrors.Mot_de_passe}
+                            helperText={formErrors.Mot_de_passe}
+                            InputProps={{
+                                endAdornment: (
+                                  <InputAdornment position="end">
+                                    <IconButton
+                                      onClick={() => setShowPassword(!showPassword)}
+                                      edge="end"
+                                    >
+                                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                                    </IconButton>
+                                  </InputAdornment>
+                                ),
+                              }}
+                        />
+                        <div className="oublier">
+                          <NavLink to="/Mot_de_passe_oublier" variant="body2"  underline='none'>
+                              Mot de passe oublié?
+                          </NavLink>
+                        </div>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 2, mb: 2 }}
+                        >
+                        Se connecter
+                        </Button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+          </div>
         </div>
     )
 }

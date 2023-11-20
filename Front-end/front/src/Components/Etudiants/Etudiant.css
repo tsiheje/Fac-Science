@@ -4,12 +4,12 @@
     height: 97vh;
     display: flex;
     gap: 20px;
-    background-color: rgb(238, 229, 229);
+    background-color: rgb(255, 255, 255);
 }
 
 .Etudiant .left{
     width: 25%;
-    padding: 15px;
+    /* padding: 15px; */
     box-sizing: border-box;
 }
 
@@ -36,8 +36,8 @@
 
 .anatiny-profile{
     width: 100%;
-    height: 450px;
-    background-color: rgb(255, 255, 255);
+    height: 520px;
+    background-color: rgb(226, 226, 226);
     border-radius: 10px;
     padding: 10px;
     box-sizing: border-box;
@@ -46,24 +46,76 @@
     align-items: center;
 }
 
+.anatiny-profile .anarana .nom{
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    margin: 0;
+}
+
+.anatiny-profile .classe{
+    text-align: center;
+}
+
+.classe .mention{
+    font-weight: bold;
+    color: rgb(0, 58, 116);
+}
+
+.classe .parcour{
+    font-weight: bold;
+    color: rgb(9, 9, 75);
+}
+
+.anatiny-profile .bar{
+    width: 100%;
+    height: 5px;
+    background-color: black;
+    border-radius: 10px;
+}
+.anatiny-profile .total{
+    font-size: 20px;
+}
+
+.total p span{
+    color: blue;
+}
+
+.anatiny-profile .mdp{
+    background-color: blue; 
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
 .gauche .right-contenu{
     margin-top: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 5px;
 }
 
 .gauche .right-contenu .anaty-annonce{
     position: relative;
-    width: 28em;
+    width: 27em;
     height: 26em;
     background-color: rgb(253, 253, 253);
     border-radius: 10px;
     padding: 10px;
     box-sizing: border-box;
+    box-shadow: 2px 4px 2px 2px rgba(0,0,0,0.3);
+    transition: transform .5s;
 }
 
+.anaty-annonce:hover{
+    transform: scale(1.1);
+    z-index: 999;
+}
 .right-contenu .anaty-annonce .publieur{
     display: flex;
     align-items: center;
@@ -90,8 +142,15 @@
     width: 100%;
     height: 58%;
     border-radius: 5px;
-    background-color: aqua;
+    overflow: hidden;
 }
+
+.anaty-annonce .couverture img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .right-contenu .anaty-annonce .action{
     float: right;
     cursor: pointer;
@@ -106,13 +165,19 @@
     border-radius: 10px;
     padding: 10px;
     box-sizing: border-box;
+    box-shadow: 2px 4px 2px 2px rgba(0,0,0,0.3);
+    transition: transform .5s;
+}
+.anaty-cours:hover{
+    transform: scale(1.1);
+    z-index: 999;
 }
 
 .right-contenu .anaty-cours .cours{
     position: absolute;
     top: 15px;
     right: 15px;
-    background-color: black;
+    background-color: rgb(6, 78, 126);
     color: white;
     padding: 6px;
     box-sizing: border-box;
@@ -123,9 +188,16 @@
 
 .right-contenu .anaty-cours .couverture{
     width: 100%;
-    height: 60%;
+    height: 65%;
     border-radius: 5px;
-    background-color: aqua;
+    overflow: hidden;
+}
+
+.anaty-cours .couverture img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
 }
 
 .anaty-cours .description .libelle{
@@ -164,12 +236,18 @@
     border-radius: 10px;
     padding: 10px;
     box-sizing: border-box;
+    box-shadow: 2px 4px 2px 2px rgba(0,0,0,0.3);
+    transition: transform .5s;
+}
+.anaty-devoir:hover{
+    transform: scale(1.1);
+    z-index: 999;
 }
 .right-contenu .anaty-devoir .devoir{
     position: absolute;
     top: 15px;
     right: 15px;
-    background-color: black;
+    background-color: rgb(6, 78, 126);
     color: white;
     padding: 6px;
     box-sizing: border-box;
@@ -180,9 +258,15 @@
 
 .right-contenu .anaty-devoir .couverture{
     width: 100%;
-    height: 60%;
+    height: 65%;
     border-radius: 5px;
-    background-color: aqua;
+    overflow: hidden;
+}
+
+.anaty-devoir .couverture img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .anaty-devoir .description .libelle{
@@ -217,7 +301,7 @@
     position: relative;
     width: 20em;
     height: 19em;
-    background-color: rgb(253, 253, 253);
+    background-color: rgb(255, 255, 255);
     border-radius: 10px;
     padding: 8px;
     box-sizing: border-box;
@@ -225,6 +309,12 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    box-shadow: 2px 4px 2px 2px rgba(0,0,0,0.3);
+    transition: transform .5s;
+}
+.anaty-prof:hover{
+    transform: scale(1.1);
+    z-index: 999;
 }
 
 .right-contenu .anaty-prof .bio p{
@@ -262,7 +352,9 @@
     margin-top: 4% ;
     display: flex;
     width: 100%;
-    gap: 5px;
+    gap: 10px;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .Etudiant .parametre .left{
@@ -271,7 +363,30 @@
 
 .Etudiant .parametre .gauche{
     width: 75%;
-    background-color: aqua;
+    background-color: rgb(245, 245, 245);
+    border-radius: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.formulaire-parametre h1{
+    text-align: center;
+}
+
+.gauche .formulaire-parametre form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.formulaire-parametre form .info, .classe-parametre, .contact-parametre{
+    display: flex;
+    gap: 10px;
+}
+
+form .btn-parametre{
+    width: 50%;
+    margin-left: 50%;
 }
 
 .Etudiant .notif{
@@ -279,13 +394,44 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    /* padding: 10px; */
 }
 
 .Etudiant .notif .anaty-notif{
-    background-color: white;
+    background-color: rgb(133, 133, 133);
     border-radius: 10px;
     width: 60%;
     height: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+
+.notif .anaty-notif h1{
+    text-align: center;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.anaty-notif .filtre{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.filtre .btn{
+    /* background-color: blue; */
+    font-size: 20px;
+    padding: 5px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    color: white;
+}
+
+.anaty-notif .tab{
+    margin-top: 20px;
 }
 
 .soumettre{
@@ -346,4 +492,30 @@
     padding: 2px 10px;
     box-sizing: border-box;
     cursor: pointer;
+}
+
+.mdp-contenu{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mdp-contenu .mdp-anaty{
+    width: 40%;
+    background-color: #ccc;
+    z-index: 999;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.mdp-anaty .ferme{
+    float: right;
+    cursor: pointer;
+    font-size: 20px;
 }

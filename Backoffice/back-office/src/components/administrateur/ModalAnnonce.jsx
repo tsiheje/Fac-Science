@@ -38,13 +38,13 @@
                 Swal.fire({
                     icon: 'success',
                     title: 'Succès',
-                    text: 'Les données ont été ajoutées avec succès!',
+                    text: 'L\'annonce est publié avec succés!',
                 });
             } else {
                 Swal.fire({
                     icon: 'error',
                     title: 'Erreur',
-                    text: 'Une erreur est survenue lors de l\'ajout des données.',
+                    text: 'Une erreur est survenue lors de la publication',
                 });
             }
         };

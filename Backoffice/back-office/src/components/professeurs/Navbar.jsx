@@ -13,6 +13,10 @@ import MenuItem from '@mui/material/MenuItem';
 import SearchIcon from '@mui/icons-material/Search';
 import Swal from 'sweetalert2';
 import './Professeur.css';
+import dashbord from '../../Assets/Images/dashboard.svg';
+import annonce from '../../Assets/Images/announcement.svg';
+import cour from '../../Assets/Images/icons8-cours-en-ligne-50.png';
+import devoir from '../../Assets/Images/icons8-formulaire-de-candidature-48.png';
 
 const BarNav = () => {
     const token = Cookies.get('token');
@@ -43,19 +47,19 @@ const BarNav = () => {
             </div>
             <div className="link">
                         <NavLink to="/Professeur">
-                            <img src={setting} width="10%" alt="Profil" />
+                            <img src={dashbord} width="10%" alt="Profil" />
                             <p>Dashbord</p>
                         </NavLink>
                         <NavLink to="/Professeur/Annonce_et_Information">
-                            <img src={setting} width="10%" alt="Profil" />
+                            <img src={annonce} width="10%" alt="Profil" />
                             <p>Annonces</p>
                         </NavLink>
                         <NavLink to="/Professeur/cours">
-                            <img src={setting} width="10%" alt="Profil" />
+                            <img src={cour} width="10%" alt="Profil" />
                             <p>Cours</p>
                         </NavLink>
                         <NavLink to="/Professeur/devoirs">
-                            <img src={setting} width="10%" alt="Profil" />
+                            <img src={devoir} width="10%" alt="Profil" />
                             <p>Devoirs</p>
                         </NavLink>
                         <NavLink to="/Professeur/Parametre">
@@ -65,10 +69,6 @@ const BarNav = () => {
                         <NavLink to="/Professeur/Notification">
                             <img src={notification} width="10%" alt="Profil" />
                             <p>Notifications</p>
-                        </NavLink>
-                        <NavLink to="/Professeur/Message">
-                            <img src={message} width="10%" alt="Profil" />
-                            <p>Messages</p>
                         </NavLink>
                 </div>
             <div className="logout" onClick={handleDeconnexion}>

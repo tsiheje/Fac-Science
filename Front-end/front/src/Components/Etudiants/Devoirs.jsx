@@ -12,6 +12,7 @@ import GetAppIcon from '@mui/icons-material/GetApp';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Soumettre from "./Soumettre";
 import Voire from "./Voire";
+import couverture from '../../Assets/Images/24493965-vue-en-plongée-verticale-de-garçon-étudiant-dans-la-chambre-à-coucher.jpg';
 
 const Devoirs = () => {
     const token = Cookies.get('token');
@@ -62,37 +63,40 @@ const Devoirs = () => {
                         <div className="search-icon"></div>
                     </div> */}
                     <div className="right-contenu">
-                        <div className="anaty-devoir">
-                            <div className="devoir">
-                                Devoir
-                            </div>
-                        <div className="couverture">
-                            </div>
-                            <div className="description">
-                                <p className="libelle">MATHEMATIQUE</p>
-                                <p className="resume">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla animi suscipit unde adipisci architecto temporibus quis officiis ut explicabo doloremque!</p>
-                            </div>
-                            <div className="ambany">
-                                <div className="publieur">
-                                    <img src={profil} alt="" width={'15%'}/>
-                                    <div className="nom">
-                                        <p className="anarana">Pr. Marie Mickelio</p>
-                                        <p className="date">22/11/2023</p>
+                        {devoirs.map(devoir => (
+                            <div className="anaty-devoir">
+                                <div className="devoir">
+                                    Devoir
+                                </div>
+                                <div className="couverture">
+                                    <img src={couverture} alt=""/>
+                                </div>
+                                <div className="description">
+                                    <p className="libelle">MATHEMATIQUE</p>
+                                    <p className="resume">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla animi suscipit unde adipisci architecto temporibus quis officiis ut explicabo doloremque!</p>
+                                </div>
+                                <div className="ambany">
+                                    <div className="publieur">
+                                        <img src={profil} alt="" width={'15%'}/>
+                                        <div className="nom">
+                                            <p className="anarana">Pr. Marie Mickelio</p>
+                                            <p className="date">22/11/2023</p>
+                                        </div>
+                                    </div>
+                                    <div className="action">
+                                        <div className="upload" onClick={handleShowSoumettre}>
+                                            <CloudUploadIcon/>
+                                        </div>
+                                        <div className="voire" onClick={handleShowVoire}>
+                                            <Visibility/>
+                                        </div>
+                                        <div className="down">
+                                            <GetAppIcon/>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="action">
-                                    <div className="upload" onClick={handleShowSoumettre}>
-                                        <CloudUploadIcon/>
-                                    </div>
-                                    <div className="voire" onClick={handleShowVoire}>
-                                        <Visibility/>
-                                    </div>
-                                    <div className="down">
-                                        <GetAppIcon/>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </div>
