@@ -34,25 +34,13 @@ const Notification = () => {
                 <div className="notif">
                     <div className="anaty-notif">                        
                         <h1>Mes Notifications</h1>
-                        <div className="filtre">
-                            <div className="btn">
-                                tous
-                            </div>
-                            <div className="btn">
-                                Annonces
-                            </div>
-                            <div className="btn">
-                                Cours
-                            </div>
-                            <div className="btn">
-                                Devoirs
-                            </div>
-                            <div className="btn">
-                                Messages
-                            </div>
-                        </div>
                         <div className="tab">
                             <table>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
                                 {notif.map(notif => (
                                     <tr key={notif.id}>
                                         <td>{notif.Type}</td>

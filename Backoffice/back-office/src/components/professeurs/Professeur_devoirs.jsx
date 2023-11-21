@@ -26,6 +26,7 @@ const Professeur_Devoirs = () => {
     }
 
     const [devoirs, setDevoirs] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
         
@@ -100,6 +101,15 @@ const Professeur_Devoirs = () => {
     const handelhideEdit = () => {
         setshowModalModif(false)
     }
+    const handleSearch = (event) => {
+        const query = event.target.value;
+        setSearchQuery(query);
+    };
+
+    const filteredDevoirs = devoirs.filter((devoir) =>
+        devoir.Libelle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        devoir.Description.toLowerCase().includes(searchQuery.toLowerCase())
+    );
     return(
         <div className="content">
             <div className="nav">
@@ -109,10 +119,11 @@ const Professeur_Devoirs = () => {
                 <div className="compents-content">
                     <div className="haut">
                         <div className="rechercher">
-                            <input type="search" name="recherche" id="" placeholder="rechercher votre devoirs..."/>
+                            <input type="search" name="recherche" id="" placeholder="rechercher votre devoirs..." value={searchQuery}
+                                onChange={handleSearch}/>
                         </div>
                         <div className="buttonajouter" onClick={handleshowModal}>
-                            +
+                            Créer un devoir
                         </div>
                     </div>
                     <div className="tab">
@@ -128,7 +139,7 @@ const Professeur_Devoirs = () => {
                                 <th>Date de soumis</th>
                                 <th>Action</th>
                             </tr>
-                            {devoirs.map(devoir => (
+                            {filteredDevoirs.map(devoir => (
                             <tr key={devoir.id}>
                                 <td>{devoir.Libelle}</td>
                                 <td>{devoir.Description}</td>

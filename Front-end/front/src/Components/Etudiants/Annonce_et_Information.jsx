@@ -39,26 +39,11 @@ const Annonce_et_Information = () => {
         setshowVoire(false);
     }
 
-    const renderContent = (announcement) => {
-        console.log(announcement.Annonce);
-        console.log(announcement.Description);
-        if (announcement.Annonce) {
-            const fileURL = `http://localhost:4000/Administrateur/uploads/${announcement.Annonce}`;
-            const fileExtension = announcement.Annonce.split('.').pop().toLowerCase();
-            console.log(fileURL);
-
-            if (fileExtension === "jpg" || fileExtension === "jpeg" || fileExtension === "png" || fileExtension === "gif") {
-                return <img src={important} alt="Image d'annonce" width="100%" height="100%" />;
-            } else if (fileExtension === "pdf") {
-                return <img src={examen} alt="Image d'annonce" width="100%" height="100%" />;
-            } else {
-                return <a href={fileURL} target="_blank" rel="noopener noreferrer">Télécharger le fichier</a>;
-            }
-        } else {
-            return <p>Aucun fichier trouvé</p>;
-        }
-    }
-
+    const handleDownload = (announcement) => {
+        console.log(announcement)
+        const fileURL = `http://localhost:4000/Administrateur/uploads/${announcement.Annonce}`;
+        window.open(fileURL, '_blank');
+            };
     return(
         <div className="content">
             <NavBar/>
@@ -85,11 +70,28 @@ const Annonce_et_Information = () => {
                                     <p>{announcement.Description}</p>
                                 </div>
                                 <div className="couverture">
-                                    {renderContent(announcement)}
-                                    {/* <img src={couverture} alt="" /> */}
+                                {announcement.Annonce ? (
+                                        (() => {
+                                            const fileURL = `http://localhost:4000/Administrateur/uploads/${announcement.Annonce}`;
+                                            const fileExtension = announcement.Annonce.split('.').pop().toLowerCase();
+
+                                            if (fileExtension === "jpg" || fileExtension === "jpeg" || fileExtension === "png" || fileExtension === "gif") {
+                                                return <img src={important} alt="Image d'annonce" width="100%" height="100%" />;
+                                            } else if (fileExtension === "pdf") {
+                                                return <img src={examen} alt="Image d'annonce" width="100%" height="100%" />;
+                                            } else {
+                                                return <a href={fileURL} target="_blank" rel="noopener noreferrer">Télécharger le fichier</a>;
+                                            }
+                                        })()
+                                    ) : (
+                                        <p>Aucun fichier trouvé</p>
+                                    )}
                                 </div>
-                                <div className="action">
-                                    <div className="voire" onClick={handleShowVoire}>
+                                <div className="action-annonce">
+                                    {/* <div className="voire" onClick={() => handleShowVoire(announcement)}>
+                                        <Visibility/>
+                                    </div> */}
+                                    <div className="down" onClick={() => handleDownload(announcement)}>
                                         <Visibility/>
                                     </div>
                                 </div>

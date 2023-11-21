@@ -119,6 +119,18 @@ const Professeur_Annonce_et_Information = () => {
     const handelhideEdit = () => {
         setshowModalModif(false)
     }
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const handleSearch = (event) => {
+        const query = event.target.value;
+        setSearchQuery(query);
+    };
+
+    const filteredAnnouncements = announcements.filter((announcement) =>
+        announcement.Annonce.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        announcement.Description.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     return(
         <div className="content">
             <div className="nav">
@@ -128,10 +140,10 @@ const Professeur_Annonce_et_Information = () => {
                 <div className="compents-content">
                 <div className="haut">
                     <div className="rechercher">
-                        <input type="search" name="recherche" id="" placeholder="rechercher votre annonce..."/>
+                        <input type="search" name="recherche" id="" placeholder="rechercher votre annonce..." value={searchQuery} onChange={handleSearch}/>
                     </div>
                     <div className="buttonajouter" onClick={handleshowModal}>
-                        +
+                        Faire une annonce
                     </div>
                 </div>
                 <div className="tab">
@@ -142,23 +154,23 @@ const Professeur_Annonce_et_Information = () => {
                             <th>Date de publication</th>
                             <th colSpan={2}>Action</th>
                         </tr>
-                        {announcements.map(announcement => (
-                                <tr key={announcement.id}>
-                                    <td>{announcement.Annonce}</td>
-                                    <td>{announcement.Description}</td>
-                                    <td>{announcement.Date_de_publication.split('T')[0]}</td>
-                                    <td>
-                                        <div className="action">
-                                            <div className="modifier" onClick={() => handleEdit(announcement.Id_Annonce)}>
-                                                <EditIcon/>
-                                            </div>
-                                            <div className="supprimer" onClick={() => showDeleteConfirmation(announcement.Id_Annonce)}>
-                                                <DeleteIcon/>
-                                            </div>
+                        {filteredAnnouncements.map((announcement) => (
+                            <tr key={announcement.id}>
+                                <td>{announcement.Annonce}</td>
+                                <td>{announcement.Description}</td>
+                                <td>{announcement.Date_de_publication.split('T')[0]}</td>
+                                <td>
+                                    <div className="action">
+                                        <div className="modifier" onClick={() => handleEdit(announcement.Id_Annonce)}>
+                                            <EditIcon/>
                                         </div>
-                                    </td>
-                                </tr>
-                            ))}
+                                        <div className="supprimer" onClick={() => showDeleteConfirmation(announcement.Id_Annonce)}>
+                                            <DeleteIcon/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
                     </table>
                 </div>
                 </div>

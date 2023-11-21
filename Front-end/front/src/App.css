@@ -10,7 +10,7 @@
 .landing{
     display: flex;
     flex-direction: column;
-    background-color: #0b99ff;
+    background-color: #002946;
 }
 
 .landing .landing-nav{
@@ -137,6 +137,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    color: white;
 }
 
 .about-service .text-service, .text-professeur, .text-etudiant{
@@ -155,7 +156,7 @@
 
 .text-service .text-service-kozy h1{
     font-size: 60px;
-    animation: droit 10s;
+    animation: droit  infinite;
 }
 
 .text-service .text-service-phrase{
@@ -186,6 +187,7 @@
 
 .text-professeur-right img{
     animation: slidown 10s;
+    border-radius: 10px;
 }
 
 .text-etudiant .text-etudiant-left{
@@ -197,6 +199,11 @@
     text-align: center;
     padding: 15px;
     box-sizing: border-box;
+}
+
+.text-etudiant .text-etudiant-left img{
+    animation: slidown 10s;
+    border-radius: 10px;
 }
 
 .text-etudiant .text-etudiant-right p{
@@ -228,6 +235,7 @@
 
 .kozy-service:hover{
     transform: scale(1.1);
+    z-index: 9999;
 }
 
 .About .service .kozy-service .h1{
@@ -310,4 +318,10 @@ p span{
         transform: translateX(0);
         opacity: 1;
     }
+}
+
+h1{
+    text-align: center;
+    font-size: 60px;
+    color: rgb(174, 188, 201);
 }

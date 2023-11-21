@@ -22,6 +22,8 @@ const Devoirs = () => {
     const Parcours = decodedToken.Parcours;
 
     const [devoirs, setDevoirs] = useState([]);
+    const [selectedElement, setSelectedElement] = useState(null);
+
     useEffect(() => {
         const getAllDevoirs = async () => {
             try{
@@ -35,20 +37,21 @@ const Devoirs = () => {
         getAllDevoirs();
     }, []);
     const [showSoumettre, setShowSoumettre] = useState(false);
-    const handleShowSoumettre = () =>{
+    const handleShowSoumettre = (devoirId) => {
+        setSelectedElement(devoirId);
+        console.log(devoirId)
         setShowSoumettre(true);
     };
-    const handlehideShowSoumettre = () =>{
-        setShowSoumettre(false)
+    const handleHideSoumettre = () => {
+        setSelectedElement(null);
+        setShowSoumettre(false);
     };
 
-    const [showVoire, setshowVoire] = useState(false);
-    const handleShowVoire = () => {
-        setshowVoire(true);
+    const handleDownload = (devoir) => {
+        console.log(devoir)
+        const fileURL = `http://localhost:4000/Administrateur/uploads/${devoir.Devoirs}`;
+        window.open(fileURL, '_blank');
     };
-    const handlehideVoire = () => {
-        setshowVoire(false);
-    }
 
     return(
         <div className="content">
@@ -84,14 +87,14 @@ const Devoirs = () => {
                                         </div>
                                     </div>
                                     <div className="action">
-                                        <div className="upload" onClick={handleShowSoumettre}>
+                                        <div className="upload" onClick={() => handleShowSoumettre(devoir.Id_devoirs)}>
                                             <CloudUploadIcon/>
                                         </div>
-                                        <div className="voire" onClick={handleShowVoire}>
+                                        {/* <div className="voire" onClick={() => handleShowVoire(devoir)}>
                                             <Visibility/>
-                                        </div>
-                                        <div className="down">
-                                            <GetAppIcon/>
+                                        </div> */}
+                                        <div className="down" onClick={() => handleDownload(devoir)}>
+                                        <Visibility/>
                                         </div>
                                     </div>
                                 </div>
@@ -100,8 +103,7 @@ const Devoirs = () => {
                     </div>
                 </div>
             </div>
-            {showSoumettre && <Soumettre onClose={handlehideShowSoumettre}/>}
-            {showVoire && <Voire onClose={handlehideVoire}/>}
+            {showSoumettre && <Soumettre devoirId={selectedElement} onClose={handleHideSoumettre} />}
         </div>
     )
 }

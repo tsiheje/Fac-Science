@@ -62,6 +62,19 @@ const Cours = () => {
             return <p>Aucun fichier trouvé</p>;
         }
     }
+
+    const [fileURL, setFileURL] = useState('');
+
+    const handleDownload = (cour) => {
+        console.log(cour)
+        const fileURL = `http://localhost:4000/Administrateur/uploads/${cour.Cours}`;
+        const link = document.createElement('a');
+        link.href = fileURL;
+        // Spécifiez le nom du fichier à télécharger
+        link.download = 'nom_du_fichier.ext';
+        // Simulez un clic pour déclencher le téléchargement
+        link.click();
+    };
     return(
         <div className="content">
             <NavBar/>
@@ -96,10 +109,10 @@ const Cours = () => {
                                         </div>
                                     </div>
                                     <div className="action">
-                                        <div className="voire" onClick={handleShowVoire}>
+                                        <div className="voire" onClick={handleShowVoire(cour)}>
                                             <Visibility/>
                                         </div>
-                                        <div className="down">
+                                        <div className="down" onClick={() => handleDownload(cour)}>
                                             <GetAppIcon/>
                                         </div>
                                     </div>

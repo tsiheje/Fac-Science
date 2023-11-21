@@ -17,6 +17,8 @@ const Professeur_Cours = () => {
     const Id = decodedToken.Id_compte;
 
     const [showModal, setshowModal] = useState(false);
+    const [cours, setCours] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
 
     const handleshowModal = () => {
         setshowModal(true);
@@ -25,7 +27,6 @@ const Professeur_Cours = () => {
         setshowModal(false);
     }
 
-    const [cours, setCours] = useState([]);
     const getAllCours = async () => {
         try {
             const response = await axios.get(`http://localhost:4000/Professeur/cours/${Id}`);
@@ -100,6 +101,17 @@ const Professeur_Cours = () => {
     const handelhideEdit = () => {
         setshowModalModif(false)
     }
+
+    const handleSearch = (event) => {
+        const query = event.target.value;
+        setSearchQuery(query);
+    };
+
+    const filteredCours = cours.filter((cour) =>
+        cour.Libelle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        cour.Description.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     return(
         <div className="content">
             <div className="nav">
@@ -109,10 +121,11 @@ const Professeur_Cours = () => {
                 <div className="compents-content">
                     <div className="haut">
                         <div className="rechercher">
-                            <input type="search" name="recherche" id="" placeholder="rechercher votre cours..."/>
+                            <input type="search" name="recherche" id="" placeholder="rechercher votre cours..." value={searchQuery}
+                                onChange={handleSearch}/>
                         </div>
                         <div className="buttonajouter" onClick={handleshowModal}>
-                            +
+                            Créer un cour
                         </div>
                     </div>
                     <div className="tab">
@@ -127,26 +140,26 @@ const Professeur_Cours = () => {
                                 <th>Date de creation</th>
                                 <th>Action</th>
                             </tr>
-                            {cours.map(cour => (
-                            <tr key={cour.id}>
-                                <td>{cour.Libelle}</td>
-                                <td>{cour.Description}</td>
-                                <td>{cour.Niveau}</td>
-                                <td>{cour.Mention}</td>
-                                <td>{cour.Parcours}</td>
-                                <td>{cour.Cours}</td>
-                                <td>{cour.Date_de_creation.split('T')[0]}</td>
-                                <td>
+                            {filteredCours.map(cour => (
+                                <tr key={cour.id}>
+                                    <td>{cour.Libelle}</td>
+                                    <td>{cour.Description}</td>
+                                    <td>{cour.Niveau}</td>
+                                    <td>{cour.Mention}</td>
+                                    <td>{cour.Parcours}</td>
+                                    <td>{cour.Cours}</td>
+                                    <td>{cour.Date_de_creation.split('T')[0]}</td>
+                                    <td>
                                         <div className="action">
                                             <div className="modifier" onClick={() => handleEdit(cour.Id_cours)}>
-                                                <EditIcon/>
+                                                <EditIcon />
                                             </div>
                                             <div className="supprimer" onClick={() => showDeleteConfirmation(cour.Id_cours)}>
-                                                <DeleteIcon/>
+                                                <DeleteIcon />
                                             </div>
                                         </div>
                                     </td>
-                            </tr>
+                                </tr>
                             ))}
                         </table>
                     </div>

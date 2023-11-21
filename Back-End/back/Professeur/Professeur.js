@@ -352,4 +352,40 @@ router.delete('/annonce/:Id_annonce', (req, res) => {
     }
   });
 });
+
+router.get('/totalCours/:Id_professeur',(req, res) => {
+  const { Id_professeur } = req.params;
+  try{
+    const sql = "select count(Cours) as Total from cours where Id_Professeur =?";
+    connection.query(sql, [Id_professeur], (err, result) => {
+      if(err){
+        console.error(err);
+        res.status(500).send('Misy erreur');
+        return;
+      }
+      res.json(result);
+    })
+  }catch(error){
+    console.error(error);
+    res.status(500).json({ error: 'Erreur lors de la récupération du total des cours.' });
+  }
+})
+
+router.get('/totalDevoirs/:Id_professeur',(req, res) => {
+  const { Id_professeur } = req.params;
+  try{
+    const sql = "select count(Devoirs) as Total from devoirs where Id_Professeur =?";
+    connection.query(sql, [Id_professeur], (err, result) => {
+      if(err){
+        console.error(err);
+        res.status(500).send('Misy erreur');
+        return;
+      }
+      res.json(result);
+    })
+  }catch(error){
+    console.error(error);
+    res.status(500).json({ error: 'Erreur lors de la récupération du total des cours.' });
+  }
+})
 module.exports = router;

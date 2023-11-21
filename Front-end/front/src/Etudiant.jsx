@@ -7,7 +7,8 @@ import { useState } from "react";
 import Login from "./Components/Login/Login";
 import Compte from './Components/Compte/CompteEtudiant';
 import professeur from '../src/Assets/Images/pHlo85Zx20ifuOISOoQCS73g7b9QNiBl0.jpg';
-import etudiant from '../src/Assets/Images/stage-vacances-fevrier-terminal-2023.webp';
+import etudiant from '../src/Assets/Images/pexels-buro-millennial-1438081.jpg';
+import icone from '../src/Assets/Images/Book_open_alt@3x.png'
 
 const Etudiant = () => {
 
@@ -77,6 +78,7 @@ const Etudiant = () => {
                         </div>
                         <div className="text-professeur">
                             <div className="text-professeur-left">
+                                <h3>Large éventail de cours</h3>
                                 <p>À One Note, nous proposons une large gamme de cours via notre menu 'Cours'. Nos enseignants expérimentés couvrent une variété de sujets, veillant à ce qu'il y en ait pour tous les goûts. Que vous soyez intéressé par des matières académiques telles que les mathématiques et les sciences, ou que vous souhaitiez explorer des domaines créatifs comme l'art et la musique, nos cours offrent une expérience d'apprentissage complète.En plus de nos cours, nous offrons également une multitude de ressources via notre menu 'Devoirs'. Ces ressources sont conçues pour compléter votre apprentissage et vous aider à exceller dans vos études. Des exercices pratiques aux guides d'étude, nos ressources apportent un soutien précieux pour améliorer votre compréhension des sujets.Explorez nos menus 'Cours' et 'Devoirs' pour découvrir les opportunités éducatives disponibles sur One Note !</p>
                             </div>
                             <div className="text-professeur-right">
@@ -85,24 +87,29 @@ const Etudiant = () => {
                         </div>
                         <div className="text-etudiant">
                             <div className="text-etudiant-left">
-                                <img src={professeur}></img>
+                                <img src={etudiant}></img>
                             </div>
                             <div className="text-etudiant-right">
+                                <h3>Ressources éducatives</h3>
                                 <p>Notre menu 'Cours' offre une vaste gamme d'opportunités éducatives pour des étudiants de tous âges. Des matières académiques aux cours axés sur les compétences, nos enseignants sont dédiés à fournir un enseignement de haute qualité qui favorise la croissance et l'apprentissage. Chaque cours est soigneusement conçu pour répondre aux besoins et aux intérêts de nos étudiants, garantissant une expérience éducative enrichissante.En plus de nos cours, nous proposons également une variété de ressources dans notre menu 'Devoirs'. Ces ressources sont créées par nos enseignants et fournissent des matériaux d'apprentissage précieux pour compléter les cours. Qu'il s'agisse de guides d'étude, de quiz pratiques ou d'activités interactives, nos ressources sont conçues pour améliorer le processus d'apprentissage et aider les étudiants à réussir.Explorez nos menus 'Cours' et 'Devoirs' pour découvrir les opportunités éducatives disponibles sur One Note !</p>
                             </div>
                         </div>
                     </div>
+                    <h1>Services supplémentaires</h1>
                     <div className="service">
                         <div className="kozy-service">
-                            <h1>Flexible Scheduling</h1>
+                            <img src={icone} alt="" />
+                            <h2>Planification flexible</h2>
                             <p>Notre menu 'annonces' vous tient informé des dernières actualités et informations de nos enseignants. Des annonces importantes concernant les changements d'emploi du temps et les événements à venir, aux rappels et ressources pour vos cours, vous pouvez trouver toutes les informations dont vous avez besoin en un seul endroit pratique.</p>
                         </div>
                         <div className="kozy-service">
-                            <h1>Interactive Learning Materials</h1>
+                            <img src={icone} alt="" />
+                            <h2>Matériaux d'apprentissage interactifs</h2>
                             <p>Notre menu 'cours' propose une vaste gamme d'opportunités éducatives pour les apprenants de tous âges. Que vous souhaitiez acquérir de nouvelles compétences, approfondir vos connaissances dans un domaine spécifique ou vous préparer à un examen de certification, nos cours ont tout ce qu'il vous faut. Avec des enseignants expérimentés et qualifiés, des supports d'apprentissage interactifs et des options d'emploi du temps flexibles, vous pouvez facilement trouver le cours parfait pour atteindre vos objectifs éducatifs.</p>
                         </div>
                         <div className="kozy-service">
-                            <h1>Personalized Tutoring</h1>
+                            <img src={icone} alt="" />
+                            <h2>Tutorat personnalisé</h2>
                             <p>Dans le menu 'devoirs', vous découvrirez une variété de tâches et de projets assignés par les enseignants. Ces devoirs sont conçus pour améliorer votre expérience d'apprentissage et vous aider à appliquer les connaissances et compétences acquises dans les cours. Avec des instructions claires, des délais et des directives de soumission, vous pouvez rester organisé et suivre vos progrès à mesure que vous terminez chaque devoir.</p>
                         </div>
                     </div>
