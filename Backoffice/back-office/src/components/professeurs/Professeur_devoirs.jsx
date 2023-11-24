@@ -10,6 +10,8 @@ import GetAppIcon from '@mui/icons-material/GetApp';
 import Swal from 'sweetalert2';
 import BarNav from "./Navbar";
 import ModaleModifDevoir from "./ModaleModifDevoir";
+import devoirsary from '../../Assets/Images/icons8-formulaire-de-candidature-48.png';
+import Reponse from "./Soumettre";
 
 const Professeur_Devoirs = () => {
     const token = Cookies.get('token');
@@ -92,7 +94,7 @@ const Professeur_Devoirs = () => {
     const [showModalModif, setshowModalModif] = useState(false);
 
     const handleEdit = (devoirId) => {
-        const selectedDevoirId = devoirs.find(devoir => devoir.Id_devoir === devoirId);
+        const selectedDevoirId = devoirs.find(devoir => devoir.Id_devoirs === devoirId);
         setSelectedDevoir(selectedDevoirId);
 
         setshowModalModif(true);
@@ -110,6 +112,16 @@ const Professeur_Devoirs = () => {
         devoir.Libelle.toLowerCase().includes(searchQuery.toLowerCase()) ||
         devoir.Description.toLowerCase().includes(searchQuery.toLowerCase())
     );
+    const [showVoireReponse, setshowVoireReponse] = useState(false);
+    const VoireReponse = (devoirId) => {
+        const selectedDevoirId = devoirs.find(devoir => devoir.Id_devoirs === devoirId);
+        setSelectedDevoir(selectedDevoirId);
+        console.log(selectedDevoirId)
+        setshowVoireReponse(true);
+    }
+    const HideReponse = () => {
+        setshowVoireReponse(false);
+    }
     return(
         <div className="content">
             <div className="nav">
@@ -151,11 +163,14 @@ const Professeur_Devoirs = () => {
                                 <td>{devoir.Date_de_soumise.split('T')[0]}</td>
                                 <td>
                                         <div className="action">
-                                            <div className="modifier" onClick={() => handleEdit(devoir.Id_devoir)}>
+                                            <div className="modifier" onClick={() => handleEdit(devoir.Id_devoirs)}>
                                                 <EditIcon/>
                                             </div>
                                             <div className="supprimer" onClick={() => showDeleteConfirmation(devoir.Id_devoirs)}>
                                                 <DeleteIcon/>
+                                            </div>
+                                            <div className="reponse" onClick={() => VoireReponse(devoir.Id_devoirs)}>
+                                                <img src={devoirsary} alt="" width={'30'}/>
                                             </div>
                                         </div>
                                     </td>
@@ -167,6 +182,7 @@ const Professeur_Devoirs = () => {
             </div>
             {showModal && <ModaleDevoirs onClose={handlehideModal}/>}
             {showModalModif && <ModaleModifDevoir onClose={handelhideEdit} selectedDevoir={selectedDevoir}/>}
+            {showVoireReponse && <Reponse onClose={HideReponse} selectedDevoir={selectedDevoir}/>}
         </div>
     )
 }

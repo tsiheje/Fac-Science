@@ -1,3 +1,6 @@
+.content{
+    background-color: rgb(155, 155, 155);
+}
 .Etudiant{
     margin-top: 1%;
     width: 100%;
@@ -109,13 +112,8 @@
     padding: 10px;
     box-sizing: border-box;
     box-shadow: 2px 4px 2px 2px rgba(0,0,0,0.3);
-    transition: transform .5s;
 }
 
-.anaty-annonce:hover{
-    transform: scale(1.1);
-    z-index: 999;
-}
 .right-contenu .anaty-annonce .publieur{
     display: flex;
     align-items: center;
@@ -154,23 +152,18 @@
 .right-contenu .anaty-annonce .action{
     float: right;
     cursor: pointer;
-    margin-right: 5px;
+    margin-right: 15px;
 }
 
 .gauche .right-contenu .anaty-cours{
     position: relative;
     width: 25em;
-    height: 24em;
+    height: 27em;
     background-color: rgb(253, 253, 253);
     border-radius: 10px;
     padding: 10px;
     box-sizing: border-box;
     box-shadow: 2px 4px 2px 2px rgba(0,0,0,0.3);
-    transition: transform .5s;
-}
-.anaty-cours:hover{
-    transform: scale(1.1);
-    z-index: 999;
 }
 
 .right-contenu .anaty-cours .cours{
@@ -188,7 +181,7 @@
 
 .right-contenu .anaty-cours .couverture{
     width: 100%;
-    height: 65%;
+    height: 60%;
     border-radius: 5px;
     overflow: hidden;
 }
@@ -237,11 +230,6 @@
     padding: 10px;
     box-sizing: border-box;
     box-shadow: 2px 4px 2px 2px rgba(0,0,0,0.3);
-    transition: transform .5s;
-}
-.anaty-devoir:hover{
-    transform: scale(1.1);
-    z-index: 999;
 }
 .right-contenu .anaty-devoir .devoir{
     position: absolute;
@@ -310,11 +298,6 @@
     align-items: center;
     gap: 10px;
     box-shadow: 2px 4px 2px 2px rgba(0,0,0,0.3);
-    transition: transform .5s;
-}
-.anaty-prof:hover{
-    transform: scale(1.1);
-    z-index: 999;
 }
 
 .right-contenu .anaty-prof .bio p{
@@ -527,8 +510,14 @@ form .btn-parametre{
 
 .action-annonce{
     display: flex;
-    margin-left: 90%;
+    margin-left: 80%;
     cursor: pointer;
+    background-color: blue;
+    padding: 5px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
 }
 
 table {

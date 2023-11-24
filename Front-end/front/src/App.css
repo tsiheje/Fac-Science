@@ -163,7 +163,6 @@
     width: 50%;
     padding: 15px;
     box-sizing: border-box;
-    text-align: center;
 }
 
 .text-service .text-service-phrase p{
@@ -171,7 +170,6 @@
 }
 .text-professeur .text-professeur-left{
     width: 50%;
-    text-align: center;
     padding: 15px;
     box-sizing: border-box;
 }
@@ -196,7 +194,6 @@
 
 .text-etudiant .text-etudiant-right{
     width: 50%;
-    text-align: center;
     padding: 15px;
     box-sizing: border-box;
 }
@@ -210,6 +207,12 @@
     font-size: 20px;
 }
 
+.titre{
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 25px;
+    color: #ffd4d4;
+}
 .About .service{
     display: flex;
     align-items: center;

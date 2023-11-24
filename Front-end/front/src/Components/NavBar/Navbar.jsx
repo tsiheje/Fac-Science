@@ -13,6 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 import SearchIcon from '@mui/icons-material/Search';
 import Swal from 'sweetalert2';
 import './NavBar.css';
+import Notification from './Notification';
 
 const NavBar = () => {
     const token = Cookies.get('token');
@@ -47,7 +48,14 @@ const NavBar = () => {
     const handleMenuClose = () => {
         setAnchorEl(null);
       };
-
+    
+    const [notif, setNotif] = useState(false);
+    const handleNotification = () => {
+        setNotif(true);
+    }
+    const hideNotification = () => {
+        setNotif(false)
+    }
     return(
         <div className="navbar">
             <h2>One Note</h2>
@@ -79,10 +87,12 @@ const NavBar = () => {
                             <img src={setting} alt="" width={'15%'}/>
                             <p>Parametres</p>
                         </NavLink>
-                        <NavLink to="/Notification">
+                        <div className="notification" onClick={handleNotification}>
                             <img src={notification} alt="" width={'15%'}/>
                             <p>Notifications</p>
-                        </NavLink>
+                        </div>
+                        {/* <NavLink to="/Notification">
+                        </NavLink> */}
                         {/* <NavLink to="/Message">
                             <img src={message} alt="" width={'15%'}/>
                             <p>Messages</p>
@@ -94,6 +104,7 @@ const NavBar = () => {
                     </div>
                 )}
             </div>
+            {notif && <Notification onClose={hideNotification}/>}
         </div>
     )
 }

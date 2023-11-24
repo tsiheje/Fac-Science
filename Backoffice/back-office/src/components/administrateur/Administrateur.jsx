@@ -48,7 +48,7 @@ const Administrateur = () => {
           {
             label: 'Par Niveaux',
             data: Object.values(dash).map((niveau) => niveau.Total),
-            backgroundColor: [  'blue'],
+            backgroundColor: ['blue'],
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1,
           },

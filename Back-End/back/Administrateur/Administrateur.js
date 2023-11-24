@@ -165,7 +165,7 @@ router.delete('/supprimer:Id_compte', (req, res) => {
 });
 
 router.get('/dashbord', (req, res) => {
-  const sql = "select Niveau, count(Niveau) as Total from compte where Roles = 'Etudiant' group by (Niveau)";
+  const sql = "select Niveau, count(Niveau) as Total from compte where Roles = 'Etudiant' group by (Niveau) order by(Niveau)";
   connection.query(sql, (err, results) => {
     if(err) {
       console.error(err);

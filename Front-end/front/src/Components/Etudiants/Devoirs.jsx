@@ -38,7 +38,8 @@ const Devoirs = () => {
     }, []);
     const [showSoumettre, setShowSoumettre] = useState(false);
     const handleShowSoumettre = (devoirId) => {
-        setSelectedElement(devoirId);
+        const selectedElement = devoirs.find(devoir => devoir.Id_devoirs === devoirId);
+        setSelectedElement(selectedElement);
         console.log(devoirId)
         setShowSoumettre(true);
     };
@@ -76,7 +77,7 @@ const Devoirs = () => {
                                 </div>
                                 <div className="description">
                                     <p className="libelle">{devoir.Libelle}</p>
-                                    <p className="resume">{devoir.Description}</p>
+                                    <p className="resume">{devoir.Description}{devoir.Date_de_soumise.split('T')[0]}</p>
                                 </div>
                                 <div className="ambany">
                                     <div className="publieur">
@@ -103,7 +104,7 @@ const Devoirs = () => {
                     </div>
                 </div>
             </div>
-            {showSoumettre && <Soumettre devoirId={selectedElement} onClose={handleHideSoumettre} />}
+            {showSoumettre && <Soumettre selectedElement={selectedElement} onClose={handleHideSoumettre} />}
         </div>
     )
 }

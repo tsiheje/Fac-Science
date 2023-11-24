@@ -388,4 +388,21 @@ router.get('/totalDevoirs/:Id_professeur',(req, res) => {
     res.status(500).json({ error: 'Erreur lors de la récupération du total des cours.' });
   }
 })
+
+router.get('/reponse/:Id_devoirs', (req, res) => {
+  const {Id_devoirs} = req.params;
+  try{
+    const sql = "select compte.Matricul, compte.Nom, compte.Prenom, Devoirs, Date_de_soumission from compte join soumettre on compte.Id_compte = soumettre.Id_Etudiants where Id_devoirs=?";
+    connection.query(sql, [Id_devoirs], (err, results) => {
+      if(err){
+        console.error(err);
+        res.status(500).send('Misy erreur');
+        return;
+      }
+      res.json(results);
+    })
+  }catch(error){
+    console.error(error)
+  }
+})
 module.exports = router;

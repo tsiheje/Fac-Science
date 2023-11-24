@@ -88,11 +88,8 @@ const Annonce_et_Information = () => {
                                     )}
                                 </div>
                                 <div className="action-annonce">
-                                    {/* <div className="voire" onClick={() => handleShowVoire(announcement)}>
-                                        <Visibility/>
-                                    </div> */}
-                                    <div className="down" onClick={() => handleDownload(announcement)}>
-                                        <Visibility/>
+                                    <div className="voire" onClick={() => handleDownload(announcement)}>
+                                        Regarder
                                     </div>
                                 </div>
                             </div>

@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import BarNav from "./Navbar";
 import { jwtDecode } from "jwt-decode";
 import ModalModif from "./ModalModifAnnonce";
+import SearchIcon from '@mui/icons-material/Search';
 
 const Admin_Annonce_et_Information = () => {
     const token = Cookies.get('token');

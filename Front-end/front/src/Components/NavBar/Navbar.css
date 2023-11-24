@@ -74,7 +74,7 @@
     font-size: 20px;
   }
 
-  .menu a:hover, .deconnexion:hover{
+  .menu a:hover, .deconnexion:hover, .notification:hover{
     background-color: #ccc;
     border-radius: 5px;
   }
@@ -90,4 +90,54 @@
     padding-bottom: 10px;
     box-sizing: border-box;
   }
+
+  .menu .notification{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 20px;
+    color: black;
+  }
+
+  .Notification{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 20px 320px 0px 300px;
+  }
+
+  .notif{
+    background-color: rgb(238, 238, 238);
+    border-radius: 10px;
+    height: 95vh;
+    color: black;
+  }
+
+  .anaty-notifi h1{
+    font-size: 30px;
+    color: black;
+  }
+
+  .notif .ferme{
+    cursor: pointer;
+    float: right;
+    margin-right: 10px;
+    margin-top: 5px;
+    font-size: 20px;
+  }
+  table{
+    border-collapse: collapse;
+    width: 100%;
+  }
+  td{
+    font-size: 20px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid black;
+    overflow-y: auto;
+    max-height: 100px;
+  }
+
 

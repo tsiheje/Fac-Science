@@ -7,6 +7,7 @@ import { jwtDecode } from "jwt-decode";
 import { Button, TextareaAutosize, MenuItem, TextField } from "@mui/material";
 import profil from '../../Assets/Images/3135715.png';
 import Mdp from "./mdp";
+import QRCode from 'react-qr-code';
 
 const Admin_parametre = () => {
     const token = Cookies.get('token');
@@ -55,6 +56,9 @@ const Admin_parametre = () => {
             });
         }
     }
+
+    const textToEncode = user.Email;
+
 
     return(
         <div className="content">
@@ -127,6 +131,7 @@ const Admin_parametre = () => {
                         <div className="bar"></div>
                         <div className="kozy">
                             <p>De plus, vous avez la possibilité de renforcer la sécurité de votre compte en changeant régulièrement votre mot de passe. Cliquez sur "Changer le mot de passe" pour accéder à cette fonctionnalité</p>
+                            {/* <QRCode value={textToEncode} size={256}/> */}
                         </div>
                         <div className="mdp" onClick={showModalMdp}>
                             Changer le mot de passe
