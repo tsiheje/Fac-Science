@@ -44,6 +44,9 @@ const Etudiant = () => {
                     </a>
                     <a href='#'>
                         <p>A propos</p>
+                    </a>    
+                    <a href='#'>
+                        <p>Nos Sercice</p>
                     </a>
                 </div>
                 <div className="landing-btn">

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Visibility from '@mui/icons-material/Visibility';
 
 const Reponse = ({ onClose, selectedDevoir }) => {
     const {Id_devoirs} = selectedDevoir || {}
@@ -18,6 +19,12 @@ const Reponse = ({ onClose, selectedDevoir }) => {
         }
         getAllReponse();
     }, [])
+
+    const handleDownload = (reponses) => {
+        console.log(reponses)
+        const fileURL = `http://localhost:4000/Administrateur/uploads/${reponses.Devoirs}`;
+        window.open(fileURL, '_blank');
+    };
     return(
         <div className="reponse-anaty">
             <div className="anaty-reponse">
@@ -39,6 +46,11 @@ const Reponse = ({ onClose, selectedDevoir }) => {
                         <td>{reponses.Prenom}</td>
                         <td>{reponses.Devoirs}</td>
                         <td>{reponses.Date_de_soumission.split('T')[0]}</td>
+                        <td>
+                            <div className="telechargeo" onClick={() => handleDownload(reponses)}>
+                                <Visibility/>
+                            </div>
+                        </td>
                     </tr>
                     ))}
                 </table>
